@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Build Dev" verbose="1" parallel="tests" thread-count="4">
+
+    <test name="Execução Chrome" parallel="classes" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="test.ReservarQuartoTest" />
+        </classes>
+    </test>
+
+    <test name="Execução Firefox" parallel="classes" thread-count="1">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="test.ReservarQuartoTest" />
+        </classes>
+    </test>
+
+    <test name="Execução Chrome 2" parallel="classes" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="test.ReservarQuartoTest" />
+        </classes>
+    </test>
+
+    <test name="Execução Firefox 2" parallel="classes" thread-count="1">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="test.ReservarQuartoTest" />
+        </classes>
+    </test>
+
+</suite>
