@@ -1,3 +1,18 @@
+/*
+ * Copyright 2018 Elias Nogueira
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package test;
 
 import exception.BrowserNotSupportedException;
@@ -19,7 +34,6 @@ import java.net.URL;
 import java.util.logging.*;
 
 import static utils.CommonUtils.*;
-
 public class BaseTest {
 
     protected WebDriver driver;
@@ -28,7 +42,7 @@ public class BaseTest {
     @BeforeMethod
     @Parameters("browser")
     public void preCondicao(@Optional("chrome") String browser) {
-        if (browser.isEmpty()) throw new NullPointerException("A variável browser está vazia");
+        if (browser.isEmpty()) throw new NullPointerException("browser variable is empty");
 
         this.browser = browser;
         Log.startLog();
@@ -44,9 +58,9 @@ public class BaseTest {
     }
 
     /**
-     * Retorna uma nova instancia do RemoteWebDriver baseado na grid apontada
-     * @param browser o browser que o teste sera executado
-     * @return uma nova instancia RemoteWebDriver instance
+     * Create a new RemoteWebDriver instance based on the grid URL
+     * @param browser the target browser
+     * @return a new RemoteWebDriver instance
      */
     private static WebDriver getDriver(String browser) {
         RemoteWebDriver remoteWebDriver = null;
@@ -65,10 +79,10 @@ public class BaseTest {
     }
 
     /**
-     * Retorna um objeto MutableCapabilities para o browser informado
-     * @param browser o nome do browser. Browser atualmente disponíveis: chrome, firefox, ie-11
-     * @return um objeto MutableCapabilities
-     * @throws BrowserNotSupportedException se o browser não estiver mapeado ou escrito errado
+     * Return a MutableCapabilities object with the target browser
+     * @param browser browser name.
+     * @return a MutableCapabilities object
+     * @throws BrowserNotSupportedException if the browser is not mapped or misspelled
      */
     private static MutableCapabilities returnCapability(String browser) throws BrowserNotSupportedException {
         MutableCapabilities capabilities;
@@ -76,9 +90,12 @@ public class BaseTest {
         switch (browser.toLowerCase()) {
 
             case "chrome":
-                capabilities = new ChromeOptions();
-                ((ChromeOptions) capabilities).addArguments("start-maximized");
-                ((ChromeOptions) capabilities).addArguments("lang=pt-BR");
+                capabilities = defaultChromeOptions();
+                break;
+
+            case "chrome-headless":
+                capabilities = defaultChromeOptions();
+                ((ChromeOptions) capabilities).addArguments("headless");
                 break;
 
             case "firefox":
@@ -91,8 +108,16 @@ public class BaseTest {
                 break;
 
             default:
-                throw new BrowserNotSupportedException("Browser " + browser + "não suportado");
+                throw new BrowserNotSupportedException("Browser " + browser + "not supported");
         }
+
+        return capabilities;
+    }
+
+    private static MutableCapabilities defaultChromeOptions() {
+        ChromeOptions capabilities = new ChromeOptions();
+        capabilities.addArguments("start-maximized");
+        capabilities.addArguments("lang=pt-BR");
 
         return capabilities;
     }

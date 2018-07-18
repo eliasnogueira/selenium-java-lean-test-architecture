@@ -19,11 +19,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package exception;
+package page_objects;
 
-public class BrowserNotSupportedException extends Exception {
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import page_objects.common.NavigationPage;
 
-    public BrowserNotSupportedException(String message) {
-        super(message);
+public class DetailPage extends NavigationPage {
+
+    private WebDriver driver;
+
+    @FindBy(id = "description")
+    WebElement descricaoQuarto;
+
+    @FindBy(css = "#message > p")
+    WebElement message;
+
+    public DetailPage(WebDriver driver) {
+        super(driver);
+
+        this.driver = driver;
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 5), this);
+    }
+
+    public void fillRoomDescription(String description) {
+        new Actions(driver).sendKeys(descricaoQuarto, description);
+    }
+
+    public String getAlertMessage() {
+        return message.getText();
     }
 }

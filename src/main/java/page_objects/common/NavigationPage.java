@@ -19,11 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package exception;
+package page_objects.common;
 
-public class BrowserNotSupportedException extends Exception {
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-    public BrowserNotSupportedException(String message) {
-        super(message);
+public class NavigationPage {
+
+    @FindBy(name = "next")
+    WebElement next;
+
+    @FindBy(name = "previous")
+    WebElement previous;
+
+    @FindBy(name = "finish")
+    WebElement finish;
+
+    public NavigationPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
+
+    public void next() {
+        next.click();
+    }
+
+    public void previous() {
+        previous.click();
+    }
+
+    public void finish() {
+        finish.click();
     }
 }

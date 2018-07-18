@@ -19,11 +19,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package exception;
+package test;
 
-public class BrowserNotSupportedException extends Exception {
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+import page_objects.AccountPage;
+import page_objects.DetailPage;
+import page_objects.RoomPage;
+import test.BaseTest;
 
-    public BrowserNotSupportedException(String message) {
-        super(message);
+import static org.testng.Assert.*;
+
+@Listeners(TestListener.class)
+public class BookRoomTest extends BaseTest {
+
+    @Test(description = "Book a room")
+    public void bookARoom() {
+
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.fillEmail("joao.dasilva@gmail.com");
+        accountPage.fillPassword("123456789");
+        accountPage.selectCountry("Brasil");
+        accountPage.selectBudget("$100 - $499");
+        accountPage.clickNewsletter();
+        accountPage.next();
+
+        RoomPage roomPage = new RoomPage(driver);
+        roomPage.selectRoomType(RoomPage.Room.FAMILY);
+        roomPage.next();
+
+        DetailPage detailPage = new DetailPage(driver);
+        detailPage.fillRoomDescription("No smoking room");
+        detailPage.finish();
+
+        assertEquals(detailPage.getAlertMessage(),
+                "Your reservation has been made and we will contact you shortly");
     }
 }

@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2018 Elias Nogueira
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package test;
 
 import org.apache.commons.io.FileUtils;
@@ -47,7 +68,7 @@ public class TestListener implements ITestListener {
 
             // the filename is the folder name on test.screenshot.path property plus the completeTestName
             FileUtils.copyFile(file,
-                    new File(getValueFromConfigFile("test.screenshot.path") + System.getProperty("file.separator") + criaNomeDoTeste(iTestResult) + ".png"));
+                    new File(getValueFromConfigFile("test.screenshot.path") + System.getProperty("file.separator") + createTestName(iTestResult) + ".png"));
 
             Log.log(Level.INFO, "Browser: " + browser);
             Log.log(Level.SEVERE, throwable.getMessage(), throwable);
@@ -78,14 +99,14 @@ public class TestListener implements ITestListener {
     }
 
 
-    private String criaNomeDoTeste(ITestResult iTestResult) {
+    private String createTestName(ITestResult iTestResult) {
         StringBuilder completeFileName = new StringBuilder();
 
-        completeFileName.append(iTestResult.getTestClass().getRealClass().getSimpleName()); // nome da classe
+        completeFileName.append(iTestResult.getTestClass().getRealClass().getSimpleName()); // class name
         completeFileName.append("_");
-        completeFileName.append(iTestResult.getName()); // nome do metodo
+        completeFileName.append(iTestResult.getName()); // method name
 
-        // todos os parametros
+        // all parameters
         Object[] parameters = iTestResult.getParameters();
         for(Object parameter : parameters) {
             completeFileName.append("_");

@@ -1,0 +1,120 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: selenium-node-chrome
+  annotations:
+    description: "Selenium Node with Google Chrome browser"
+    iconClass: "icon-selenium"
+    tags: "selenium,node,chrome"
+objects:
+- kind: BuildConfig
+  apiVersion: v1
+  metadata:
+    name: selenium-node-chrome
+  spec:
+    triggers:
+    - type: ConfigChange
+      configChange: {}
+    source:
+      contextDir: selenium-node-chrome
+      type: Git
+      git:
+        uri: https://github.com/ddavison/selenium-openshift-templates
+        ref: master
+    strategy:
+      type: Docker
+      DockerStrategy: {}
+    output:
+      to:
+        kind: ImageStreamTag
+        name: selenium-node-chrome:latest
+- kind: ImageStream
+  apiVersion: v1
+  metadata:
+    name: selenium-node-chrome
+  spec:
+    dockerImageRepository: ''
+    tags:
+    - name: latest
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: selenium-node-chrome
+  spec:
+    strategy:
+      type: Recreate
+    triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - master
+        from:
+          kind: ImageStreamTag
+          name: selenium-node-chrome:latest
+    - type: ConfigChange
+    replicas: 1
+    selector:
+      browser: chrome
+    template:
+      metadata:
+        name: selenium-node-chrome-master
+        labels:
+          browser: chrome
+      spec:
+        containers:
+        - env:
+          - name: JAVA_OPTS
+            value: ${JAVA_OPTS}
+          - name: SE_OPTS
+            value: ${SE_OPTS}
+          - name: HUB_PORT_4444_TCP_ADDR
+            value: ${HUB_PORT_4444_TCP_ADDR}
+          - name: HUB_PORT_4444_TCP_PORT
+            value: ${HUB_PORT_4444_TCP_PORT}
+          - name: REMOTE_HOST
+            value: ${REMOTE_HOST}
+          image: selenium-node-chrome
+          name: master
+          ports:
+          - containerPort: 4444
+            protocol: TCP
+          - containerPort: 5555
+            protocol: TCP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: selenium-node-chrome
+  spec:
+    selector:
+      browser: chrome
+    type: ClusterIP
+    ports:
+    - name: node-port
+      port: 5555
+      targetPort: 5555
+      protocol: TCP
+    - name: node-port-grid
+      port: 4444
+      targetPort: 4444
+      protocol: TCP
+parameters:
+  - name: JAVA_OPTS
+    description: Options for the Java command
+    value: "-Xmx512m -Dselenium.LOGGER.level=WARNING"
+  - name: SE_OPTS
+    description: Options for the Node
+    value: ""
+  - name: HUB_PORT_4444_TCP_ADDR
+    description: The Hub to connect to
+    value: "selenium-hub"
+  - name: HUB_PORT_4444_TCP_PORT
+    description: The Hub port to connect to
+    value: "4444"
+  - name: REMOTE_HOST
+    description: The remote host
+    value: ""
+  - name: NODE_ID
+    description: Unique ID assigned to the node
+    generate: expression
+    from: '[a-z]{4}'
