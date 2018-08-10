@@ -21,6 +21,7 @@
  */
 package utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,9 +54,14 @@ public class Log {
 
     public static void startLog() {
         try {
+            String logDirectory = getValueFromConfigFile("log.directory");
+            File directory = new File(logDirectory);
+
+            if (!directory.exists()) directory.mkdir();
+
             logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
             SimpleDateFormat format = new SimpleDateFormat(getValueFromConfigFile("log.dateformat"));
-            String fileName = getValueFromConfigFile("log.directory") + System.getProperty("file.separator") + "exceptions_" + format.format(Calendar.getInstance().getTime()) + ".log";
+            String fileName = logDirectory + System.getProperty("file.separator") + "exceptions_" + format.format(Calendar.getInstance().getTime()) + ".log";
 
             handler = new FileHandler(fileName, true);
             handler.setLevel(Level.ALL);
