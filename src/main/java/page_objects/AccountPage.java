@@ -31,19 +31,19 @@ import page_objects.common.NavigationPage;
 public class AccountPage extends NavigationPage {
 
     @FindBy(id = "email")
-    WebElement email;
+    private WebElement email;
 
     @FindBy(id = "password")
-    WebElement password;
+    private WebElement password;
 
     @FindBy(name = "country")
-    WebElement country;
+    private WebElement country;
 
     @FindBy(name = "budget")
-    WebElement budget;
+    private WebElement budget;
 
     @FindBy(css = ".check")
-    WebElement newsletter;
+    private WebElement newsletter;
 
     public AccountPage(WebDriver driver) {
         super(driver);

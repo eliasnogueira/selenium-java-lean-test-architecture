@@ -91,11 +91,13 @@ public class TestListener implements ITestListener {
     @Override
     public void onStart(ITestContext iTestContext) {
         // nothing to do
+        // initialize extent
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
         // nothing to do
+        // finalize extent
     }
 
 

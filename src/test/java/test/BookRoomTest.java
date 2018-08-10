@@ -21,12 +21,12 @@
  */
 package test;
 
+import enums.Room;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import page_objects.AccountPage;
 import page_objects.DetailPage;
 import page_objects.RoomPage;
-import test.BaseTest;
 
 import static org.testng.Assert.*;
 
@@ -45,7 +45,7 @@ public class BookRoomTest extends BaseTest {
         accountPage.next();
 
         RoomPage roomPage = new RoomPage(driver);
-        roomPage.selectRoomType(RoomPage.Room.FAMILY);
+        roomPage.selectRoomType(Room.FAMILY);
         roomPage.next();
 
         DetailPage detailPage = new DetailPage(driver);

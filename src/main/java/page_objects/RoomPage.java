@@ -21,6 +21,7 @@
  */
 package page_objects;
 
+import enums.Room;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import page_objects.common.NavigationPage;
@@ -38,21 +39,5 @@ public class RoomPage extends NavigationPage {
 
     public void selectRoomType(Room room) {
         driver.findElement(By.xpath("//h6[text()='" + room + "']")).click();
-    }
-
-    public enum Room {
-
-        SINGLE("Single"), FAMILY("Family"), BUSINESS("Business");
-
-        private String value;
-
-        Room(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
     }
 }

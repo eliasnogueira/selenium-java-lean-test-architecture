@@ -1,0 +1,31 @@
+node {
+    def mvnHome
+
+    stage('Preparation') {
+        git 'https://github.com/eliasnogueira/test-automation-javaone-2017.git'
+        mvnHome = tool 'M3'
+    }
+
+    stage('Build') {
+        sh "'${mvnHome}/bin/mvn' clean package"
+    }
+
+    stage('Test Execution') {
+        try {
+            sh "'${mvnHome}/bin/mvn' test -Pweb-execution -Dsuite=multi_browser"
+        } catch (Exception e) {
+            currentBuild.result = 'FAILURE'
+        } finally {
+            junit '**/target/surefire-reports/TEST-*.xml'
+
+            publishHTML (target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'target/report',
+                reportFiles: 'health_check*.html',
+                reportName: "Health Check HTML Report"
+            ])
+        }
+    }
+}

@@ -34,21 +34,23 @@ public class CommonUtils {
     }
 
     /**
-     * Return a property value from conf/config.properties file
-     * @param property a property in config/config.properties
+     * Return a property value from conf/${env}/config.properties file
+     * @param property a property in config/${env}/config.properties
      * @return the property value
      */
     public static String getValueFromConfigFile(String property) {
         Properties properties;
-        String valor = null;
         try {
             properties = new Properties();
-            properties.load(new FileReader(new File("conf/config.properties")));
 
-            valor =  properties.getProperty(property);
+            String env = null == System.getProperty("env") ? "dev" : System.getProperty("env");
+
+            properties.load(new FileReader(new File("conf/" + env +  "/config.properties")));
+
+            return properties.getProperty(property);
         } catch (IOException | NullPointerException e) {
             Log.log(Level.SEVERE, e.getMessage(), e);
         }
-        return valor;
+        return null;
     }
 }

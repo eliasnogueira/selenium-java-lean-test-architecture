@@ -34,10 +34,10 @@ public class DetailPage extends NavigationPage {
     private WebDriver driver;
 
     @FindBy(id = "description")
-    WebElement descricaoQuarto;
+    private WebElement roomDescription;
 
     @FindBy(css = "#message > p")
-    WebElement message;
+    private WebElement message;
 
     public DetailPage(WebDriver driver) {
         super(driver);
@@ -47,7 +47,7 @@ public class DetailPage extends NavigationPage {
     }
 
     public void fillRoomDescription(String description) {
-        new Actions(driver).sendKeys(descricaoQuarto, description);
+        new Actions(driver).sendKeys(roomDescription, description);
     }
 
     public String getAlertMessage() {
