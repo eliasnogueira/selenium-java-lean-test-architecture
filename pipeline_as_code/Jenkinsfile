@@ -2,12 +2,12 @@ node {
     def mvnHome
 
     stage('Preparation') {
-        git 'https://github.com/eliasnogueira/test-automation-javaone-2017.git'
+        git 'https://github.com/eliasnogueira/selenium-java-bootstrap.git'
         mvnHome = tool 'M3'
     }
 
     stage('Build') {
-        sh "'${mvnHome}/bin/mvn' clean package"
+        sh "'${mvnHome}/bin/mvn' clean package -DskipTests=true"
     }
 
     stage('Test Execution') {
@@ -18,13 +18,17 @@ node {
         } finally {
             junit '**/target/surefire-reports/TEST-*.xml'
 
+            /*
+             * Please read https://wiki.jenkins.io/display/JENKINS/Configuring+Content+Security+Policy
+             * to allow Jenkins to load static files
+             */
             publishHTML (target: [
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
-                reportDir: 'target/report',
-                reportFiles: 'health_check*.html',
-                reportName: "Health Check HTML Report"
+                reportDir: 'target/surefire-reports',
+                reportFiles: 'index.html',
+                reportName: "TestNG Report"
             ])
         }
     }
