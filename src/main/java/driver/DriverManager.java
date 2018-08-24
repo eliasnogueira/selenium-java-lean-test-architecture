@@ -10,7 +10,7 @@ public class DriverManager {
 
     private  DriverManager() {}
 
-    private static WebDriver getDriver() {
+    public static WebDriver getDriver() {
         return  driver.get();
     }
 

@@ -22,7 +22,6 @@
 package test;
 
 import enums.Room;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import page_objects.AccountPage;
 import page_objects.DetailPage;
@@ -30,7 +29,6 @@ import page_objects.RoomPage;
 
 import static org.testng.Assert.*;
 
-@Listeners(TestListener.class)
 public class BookRoomTest extends BaseTest {
 
     @Test(description = "Book a room")
