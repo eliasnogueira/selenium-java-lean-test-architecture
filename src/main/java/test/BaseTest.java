@@ -18,6 +18,7 @@ package test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.github.javafaker.Faker;
 import driver.DriverFactory;
 import driver.DriverManager;
 import org.openqa.selenium.OutputType;
@@ -30,10 +31,15 @@ import utils.Log;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import static utils.CommonUtils.getValueFromConfigFile;
+
 public class BaseTest {
+
+    protected Faker faker;
 
     private static final ThreadLocal<ExtentTest> parentTest = new ThreadLocal<>();
     private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
@@ -54,6 +60,8 @@ public class BaseTest {
     @Parameters("browser")
     public void preCondition(@Optional("chrome") String browser, Method method) {
         Log.startLog();
+
+        faker = new Faker(new Locale(Objects.requireNonNull(getValueFromConfigFile("faker.locale"))));
 
         WebDriver driver = DriverFactory.createInstance(browser);
         DriverManager.setDriver(driver);

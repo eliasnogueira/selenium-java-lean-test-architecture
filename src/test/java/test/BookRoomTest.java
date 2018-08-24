@@ -35,8 +35,8 @@ public class BookRoomTest extends BaseTest {
     public void bookARoom() {
 
         AccountPage accountPage = new AccountPage();
-        accountPage.fillEmail("joao.dasilva@gmail.com");
-        accountPage.fillPassword("123456789");
+        accountPage.fillEmail(faker.internet().emailAddress());
+        accountPage.fillPassword(faker.internet().password());
         accountPage.selectCountry("Brasil");
         accountPage.selectBudget("$100 - $499");
         accountPage.clickNewsletter();
@@ -47,7 +47,7 @@ public class BookRoomTest extends BaseTest {
         roomPage.next();
 
         DetailPage detailPage = new DetailPage();
-        detailPage.fillRoomDescription("No smoking room");
+        detailPage.fillRoomDescription(faker.lorem().sentence());
         detailPage.finish();
 
         assertEquals(detailPage.getAlertMessage(),
