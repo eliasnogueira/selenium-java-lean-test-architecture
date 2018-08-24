@@ -1,0 +1,20 @@
+image: maven:3.5.4-jdk-8
+
+stages:
+- build
+- test
+
+cache:
+  paths:
+  - .m2/repository/
+  - target/
+
+build:
+  stage: build
+  script:
+  - mvn clean package -DskipTests=true
+
+test:
+  stage: test
+  script:
+  - mvn test -Pweb-execution -Dsuite=multi_browser -Denv=testmulti_browser -Denv=test
