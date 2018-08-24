@@ -19,37 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package page_objects.common;
+package page_objects.booking;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import page_objects.booking.common.NavigationPage;
 
-public class NavigationPage {
+public class DetailPage extends NavigationPage {
 
-    @FindBy(name = "next")
-    WebElement next;
+    private WebDriver driver;
 
-    @FindBy(name = "previous")
-    WebElement previous;
+    @FindBy(id = "description")
+    private WebElement roomDescription;
 
-    @FindBy(name = "finish")
-    WebElement finish;
+    @FindBy(css = "#message > p")
+    private WebElement message;
 
-    public NavigationPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public void fillRoomDescription(String description) {
+        new Actions(driver).sendKeys(roomDescription, description);
     }
 
-    public void next() {
-        next.click();
-    }
-
-    public void previous() {
-        previous.click();
-    }
-
-    public void finish() {
-        finish.click();
+    public String getAlertMessage() {
+        return message.getText();
     }
 }

@@ -19,25 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package page_objects;
+package page_objects.booking;
 
+import driver.DriverManager;
 import enums.Room;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import page_objects.common.NavigationPage;
+import page_objects.booking.common.NavigationPage;
 
 public class RoomPage extends NavigationPage {
 
-    private WebDriver driver;
-
-    public RoomPage(WebDriver driver) {
-        super(driver);
-
-        this.driver = driver;
-    }
-
-
     public void selectRoomType(Room room) {
-        driver.findElement(By.xpath("//h6[text()='" + room + "']")).click();
+        DriverManager.getDriver().findElement(By.xpath("//h6[text()='" + room + "']")).click();
     }
 }

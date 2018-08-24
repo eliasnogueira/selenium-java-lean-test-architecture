@@ -19,57 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package page_objects;
+package page_objects.booking.common;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import page_objects.common.NavigationPage;
+import page_objects.AbstractPageObject;
 
-public class AccountPage extends NavigationPage {
+public class NavigationPage extends AbstractPageObject {
 
-    @FindBy(id = "email")
-    private WebElement email;
+    @FindBy(name = "next")
+    WebElement next;
 
-    @FindBy(id = "password")
-    private WebElement password;
+    @FindBy(name = "previous")
+    WebElement previous;
 
-    @FindBy(name = "country")
-    private WebElement country;
+    @FindBy(name = "finish")
+    WebElement finish;
 
-    @FindBy(name = "budget")
-    private WebElement budget;
-
-    @FindBy(css = ".check")
-    private WebElement newsletter;
-
-    public AccountPage(WebDriver driver) {
-        super(driver);
-
-        PageFactory.initElements(driver, this);
-
-        driver.switchTo().frame("result");
+    public void next() {
+        next.click();
     }
 
-    public void fillEmail(String email) {
-        this.email.sendKeys(email);
+    public void previous() {
+        previous.click();
     }
 
-    public void fillPassword(String password) {
-        this.password.sendKeys(password);
-    }
-
-    public void selectCountry(String country) {
-        new Select(this.country).selectByVisibleText(country);
-    }
-
-    public void selectBudget(String value) {
-        new Select(budget).selectByVisibleText(value);
-    }
-
-    public void clickNewsletter() {
-        newsletter.click();
+    public void finish() {
+        finish.click();
     }
 }

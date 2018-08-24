@@ -19,38 +19,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package page_objects;
+package page_objects.booking;
 
-import org.openqa.selenium.WebDriver;
+import driver.DriverManager;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import page_objects.common.NavigationPage;
+import org.openqa.selenium.support.ui.Select;
+import page_objects.booking.common.NavigationPage;
 
-public class DetailPage extends NavigationPage {
+public class AccountPage extends NavigationPage {
 
-    private WebDriver driver;
+    @FindBy(id = "email")
+    private WebElement email;
 
-    @FindBy(id = "description")
-    private WebElement roomDescription;
+    @FindBy(id = "password")
+    private WebElement password;
 
-    @FindBy(css = "#message > p")
-    private WebElement message;
+    @FindBy(name = "country")
+    private WebElement country;
 
-    public DetailPage(WebDriver driver) {
-        super(driver);
+    @FindBy(name = "budget")
+    private WebElement budget;
 
-        this.driver = driver;
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 5), this);
+    @FindBy(css = ".check")
+    private WebElement newsletter;
+
+    public AccountPage() {
+        DriverManager.getDriver().switchTo().frame("result");
     }
 
-    public void fillRoomDescription(String description) {
-        new Actions(driver).sendKeys(roomDescription, description);
+    public void fillEmail(String email) {
+        this.email.sendKeys(email);
     }
 
-    public String getAlertMessage() {
-        return message.getText();
+    public void fillPassword(String password) {
+        this.password.sendKeys(password);
+    }
+
+    public void selectCountry(String country) {
+        new Select(this.country).selectByVisibleText(country);
+    }
+
+    public void selectBudget(String value) {
+        new Select(budget).selectByVisibleText(value);
+    }
+
+    public void clickNewsletter() {
+        newsletter.click();
     }
 }

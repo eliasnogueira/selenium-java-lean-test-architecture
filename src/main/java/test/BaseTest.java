@@ -32,10 +32,8 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 
-import static utils.CommonUtils.*;
+import static utils.CommonUtils.getValueFromConfigFile;
 public class BaseTest {
-
-    WebDriver driver;
 
     private static final ThreadLocal<ExtentTest> parentTest = new ThreadLocal<>();
     private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
@@ -57,7 +55,7 @@ public class BaseTest {
     public void preCondition(@Optional("chrome") String browser, Method method) {
         Log.startLog();
 
-        driver = DriverFactory.createInstance(browser);
+        WebDriver driver = DriverFactory.createInstance(browser);
         DriverManager.setDriver(driver);
 
         ExtentTest child = parentTest.get().

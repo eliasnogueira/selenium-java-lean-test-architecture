@@ -23,18 +23,18 @@ package test;
 
 import enums.Room;
 import org.testng.annotations.Test;
-import page_objects.AccountPage;
-import page_objects.DetailPage;
-import page_objects.RoomPage;
+import page_objects.booking.AccountPage;
+import page_objects.booking.DetailPage;
+import page_objects.booking.RoomPage;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class BookRoomTest extends BaseTest {
 
     @Test(description = "Book a room")
     public void bookARoom() {
 
-        AccountPage accountPage = new AccountPage(driver);
+        AccountPage accountPage = new AccountPage();
         accountPage.fillEmail("joao.dasilva@gmail.com");
         accountPage.fillPassword("123456789");
         accountPage.selectCountry("Brasil");
@@ -42,11 +42,11 @@ public class BookRoomTest extends BaseTest {
         accountPage.clickNewsletter();
         accountPage.next();
 
-        RoomPage roomPage = new RoomPage(driver);
+        RoomPage roomPage = new RoomPage();
         roomPage.selectRoomType(Room.FAMILY);
         roomPage.next();
 
-        DetailPage detailPage = new DetailPage(driver);
+        DetailPage detailPage = new DetailPage();
         detailPage.fillRoomDescription("No smoking room");
         detailPage.finish();
 
