@@ -21,9 +21,9 @@
  */
 package exception;
 
-public class BrowserNotSupportedException extends Exception {
+public class BrowserException extends Exception {
 
-    public BrowserNotSupportedException(String message) {
+    public BrowserException(String message) {
         super(message);
     }
 }
