@@ -4,7 +4,7 @@ public enum Room {
 
     SINGLE("Single"), FAMILY("Family"), BUSINESS("Business");
 
-    private String value;
+    private final String value;
 
     Room(String value) {
         this.value = value;

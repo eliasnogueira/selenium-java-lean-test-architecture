@@ -45,8 +45,10 @@ public class CommonUtils {
 
             String env = null == System.getProperty("env") ? "dev" : System.getProperty("env");
 
+            String fileSeparator = System.getProperty("file.separator");
             ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-            properties.load(new FileReader(new File(classLoader.getResource("conf/" + env + "/config.properties").getFile())));
+            properties.load(new FileReader(new File(classLoader.
+                    getResource("conf" + fileSeparator + env + fileSeparator + "config.properties").getFile())));
 
             return properties.getProperty(property);
         } catch (IOException | NullPointerException e) {

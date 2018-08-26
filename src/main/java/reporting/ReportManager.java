@@ -18,7 +18,7 @@ public class ReportManager {
 
     public static ExtentReports getInstance() {
         if (extentReports == null) {
-            createInstance();
+            extentReports = createInstance();
         }
 
         return extentReports;

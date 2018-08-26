@@ -4,9 +4,6 @@
 .idea/
 *.iml
 
-# Mac
-.DS_Store
-
 # Maven
 logs/
 target/
