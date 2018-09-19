@@ -20,10 +20,10 @@ public class TestListener implements ITestListener {
 
     private static final ThreadLocal<ExtentTest> parentTest = new ThreadLocal<>();
     private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
-    private ExtentTest parent;
 
     @Override
     public void onTestStart(ITestResult result) {
+        // get the method name from iTestResult
         ExtentTest child = parentTest.get().
                 createNode(result.getMethod().getMethodName(), DriverManager.getInfo());
         test.set(child);
@@ -51,7 +51,8 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        parent = ReportManager.getInstance().createTest(getClass().getName());
+        // get the test name from iTestContext
+        ExtentTest parent = ReportManager.getInstance().createTest(context.getAllTestMethods()[0].getRealClass().getSimpleName());
         parentTest.set(parent);
     }
 
@@ -66,13 +67,15 @@ public class TestListener implements ITestListener {
 
             String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
 
-            test.get().fail(iTestResult.getThrowable(),
+            test.get().fatal(iTestResult.getThrowable(),
                     MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
 
             LOGGER.error(DriverManager.getInfo());
             LOGGER.error(iTestResult.getThrowable().getCause());
 
         } catch (IOException e) {
+            test.get().fail(e);
+
             LOGGER.error(DriverManager.getInfo());
             LOGGER.error(e.getMessage());
         }
