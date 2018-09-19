@@ -17,4 +17,4 @@ build:
 test:
   stage: test
   script:
-  - mvn test -Pweb-execution -Dsuite=multi_browser -Denv=testmulti_browser -Denv=test
+  - mvn test -Pweb-execution -Dsuite=multi_browser -Denv=test

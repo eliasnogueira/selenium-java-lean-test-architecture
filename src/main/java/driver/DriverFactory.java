@@ -1,6 +1,7 @@
 package driver;
 
 import exception.BrowserException;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -9,14 +10,14 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import utils.Log;
 
 import java.net.URL;
-import java.util.logging.Level;
 
 import static utils.CommonUtils.getValueFromConfigFile;
 
 public class DriverFactory {
+
+    private static final Logger LOGGER = Logger.getLogger(DriverFactory.class.getName() );
 
     private DriverFactory() {
     }
@@ -35,8 +36,7 @@ public class DriverFactory {
 
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), returnCapability(browser));
         } catch (Exception e) {
-            Log.log(Level.INFO, "Browser:" +  browser);
-            Log.log(Level.SEVERE, e.getMessage(), e);
+            LOGGER.error("Browser: " +  browser, e);
         }
 
         return remoteWebDriver;
@@ -66,6 +66,11 @@ public class DriverFactory {
                 capabilities = new FirefoxOptions();
                 break;
 
+            case "firefox-headless":
+                capabilities = new FirefoxOptions();
+                ((FirefoxOptions) capabilities).setHeadless(true);
+                break;
+
             case "ie-11":
                 capabilities = new InternetExplorerOptions();
                 capabilities.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
@@ -75,7 +80,7 @@ public class DriverFactory {
                 throw new BrowserException("Browser " + browser + "not supported");
         }
 
-        // this capability disable video recoring if you are using Zalenium
+        // this capability will disable video recoring if you are using Zalenium
         capabilities.setCapability("recordVideo", getValueFromConfigFile("video.recoring"));
 
         return capabilities;

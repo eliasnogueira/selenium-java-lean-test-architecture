@@ -5,7 +5,6 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import java.io.File;
-import java.util.Objects;
 
 import static utils.CommonUtils.getValueFromConfigFile;
 
@@ -18,7 +17,7 @@ public class ReportManager {
 
     public static ExtentReports getInstance() {
         if (extentReports == null) {
-            extentReports = createInstance();
+            createInstance();
         }
 
         return extentReports;
@@ -47,7 +46,7 @@ public class ReportManager {
 
     private static void createReportDir() {
         String reportDir = getValueFromConfigFile("report.dir");
-        File directory = new File(Objects.requireNonNull(reportDir));
+        File directory = new File(reportDir);
 
         if (!directory.exists()) directory.mkdir();
     }
