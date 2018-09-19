@@ -108,6 +108,15 @@ To do this you need:
 mvn test -Pweb_execution -Dsuite=multi_browser
 ````
 
+### Pipelne as a code
+
+The two files of pipeline as a code are inside _pipeline_as_code_ folder.
+
+#### Jenkins pipeline
+
+You can you _Jenkisfile_ on this directory and refer _pipeline_as_code/Jenkinsfile_ on XXXXXX item on Jenkins.
+This pipeline works on
+
 ### TO-DO items
 
 * ExtentReport
