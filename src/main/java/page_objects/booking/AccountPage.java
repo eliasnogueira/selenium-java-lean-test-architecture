@@ -32,7 +32,7 @@ public class AccountPage extends NavigationPage {
     @FindBy(id = "email")
     private WebElement email;
 
-    @FindBy(id = "password")
+    @FindBy(id = "passwordd")
     private WebElement password;
 
     @FindBy(name = "country")

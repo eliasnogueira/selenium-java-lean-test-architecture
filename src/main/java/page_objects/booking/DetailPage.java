@@ -21,15 +21,13 @@
  */
 package page_objects.booking;
 
-import org.openqa.selenium.WebDriver;
+import driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import page_objects.booking.common.NavigationPage;
 
 public class DetailPage extends NavigationPage {
-
-    private WebDriver driver;
 
     @FindBy(id = "description")
     private WebElement roomDescription;
@@ -38,7 +36,7 @@ public class DetailPage extends NavigationPage {
     private WebElement message;
 
     public void fillRoomDescription(String description) {
-        new Actions(driver).sendKeys(roomDescription, description);
+        new Actions(DriverManager.getDriver()).sendKeys(roomDescription, description);
     }
 
     public String getAlertMessage() {
