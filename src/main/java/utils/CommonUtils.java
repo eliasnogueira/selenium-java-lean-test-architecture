@@ -21,16 +21,18 @@
  */
 package utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.Properties;
-import org.apache.log4j.Logger;
 
 public class CommonUtils {
 
-    private static final Logger LOGGER = Logger.getLogger(CommonUtils.class);
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private CommonUtils() {
     }
@@ -41,11 +43,10 @@ public class CommonUtils {
      * @return the property value
      */
     public static String getValueFromConfigFile(String property) {
-        Properties properties;
         String value = null;
 
         try {
-            properties = new Properties();
+            Properties properties = new Properties();
 
             String env = null == System.getProperty("env") ? "dev" : System.getProperty("env");
             String fileSeparator = System.getProperty("file.separator");
@@ -59,7 +60,7 @@ public class CommonUtils {
                 throw new InvalidParameterException();
             }
 
-        } catch (IOException | NullPointerException e) {
+        } catch (NullPointerException | IOException e) {
             LOGGER.error("Property " + property + " was not found on the configuration files", e);
         }
         return value;

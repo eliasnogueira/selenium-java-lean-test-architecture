@@ -1,6 +1,7 @@
 package driver;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -57,7 +58,7 @@ public enum DriverFactory implements IDriverType {
         }
     };
 
-    private static final Logger LOGGER = Logger.getLogger(DriverFactory.class.getName() );
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private static MutableCapabilities defaultChromeOptions() {
         ChromeOptions capabilities = new ChromeOptions();

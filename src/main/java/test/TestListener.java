@@ -3,7 +3,8 @@ package test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import driver.DriverManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 public class TestListener implements ITestListener {
 
-    private static final Logger LOGGER = Logger.getLogger(BaseTest.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private static final ThreadLocal<ExtentTest> parentTest = new ThreadLocal<>();
     private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
@@ -24,8 +25,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         // get the method name from iTestResult
-        ExtentTest child = parentTest.get().
-                createNode(result.getMethod().getMethodName(), DriverManager.getInfo());
+        ExtentTest child = parentTest.get().createNode(result.getMethod().getMethodName(), DriverManager.getInfo());
         test.set(child);
     }
 
