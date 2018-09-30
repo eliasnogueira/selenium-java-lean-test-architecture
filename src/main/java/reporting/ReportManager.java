@@ -23,7 +23,7 @@ public class ReportManager {
         return extentReports;
     }
 
-    private static ExtentReports createInstance() {
+    private static void createInstance() {
         createReportDir();
 
         ExtentHtmlReporter extentHtmlReporter = new ExtentHtmlReporter(
@@ -40,8 +40,6 @@ public class ReportManager {
         extentHtmlReporter.config().setTheme(Theme.DARK);
         extentHtmlReporter.config().setEncoding("UTF-8");
         extentHtmlReporter.config().setTimeStampFormat(getValueFromConfigFile("report.timeStampFormat"));
-
-        return extentReports;
     }
 
     private static void createReportDir() {
