@@ -8,13 +8,6 @@
         </classes>
     </test>
 
-    <test name="Chrome execution headless">
-        <parameter name="browser" value="chrome-headless"/>
-        <classes>
-            <class name="test.BookRoomTest" />
-        </classes>
-    </test>
-
     <test name="Firefox Execution">
         <parameter name="browser" value="firefox"/>
         <classes>
@@ -22,11 +15,5 @@
         </classes>
     </test>
 
-    <test name="Firefox Execution headless">
-        <parameter name="browser" value="firefox-headless"/>
-        <classes>
-            <class name="test.BookRoomTest" />
-        </classes>
-    </test>
 
 </suite>
