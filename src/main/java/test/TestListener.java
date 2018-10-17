@@ -67,15 +67,17 @@ public class TestListener implements ITestListener {
 
             String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
 
+            LOGGER.error(iTestResult.getTestClass().getName());
+            LOGGER.error(DriverManager.getInfo());
+            LOGGER.error(iTestResult.getThrowable());
+
             test.get().fatal(iTestResult.getThrowable(),
                     MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
-
-            LOGGER.error(DriverManager.getInfo());
-            LOGGER.error(iTestResult.getThrowable().getCause());
 
         } catch (IOException e) {
             test.get().fail(e);
 
+            LOGGER.error(iTestResult.getTestClass().getName());
             LOGGER.error(DriverManager.getInfo());
             LOGGER.error(e.getMessage());
         }
