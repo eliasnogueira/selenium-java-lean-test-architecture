@@ -27,7 +27,7 @@ import page_objects.booking.AccountPage;
 import page_objects.booking.DetailPage;
 import page_objects.booking.RoomPage;
 
-import static org.testng.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.*;
 
 public class BookRoomTest extends BaseTest {
 
@@ -50,7 +50,7 @@ public class BookRoomTest extends BaseTest {
         detailPage.fillRoomDescription(faker.lorem().sentence());
         detailPage.finish();
 
-        assertEquals(detailPage.getAlertMessage(),
-                "Your reservation has been made and we will contact you shortly");
+        assertThat(detailPage.getAlertMessage())
+                .isEqualTo("Your reservation has been made and we will contact you shortly");
     }
 }
