@@ -2,7 +2,7 @@ package driver;
 
 import org.openqa.selenium.MutableCapabilities;
 
-public interface IDriverType {
+interface IDriverType {
 
     MutableCapabilities returnDriver();
 }
