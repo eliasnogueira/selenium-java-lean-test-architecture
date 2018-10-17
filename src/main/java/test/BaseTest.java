@@ -19,22 +19,19 @@ import com.github.javafaker.Faker;
 import driver.DriverFactory;
 import driver.DriverManager;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
-
-import java.lang.reflect.Method;
 import java.util.Locale;
 
 import static utils.CommonUtils.getValueFromConfigFile;
 
 @Listeners(TestListener.class)
-public class BaseTest {
+public abstract class BaseTest {
 
-    protected Faker faker;
+    Faker faker;
 
     @BeforeMethod
     @Parameters("browser")
-    public void preCondition(@Optional("chrome") String browser, Method method) {
+    public void preCondition(@Optional("chrome") String browser) {
         faker = new Faker(new Locale(getValueFromConfigFile("faker.locale")));
 
         WebDriver driver = DriverFactory.createInstance(browser);
@@ -44,7 +41,7 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void postCondition(ITestResult iTestResult) {
+    public void postCondition() {
         DriverManager.quit();
     }
 }
