@@ -27,7 +27,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.security.InvalidParameterException;
 import java.util.Properties;
 
 public class CommonUtils {
@@ -43,26 +42,22 @@ public class CommonUtils {
      * @return the property value
      */
     public static String getValueFromConfigFile(String property) {
-        String value = null;
+        Properties properties;
 
         try {
-            Properties properties = new Properties();
+            properties = new Properties();
 
             String env = null == System.getProperty("env") ? "dev" : System.getProperty("env");
+
             String fileSeparator = System.getProperty("file.separator");
             ClassLoader classLoader = ClassLoader.getSystemClassLoader();
             properties.load(new FileReader(new File(classLoader.
                     getResource("conf" + fileSeparator + env + fileSeparator + "config.properties").getFile())));
 
-            value = properties.getProperty(property);
-            if (value == null) {
-                LOGGER.error("Missing value for key " + property);
-                throw new InvalidParameterException();
-            }
-
+            return properties.getProperty(property);
         } catch (NullPointerException | IOException e) {
             LOGGER.error("Property " + property + " was not found on the configuration files", e);
         }
-        return value;
+        return null;
     }
 }
