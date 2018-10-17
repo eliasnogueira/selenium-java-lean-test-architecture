@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import static utils.CommonUtils.getValueFromConfigFile;
@@ -81,15 +82,18 @@ public enum DriverFactory implements IDriverType {
             String gridURL = getValueFromConfigFile("grid.url") + ":" + getValueFromConfigFile("grid.port") + "/wd/hub";
 
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), returnCapability(browser));
-        } catch (Exception e) {
+        } catch (MalformedURLException e) {
+            LOGGER.error("Grid URL is invalid or Grid is not available");
             LOGGER.error("Browser: " +  browser, e);
+        } catch (IllegalArgumentException e) {
+            LOGGER.error("Browser: " +  browser + "is not valid or recognized", e);
         }
 
         return remoteWebDriver;
     }
 
 
-    public static MutableCapabilities returnCapability(String browser) {
+    private static MutableCapabilities returnCapability(String browser) {
         return valueOf(browser.toUpperCase()).returnDriver();
     }
 
