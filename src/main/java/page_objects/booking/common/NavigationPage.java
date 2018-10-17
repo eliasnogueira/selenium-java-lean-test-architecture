@@ -28,13 +28,13 @@ import page_objects.AbstractPageObject;
 public class NavigationPage extends AbstractPageObject {
 
     @FindBy(name = "next")
-    WebElement next;
+    private WebElement next;
 
     @FindBy(name = "previous")
-    WebElement previous;
+    private WebElement previous;
 
     @FindBy(name = "finish")
-    WebElement finish;
+    private WebElement finish;
 
     public void next() {
         next.click();
