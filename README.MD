@@ -60,9 +60,6 @@ E.g: running all tests using test configuration values
 mvn test -Denv=test
 ```
 
-### yaml templates to create a Selenium Grid infrastructure on OpenShift
-
-
 ### Profiles executors on pom.xml
 
 There is a profile called _multi-browser_ created to execute the test suite _multi_browser.xml_ inside _src/test/resources/suites_ folder.
@@ -116,15 +113,3 @@ The two files of pipeline as a code are inside _pipeline_as_code_ folder.
 
 You can you _Jenkisfile_ on this directory and refer _pipeline_as_code/Jenkinsfile_ on XXXXXX item on Jenkins.
 This pipeline works on
-
-### TO-DO items
-
-* ExtentReport
-* Pipeline as a code
-  - Jenkins
-  - GitLab
-* Melhorias no log
-* DataProvider com TestNG
-   - Classe com csv
-* Database Connection
-* JavaFaker  
