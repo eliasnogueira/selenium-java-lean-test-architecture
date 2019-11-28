@@ -34,7 +34,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 @Log4j2
-public class TestListener implements ITestListener {
+class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
