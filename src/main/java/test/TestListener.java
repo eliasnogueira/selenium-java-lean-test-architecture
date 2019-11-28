@@ -24,38 +24,26 @@
 
 package test;
 
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.service.ExtentTestManager;
 import driver.DriverManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import reporting.ReportManager;
 
-import java.io.IOException;
-
+@Log4j2
 public class TestListener implements ITestListener {
-
-    private static final Logger LOGGER = LogManager.getLogger();
-
-    private static final ThreadLocal<ExtentTest> parentTest = new ThreadLocal<>();
-    private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
     @Override
     public void onTestStart(ITestResult result) {
-        // get the method name from iTestResult
-        ExtentTest child = parentTest.get().createNode(result.getMethod().getMethodName(), DriverManager.getInfo());
-        test.set(child);
+        ExtentTestManager.getTest().info(DriverManager.getInfo());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        test.get().pass("Success");
+        // empty
     }
 
     @Override
@@ -65,46 +53,30 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        test.get().skip(result.getThrowable());
+        log.error(result.getThrowable());
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        // do nothing
+        // empty
     }
 
     @Override
     public void onStart(ITestContext context) {
-        // get the test name from iTestContext
-        ExtentTest parent = ReportManager.getInstance().createTest(context.getAllTestMethods()[0].getRealClass().getSimpleName());
-        parentTest.set(parent);
+        // empty
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        ReportManager.getInstance().flush();
+        // empty
     }
 
     private void failTest(ITestResult iTestResult) {
-        try {
-            WebDriver driver = DriverManager.getDriver();
+        log.error(iTestResult.getTestClass().getName());
+        log.error(iTestResult.getThrowable());
 
-            String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
-
-            LOGGER.error(iTestResult.getTestClass().getName());
-            LOGGER.error(DriverManager.getInfo());
-            LOGGER.error(iTestResult.getThrowable());
-
-            test.get().fatal(iTestResult.getThrowable(),
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
-
-        } catch (IOException e) {
-            test.get().fail(e);
-
-            LOGGER.error(iTestResult.getTestClass().getName());
-            LOGGER.error(DriverManager.getInfo());
-            LOGGER.error(e.getMessage());
-        }
+        String screenshot = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
+        ExtentTestManager.getTest().addScreenCaptureFromBase64String(screenshot);
     }
 
 }

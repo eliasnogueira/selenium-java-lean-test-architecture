@@ -24,16 +24,15 @@
 
 package page_objects;
 
+import config.Configuration;
 import driver.DriverManager;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-import static utils.CommonUtils.getValueFromConfigFile;
-
 public class AbstractPageObject {
 
     protected AbstractPageObject() {
-        int timeout = Integer.parseInt(getValueFromConfigFile("timeout"));
+        int timeout = new Configuration().getTimeout();
         PageFactory.initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), timeout), this);
     }
 }

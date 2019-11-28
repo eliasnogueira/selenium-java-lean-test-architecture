@@ -25,13 +25,13 @@
 package page_objects.booking;
 
 import driver.DriverManager;
-import enums.Room;
+import enums.RoomType;
 import org.openqa.selenium.By;
 import page_objects.booking.common.NavigationPage;
 
 public class RoomPage extends NavigationPage {
 
-    public void selectRoomType(Room room) {
+    public void selectRoomType(RoomType room) {
         DriverManager.getDriver().findElement(By.xpath("//h6[text()='" + room + "']")).click();
     }
 }

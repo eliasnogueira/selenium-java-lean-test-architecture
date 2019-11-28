@@ -4,16 +4,15 @@
     <test name="Chrome execution">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.BookRoomTest" />
+            <class name="test.BookRoomWeb" />
         </classes>
     </test>
 
     <test name="Firefox Execution">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="test.BookRoomTest" />
+            <class name="test.BookRoomWeb" />
         </classes>
     </test>
-
 
 </suite>

@@ -23,7 +23,8 @@
  */
 package test;
 
-import enums.Room;
+import data.BookingDataFactory;
+import model.Booking;
 import org.testng.annotations.Test;
 import page_objects.booking.AccountPage;
 import page_objects.booking.DetailPage;
@@ -31,25 +32,26 @@ import page_objects.booking.RoomPage;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class BookRoomTest extends BaseTest {
+public class BookRoomWeb extends BaseWeb {
 
     @Test(description = "Book a room")
     public void bookARoom() {
+        Booking bookingInformation = new BookingDataFactory().createBookingData();
 
         AccountPage accountPage = new AccountPage();
-        accountPage.fillEmail(faker.internet().emailAddress());
-        accountPage.fillPassword(faker.internet().password());
-        accountPage.selectCountry("Brasil");
-        accountPage.selectBudget("$100 - $499");
+        accountPage.fillEmail(bookingInformation.getEmail());
+        accountPage.fillPassword(bookingInformation.getPassword());
+        accountPage.selectCountry(bookingInformation.getCountry());
+        accountPage.selectBudget(bookingInformation.getDailyBudget());
         accountPage.clickNewsletter();
         accountPage.next();
 
         RoomPage roomPage = new RoomPage();
-        roomPage.selectRoomType(Room.FAMILY);
+        roomPage.selectRoomType(bookingInformation.getRoomType());
         roomPage.next();
 
         DetailPage detailPage = new DetailPage();
-        detailPage.fillRoomDescription(faker.lorem().sentence());
+        detailPage.fillRoomDescription(bookingInformation.getRoomDescription());
         detailPage.finish();
 
         assertThat(detailPage.getAlertMessage())

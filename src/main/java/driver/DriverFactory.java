@@ -24,8 +24,8 @@
 
 package driver;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import config.Configuration;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -37,8 +37,7 @@ import org.openqa.selenium.safari.SafariOptions;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static utils.CommonUtils.getValueFromConfigFile;
-
+@Log4j2
 public enum DriverFactory implements IDriverType {
 
     FIREFOX {
@@ -83,12 +82,9 @@ public enum DriverFactory implements IDriverType {
         }
     };
 
-    private static final Logger LOGGER = LogManager.getLogger();
-
     private static MutableCapabilities defaultChromeOptions() {
         ChromeOptions capabilities = new ChromeOptions();
         capabilities.addArguments("start-maximized");
-        capabilities.addArguments("lang=pt-BR");
 
         return capabilities;
     }
@@ -100,17 +96,17 @@ public enum DriverFactory implements IDriverType {
      */
     public static WebDriver createInstance(String browser) {
         RemoteWebDriver remoteWebDriver = null;
-
+        Configuration configuration = new Configuration();
         try {
             // a composition of the target grid address and port
-            String gridURL = getValueFromConfigFile("grid.url") + ":" + getValueFromConfigFile("grid.port") + "/wd/hub";
+            String gridURL = configuration.getGridURL() + ":" + configuration.getGridPort() + "/wd/hub";
 
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), returnCapability(browser));
         } catch (MalformedURLException e) {
-            LOGGER.error("Grid URL is invalid or Grid is not available");
-            LOGGER.error("Browser: " +  browser, e);
+            log.error("Grid URL is invalid or Grid is not available");
+            log.error("Browser: " +  browser, e);
         } catch (IllegalArgumentException e) {
-            LOGGER.error("Browser: " +  browser + "is not valid or recognized", e);
+            log.error("Browser: " +  browser + "is not valid or recognized", e);
         }
 
         return remoteWebDriver;

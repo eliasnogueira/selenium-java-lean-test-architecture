@@ -24,29 +24,23 @@
 
 package test;
 
-import com.github.javafaker.Faker;
+import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
+import config.Configuration;
 import driver.DriverFactory;
 import driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import java.util.Locale;
 
-import static utils.CommonUtils.getValueFromConfigFile;
-
-@Listeners(TestListener.class)
-public abstract class BaseTest {
-
-    Faker faker;
+@Listeners({ExtentITestListenerClassAdapter.class, TestListener.class})
+public abstract class BaseWeb {
 
     @BeforeMethod
     @Parameters("browser")
     public void preCondition(@Optional("chrome") String browser) {
-        faker = new Faker(new Locale(getValueFromConfigFile("faker.locale")));
-
         WebDriver driver = DriverFactory.createInstance(browser);
         DriverManager.setDriver(driver);
 
-        DriverManager.getDriver().get(getValueFromConfigFile("url.base"));
+        DriverManager.getDriver().get(new Configuration().getBaseURL());
     }
 
     @AfterMethod
