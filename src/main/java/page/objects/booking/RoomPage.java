@@ -22,27 +22,16 @@
  * SOFTWARE.
  */
 
-package page_objects.booking;
+package page.objects.booking;
 
 import driver.DriverManager;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import page_objects.booking.common.NavigationPage;
+import enums.RoomType;
+import org.openqa.selenium.By;
+import page.objects.booking.common.NavigationPage;
 
-public class DetailPage extends NavigationPage {
+public class RoomPage extends NavigationPage {
 
-    @FindBy(id = "description")
-    private WebElement roomDescription;
-
-    @FindBy(css = "#message > p")
-    private WebElement message;
-
-    public void fillRoomDescription(String description) {
-        new Actions(DriverManager.getDriver()).sendKeys(roomDescription, description);
-    }
-
-    public String getAlertMessage() {
-        return message.getText();
+    public void selectRoomType(RoomType room) {
+        DriverManager.getDriver().findElement(By.xpath("//h6[text()='" + room + "']")).click();
     }
 }

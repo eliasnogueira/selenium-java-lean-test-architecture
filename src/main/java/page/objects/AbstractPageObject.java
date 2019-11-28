@@ -22,16 +22,17 @@
  * SOFTWARE.
  */
 
-package page_objects.booking;
+package page.objects;
 
+import config.Configuration;
 import driver.DriverManager;
-import enums.RoomType;
-import org.openqa.selenium.By;
-import page_objects.booking.common.NavigationPage;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class RoomPage extends NavigationPage {
+public class AbstractPageObject {
 
-    public void selectRoomType(RoomType room) {
-        DriverManager.getDriver().findElement(By.xpath("//h6[text()='" + room + "']")).click();
+    protected AbstractPageObject() {
+        int timeout = new Configuration().getTimeout();
+        PageFactory.initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), timeout), this);
     }
 }

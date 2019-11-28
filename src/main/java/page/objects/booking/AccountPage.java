@@ -22,17 +22,52 @@
  * SOFTWARE.
  */
 
-package page_objects;
+package page.objects.booking;
 
-import config.Configuration;
 import driver.DriverManager;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import page.objects.booking.common.NavigationPage;
 
-public class AbstractPageObject {
+public class AccountPage extends NavigationPage {
 
-    protected AbstractPageObject() {
-        int timeout = new Configuration().getTimeout();
-        PageFactory.initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), timeout), this);
+    @FindBy(id = "email")
+    private WebElement email;
+
+    @FindBy(id = "password")
+    private WebElement password;
+
+    @FindBy(name = "country")
+    private WebElement country;
+
+    @FindBy(name = "budget")
+    private WebElement budget;
+
+    @FindBy(css = ".check")
+    private WebElement newsletter;
+
+    public AccountPage() {
+        DriverManager.getDriver().switchTo().frame("result");
+    }
+
+    public void fillEmail(String email) {
+        this.email.sendKeys(email);
+    }
+
+    public void fillPassword(String password) {
+        this.password.sendKeys(password);
+    }
+
+    public void selectCountry(String country) {
+        new Select(this.country).selectByVisibleText(country);
+    }
+
+    public void selectBudget(String value) {
+        new Select(budget).selectByVisibleText(value);
+    }
+
+    public void clickNewsletter() {
+        newsletter.click();
     }
 }

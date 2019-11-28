@@ -22,32 +22,30 @@
  * SOFTWARE.
  */
 
-package page_objects.booking.common;
+package page.objects.booking;
 
+import driver.DriverManager;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import page_objects.AbstractPageObject;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import page.objects.booking.common.NavigationPage;
 
-public class NavigationPage extends AbstractPageObject {
+public class DetailPage extends NavigationPage {
 
-    @FindBy(name = "next")
-    private WebElement next;
+    @FindBy(id = "description")
+    private WebElement roomDescription;
 
-    @FindBy(name = "previous")
-    private WebElement previous;
+    @FindBy(css = "#message > p")
+    private WebElement message;
 
-    @FindBy(name = "finish")
-    private WebElement finish;
-
-    public void next() {
-        next.click();
+    public void fillRoomDescription(String description) {
+        new Actions(DriverManager.getDriver()).sendKeys(roomDescription, description);
     }
 
-    public void previous() {
-        previous.click();
-    }
-
-    public void finish() {
-        finish.click();
+    public String getAlertMessage() {
+        return message.getText();
     }
 }
