@@ -26,9 +26,9 @@ package test;
 import data.BookingDataFactory;
 import model.Booking;
 import org.testng.annotations.Test;
-import page_objects.booking.AccountPage;
-import page_objects.booking.DetailPage;
-import page_objects.booking.RoomPage;
+import page.objects.booking.AccountPage;
+import page.objects.booking.DetailPage;
+import page.objects.booking.RoomPage;
 
 import static org.assertj.core.api.Assertions.*;
 
