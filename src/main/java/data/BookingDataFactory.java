@@ -35,10 +35,14 @@ public class BookingDataFactory {
     }
 
     private String returnRandomCountry() {
-        return new String[] {"Belgium", "Brazil", "Netherlands"}[(new Random().nextInt(3))];
+        return returnRandomItemOnArray(new String[] {"Belgium", "Brazil", "Netherlands"});
     }
 
     private String returnDailyBudget() {
-        return new String[] {"$100", "$100 - $499", "$499 - $999", "$999+"}[(new Random().nextInt(4))];
+        return returnRandomItemOnArray(new String[] {"$100", "$100 - $499", "$499 - $999", "$999+"});
+    }
+
+    private String returnRandomItemOnArray(String[] array) {
+        return array[(new Random().nextInt(array.length))];
     }
 }
