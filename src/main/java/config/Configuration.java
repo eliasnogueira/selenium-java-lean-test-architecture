@@ -5,10 +5,11 @@ import org.aeonbits.owner.Config;
 @Config.Sources({"classpath:conf/${env}.properties"})
 public interface Configuration extends Config {
 
+    String target();
+
     @Key("url.base")
     String url();
 
-    @DefaultValue("5")
     String timeout();
 
     @Key("grid.url")
