@@ -1,28 +1,22 @@
 package config;
 
-import static config.ReadConfigFile.getValueFromConfigFile;
+import org.aeonbits.owner.Config;
 
-import java.util.Objects;
+@Config.Sources({"classpath:conf/${env}.properties"})
+public interface Configuration extends Config {
 
-public class Configuration {
+    @Key("url.base")
+    String url();
 
-    public String getBaseURL() {
-        return getValueFromConfigFile("url.base");
-    }
+    @DefaultValue("5")
+    String timeout();
 
-    public int getTimeout() {
-        return Integer.parseInt(Objects.requireNonNull(getValueFromConfigFile("timeout")));
-    }
+    @Key("grid.url")
+    String gridUrl();
 
-    public String getGridURL() {
-        return  getValueFromConfigFile("grid.url");
-    }
+    @Key("grid.port")
+    String gridPort();
 
-    public int getGridPort() {
-        return Integer.parseInt(Objects.requireNonNull(getValueFromConfigFile("grid.port")));
-    }
-
-    public String getFakerLocale() {
-        return getValueFromConfigFile("faker.locale");
-    }
+    @Key("faker.locale")
+    String faker();
 }
