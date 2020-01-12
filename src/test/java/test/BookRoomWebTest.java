@@ -32,7 +32,7 @@ import page.objects.booking.RoomPage;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class BookRoomWeb extends BaseWeb {
+public class BookRoomWebTest extends BaseWeb {
 
     @Test(description = "Book a room")
     public void bookARoom() {
