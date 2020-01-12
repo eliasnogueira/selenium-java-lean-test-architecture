@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Random;
 import lombok.extern.log4j.Log4j2;
 import model.Booking;
+import org.aeonbits.owner.ConfigCache;
 
 @Log4j2
 public class BookingDataFactory {
@@ -15,7 +16,8 @@ public class BookingDataFactory {
     private final Faker faker;
 
     public BookingDataFactory() {
-        faker = new Faker(new Locale(new Configuration().getFakerLocale()));
+        Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
+        faker = new Faker(new Locale(configuration.faker()));
     }
 
     public Booking createBookingData() {
