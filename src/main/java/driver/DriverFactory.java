@@ -25,101 +25,37 @@
 package driver;
 
 import config.Configuration;
+import driver.local.LocalDriver;
+import driver.remote.RemoteDriver;
 import lombok.extern.log4j.Log4j2;
 import org.aeonbits.owner.ConfigCache;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariOptions;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 @Log4j2
-public enum DriverFactory implements IDriverType {
+public class DriverFactory {
 
-    FIREFOX {
-        public MutableCapabilities returnDriver() {
-            return new FirefoxOptions();
-        }
-    },
 
-    FIREFOX_HEADLESS {
-        public MutableCapabilities returnDriver() {
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setHeadless(true);
-            return firefoxOptions;
-        }
-    },
-
-    CHROME {
-        @Override
-        public MutableCapabilities returnDriver() {
-            return defaultChromeOptions();
-        }
-    },
-
-    CHROME_HEADLESS {
-        @Override
-        public MutableCapabilities returnDriver() {
-            return ((ChromeOptions) defaultChromeOptions()).addArguments("headless");
-        }
-    },
-
-    SAFARI {
-        @Override
-        public MutableCapabilities returnDriver() {
-            return new SafariOptions();
-        }
-    },
-
-    EDGE {
-        @Override
-        public MutableCapabilities returnDriver() {
-            return new EdgeOptions();
-        }
-    };
-
-    private static MutableCapabilities defaultChromeOptions() {
-        ChromeOptions capabilities = new ChromeOptions();
-        capabilities.addArguments("start-maximized");
-
-        return capabilities;
-    }
-
-    /**
-     * Create a new RemoteWebDriver instance based on the grid URL
-     * @param browser the target browser
-     * @return a new RemoteWebDriver instance
-     */
     public static WebDriver createInstance(String browser) {
-        RemoteWebDriver remoteWebDriver = null;
         Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
-        try {
-            // a composition of the target grid address and port
-            String gridURL = configuration.gridUrl() + ":" + configuration.gridPort() + "/wd/hub";
+        Target target = Target.valueOf(configuration.target().toUpperCase());
+        WebDriver webdriver;
 
-            remoteWebDriver = new RemoteWebDriver(new URL(gridURL), returnCapability(browser));
-        } catch (MalformedURLException e) {
-            log.error("Grid URL is invalid or Grid is not available");
-            log.error("Browser: " +  browser, e);
-        } catch (IllegalArgumentException e) {
-            log.error("Browser: " +  browser + "is not valid or recognized", e);
+        switch (target) {
+
+            case LOCAL:
+                webdriver = new LocalDriver().createInstance(browser);
+                break;
+            case GRID:
+                webdriver = new RemoteDriver().createInstance(browser);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + target);
         }
 
-        return remoteWebDriver;
+        return webdriver;
     }
 
-
-    private static MutableCapabilities returnCapability(String browser) {
-        return valueOf(browser.toUpperCase()).returnDriver();
-    }
-
-    @Override
-    public String toString() {
-        return super.toString().toLowerCase();
+    enum Target {
+        LOCAL, GRID
     }
 }
