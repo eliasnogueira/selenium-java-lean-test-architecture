@@ -15,8 +15,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -26,11 +26,12 @@
         <selenium.version>3.141.59</selenium.version>
         <testng.version>7.1.0</testng.version>
         <assertj.version>3.14.0</assertj.version>
-        <extentreports.version>4.1.1</extentreports.version>
-        <extentreports-adaptor.version>1.0.3</extentreports-adaptor.version>
+        <extentreports.version>4.0.9</extentreports.version>
+        <extentreports-adapter.version>1.0.3</extentreports-adapter.version>
         <javafaker.version>1.0.1</javafaker.version>
         <log4j.version>2.13.0</log4j.version>
         <lombok.version>1.18.10</lombok.version>
+        <webdrivermanager.version>3.7.1</webdrivermanager.version>
 
         <suite>multi_browser</suite>
     </properties>
@@ -94,8 +95,21 @@
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports-testng-adapter</artifactId>
-            <version>${extentreports-adaptor.version}</version>
+            <version>${extentreports-adapter.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+
     </dependencies>
 
     <!-- This profile execute the TestNG suite inside the suites folder on test/resources -->
