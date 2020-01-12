@@ -26,6 +26,7 @@ package driver;
 
 import config.Configuration;
 import lombok.extern.log4j.Log4j2;
+import org.aeonbits.owner.ConfigCache;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -96,10 +97,10 @@ public enum DriverFactory implements IDriverType {
      */
     public static WebDriver createInstance(String browser) {
         RemoteWebDriver remoteWebDriver = null;
-        Configuration configuration = new Configuration();
+        Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
         try {
             // a composition of the target grid address and port
-            String gridURL = configuration.getGridURL() + ":" + configuration.getGridPort() + "/wd/hub";
+            String gridURL = configuration.gridUrl() + ":" + configuration.gridPort() + "/wd/hub";
 
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), returnCapability(browser));
         } catch (MalformedURLException e) {
