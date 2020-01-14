@@ -105,7 +105,7 @@ To do this you need:
 mvn test -Pweb_execution -Dsuite=multi_browser
 ````
 
-### Pipelne as a code
+### Pipeline as a code
 
 The two files of pipeline as a code are inside _pipeline_as_code_ folder.
 
