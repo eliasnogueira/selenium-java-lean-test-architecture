@@ -31,7 +31,7 @@
         <javafaker.version>1.0.1</javafaker.version>
         <log4j.version>2.13.0</log4j.version>
         <lombok.version>1.18.10</lombok.version>
-        <webdrivermanager.version>3.7.1</webdrivermanager.version>
+        <webdrivermanager.version>3.8.1</webdrivermanager.version>
 
         <suite>multi_browser</suite>
     </properties>
