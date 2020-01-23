@@ -18,7 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @Log4j2
-public class RemoteDriver implements IDriver {
+public class RemoteDriverManager implements IDriver {
 
     @Override
     public WebDriver createInstance(String browser) {
