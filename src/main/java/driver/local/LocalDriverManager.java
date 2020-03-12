@@ -35,7 +35,7 @@ public class LocalDriverManager implements IDriver {
 
     @Override
     public WebDriver createInstance(String browser) {
-         WebDriver driver = null;
+        WebDriver driver = null;
 
         try {
             DriverManagerType driverManagerType = DriverManagerType.valueOf(browser.toUpperCase());

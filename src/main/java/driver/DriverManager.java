@@ -32,10 +32,11 @@ public class DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private  DriverManager() {}
+    private DriverManager() {
+    }
 
     public static WebDriver getDriver() {
-        return  driver.get();
+        return driver.get();
     }
 
     public static void setDriver(WebDriver driver) {
