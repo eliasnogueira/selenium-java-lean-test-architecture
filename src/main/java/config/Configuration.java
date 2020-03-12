@@ -26,7 +26,7 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources({"classpath:conf/${env}.properties"})
+@Config.Sources({"classpath:conf/${environment}.properties"})
 public interface Configuration extends Config {
 
     String target();
