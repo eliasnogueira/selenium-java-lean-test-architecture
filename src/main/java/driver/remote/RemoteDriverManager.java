@@ -25,10 +25,12 @@
 package driver.remote;
 
 import config.Configuration;
+import config.ConfigurationManager;
 import driver.IDriver;
 import io.github.bonigarcia.wdm.DriverManagerType;
+import java.net.MalformedURLException;
+import java.net.URL;
 import lombok.extern.log4j.Log4j2;
-import org.aeonbits.owner.ConfigCache;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -38,16 +40,13 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 @Log4j2
 public class RemoteDriverManager implements IDriver {
 
     @Override
     public WebDriver createInstance(String browser) {
         RemoteWebDriver remoteWebDriver = null;
-        Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
+        Configuration configuration = ConfigurationManager.getConfiguration();
         try {
             // a composition of the target grid address and port
             String gridURL = String.format("http://%s:%s/wd/hub", configuration.gridUrl(), configuration.gridPort());
@@ -55,9 +54,9 @@ public class RemoteDriverManager implements IDriver {
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), getCapability(browser));
         } catch (MalformedURLException e) {
             log.error("Grid URL is invalid or Grid is not available");
-            log.error("Browser: " +  browser, e);
+            log.error("Browser: " + browser, e);
         } catch (IllegalArgumentException e) {
-            log.error("Browser: " +  browser + "is not valid or recognized", e);
+            log.error("Browser: " + browser + "is not valid or recognized", e);
         }
 
         return remoteWebDriver;
@@ -70,7 +69,7 @@ public class RemoteDriverManager implements IDriver {
         switch (driverManagerType) {
 
             case CHROME:
-                mutableCapabilities =  defaultChromeOptions();
+                mutableCapabilities = defaultChromeOptions();
                 break;
             case FIREFOX:
                 mutableCapabilities = new FirefoxOptions();

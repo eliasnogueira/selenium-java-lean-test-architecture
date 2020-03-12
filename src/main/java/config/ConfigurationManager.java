@@ -22,36 +22,29 @@
  * SOFTWARE.
  */
 
-package test;
+package config;
 
-import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
-import config.Configuration;
-import config.ConfigurationManager;
-import driver.DriverFactory;
-import driver.DriverManager;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.aeonbits.owner.ConfigCache;
+import org.aeonbits.owner.ConfigFactory;
 
-@Listeners({ExtentITestListenerClassAdapter.class, TestListener.class})
-public abstract class BaseWeb {
+public class ConfigurationManager {
 
-    @BeforeMethod
-    @Parameters("browser")
-    public void preCondition(@Optional("chrome") String browser) {
-        Configuration configuration = ConfigurationManager.getConfiguration();
+    private static final String ENVIRONMENT = "environment";
 
-        WebDriver driver = DriverFactory.createInstance(browser);
-        DriverManager.setDriver(driver);
-
-        DriverManager.getDriver().get(configuration.url());
+    private ConfigurationManager() {
     }
 
-    @AfterMethod
-    public void postCondition() {
-        DriverManager.quit();
+    public static Configuration getConfiguration() {
+        setEnvironment();
+        return ConfigCache.getOrCreate(Configuration.class);
+    }
+
+    private static void setEnvironment() {
+        String environment = System.getProperty(ENVIRONMENT);
+        String actualEnv = environment == null ? "dev" : environment;
+
+        System.setProperty(ENVIRONMENT, actualEnv);
+        ConfigFactory.setProperty(ENVIRONMENT, actualEnv);
     }
 }
+
