@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-bootstrap</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <build>
         <plugins>
@@ -32,6 +32,7 @@
         <log4j.version>2.13.0</log4j.version>
         <lombok.version>1.18.10</lombok.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
+        <owner.version>1.0.10</owner.version>
 
         <suite>multi_browser</suite>
     </properties>
@@ -101,7 +102,7 @@
         <dependency>
             <groupId>org.aeonbits.owner</groupId>
             <artifactId>owner</artifactId>
-            <version>1.0.10</version>
+            <version>${owner.version}</version>
         </dependency>
 
         <dependency>
