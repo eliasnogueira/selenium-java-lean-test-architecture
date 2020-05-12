@@ -28,12 +28,14 @@ import config.Configuration;
 import config.ConfigurationManager;
 import driver.local.LocalDriverManager;
 import driver.remote.RemoteDriverManager;
+import enums.Target;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 
 @Log4j2
 public class DriverFactory {
 
+    private DriverFactory() {}
 
     public static WebDriver createInstance(String browser) {
         Configuration configuration = ConfigurationManager.getConfiguration();
@@ -43,9 +45,11 @@ public class DriverFactory {
         switch (target) {
 
             case LOCAL:
-                webdriver = new LocalDriverManager().createInstance(browser);
+                //override the browser value from @Optional on BeseWeb
+                webdriver = new LocalDriverManager().createInstance(configuration.browser());
                 break;
             case GRID:
+                // getting the browser from the suite file or @Optional on BaseWeb
                 webdriver = new RemoteDriverManager().createInstance(browser);
                 break;
             default:
@@ -53,9 +57,5 @@ public class DriverFactory {
         }
 
         return webdriver;
-    }
-
-    enum Target {
-        LOCAL, GRID
     }
 }
