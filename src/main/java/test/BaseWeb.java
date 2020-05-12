@@ -39,7 +39,7 @@ import org.testng.annotations.Parameters;
 @Listeners({ExtentITestListenerClassAdapter.class, TestListener.class})
 public abstract class BaseWeb {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     @Parameters("browser")
     public void preCondition(@Optional("chrome") String browser) {
         Configuration configuration = ConfigurationManager.getConfiguration();
@@ -50,7 +50,7 @@ public abstract class BaseWeb {
         DriverManager.getDriver().get(configuration.url());
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void postCondition() {
         DriverManager.quit();
     }
