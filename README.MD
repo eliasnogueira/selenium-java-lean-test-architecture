@@ -4,8 +4,17 @@ The purpose of this project is to have a basic project with minimum viable testi
 
 This project using the following languages and frameworks:
 
-* Java 8 as the programming language
-* TestNG as the UnitTest framework to support the test creation
+* [Java 11](https://openjdk.java.net/projects/jdk/11/) as the programming language
+* [TestNG](https://testng.org/doc/) as the UnitTest framework to support the test creation
+* [Seleium WebDriver](https://www.selenium.dev/) as the web browser automation framework using the Java binding
+* [AsseertJ](https://joel-costigliola.github.io/assertj/) as the fluent assertion library
+* [ExtentReport](https://extentreports.com/) as the testing report strategy
+* [JavaFaker](https://github.com/DiUS/java-faker) as the faker data generation strategy
+* [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging manage strategy
+* [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) as the Selenium binaries management
+* [Owner](http://owner.aeonbits.org/) to minimize the code to handle the properties file
+* [Lombok](https://projectlombok.org/) to minimize the boilerplate in the Java code
+
 
 ## Test architecture
 
@@ -13,52 +22,143 @@ We know that any automation project starting with a good test architecture.
 This project can be your initial test architecture for a faster start.
 You will see the following items in this architecture:
 
-* Use of Page Objects patters
-* Parallel execution
-* BaseTest
-* TestListner
-* Logging
-* Configuration through a properties file
-* yaml templates to create a Selenium Grid infrastructure on OpenShift
+* [Page Objects pattern](#page-objects-pattern)
+* [Execution types](#execution-types)
+* [BaseTest](#basetest)
+* [TestListener](#testlistener)
+* [Logging](#logging)
+* [Configuration files](#configuration-files)
+* [Parallel execution](#parallel-execution)
+* [Test Data Factory](#test-data-factory)
+* [Profiles executors on pom.xml](#profiles-executors-on-pomxml)
+* [Pipeline as a code](#pipeline-as-a-code)
 
 Do you have any other item to add on this test architecture? Please do a pull request or open an issue to discuss
 
-### Use of Page Objects patters
+### Page Objects pattern
+I will not explain the Page Object pattern because you can find a lot of good explanations and examples on the internet. 
+Instead, I will explain what exactly about page objects I'm using in this project.
 
-### Parallel execution
+#### AbstractPageObject
+This class has a protected constructor to remove the necessity to init the elements using the Page Factory. 
+Also, it sets the timeout from the `timeout` property value located on `general.properties` file.
+
+All the Page Object classes should extend the `AbstractPageObject`.
+It also tries to remove the `driver` object from the Page Object class as much as possible.
+
+> **Important information**
+>
+> There's a `NavigationPage` on the `common` package inside the Page Objects.
+> Notice that all the pages extend this one instead of the `AbstractPageObject`. I implemented this way:
+> * because the previous and next buttons are fixed on the page (there's no refresh on the page)
+> * to avoid create or pass the new reference to the `NavigationPage` when we need to hit previous or next buttons
+
+As much as possible avoid this strategy to not get an `ElementNotFoundException` or `StaleElementReferenceException`.
+Use this approach if you know that the page does not refresh.
+
+### Execution types
+
+There are two execution types: **local** and **remote**.
+For both, there's a factory class [DriverFactory](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/driver/DriverFactory.java) 
+to resolve if the execution is local or remote based on the `target ` property value located on `general.properties` file.
+
+The class [DriverManager](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/driver/DriverManager.java) 
+create a `ThreadLocal` for the WebDriver instance, to make sure there's no conflict when we run it in parallel.
+
+#### Local execution
+This execution type uses [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) class to instantiate the web browsers.
+
+The class [LocalDriverManager](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/driver/local/LocalDriverManager.java) 
+create a browser instance from the value placed on the `browser` property on the `local.properties` file.
+It matches the browser name with an internal Enum type on WebDriverManager.
+
+#### Remote execution
+This execution type uses [RemoteDriverManager](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/driver/remote/RemoteDriverManager.java) 
+class to connect on the remote grid and create the browser instance.
+
+The approach of the remote execution here was created to enable the parallel execution, but if you set the `target` 
+property value to `grid` and run a test it will work because if there's no explicit browser in use, Google Chrome will be used. 
+You can check this on the [BaseWeb](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/test/BaseWeb.java) class.
+
+You must pay attention to the two required information regarding the remote execution: the `grid.url` and `grid.port` 
+property values on the `grid.properties` file. You must update these values before the start.
+
+If you are using the `docker-compose.yml` file to start the Zalenium grid, the values on the `grid.property` file should work.
+
+Please take a look at the [Parallel Execution](#parallel-execution) section.
 
 ### BaseTest
+This testing pattern was implemented on the [BaseWeb](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/test/BaseWeb.java) 
+class to automatically run the pre (setup) and post (teardown) conditions.
 
-### TestListner
+The pre-condition uses `@BeforeMethod` from TestNG creates the browser instance based on the values passed either local or remote execution.
+The post-condition uses `@AfterMethod` to close the browser instance.
+Both have the `alwaysRun` parameter as `true` to force the run on a pipeline.
+
+Pay attention that it was designed to open a browser instance to each `@Test` located on the test class.
+
+This class also have two test listeners:
+* `ExtentITestListenerClassAdapter`: from [ExtentReport](https://extentreports.com/) to automatically generated the report and status
+* `TestListener`: custom TestNG listener that will be described in the next section
+
+### TestListener
+
+The `ExtentITestListenerClassAdapter` is a listener provided by the [extentreports-testng-adapter](https://github.com/extent-framework/extentreports-testng-adapter) 
+library responsible to generate the report using the property values located on the `extent.properties` file.
+
+The `TestListener` is a class that implements [ITestListener](https://testng.org/doc/documentation-main.html#logging-listeners).
+The following method is in use to help logging errors and attach additional information on the test report:
+* `onTestStart`: add the browser information into the test report
+* `onTestFailure`: log the exceptions and add a screenshot on the test report
+* `onTestSkipped`: add the skipped test on the log
 
 ### Logging
+All the log is done by the Log4J using the `@Log4j2` annotation.
 
-### Configuration through a properties file
+The `log4j2.properties` has two strategies: console and file.
+A file with all the log information will be automatically created on the user folder with `test_automation.log` filename. 
+If you want to change it, update the `appender.file.fileName` property value.
 
-The project use the a property file to configure basic mutable items, like:
+The `log.error` is used to log all the exceptions this architecture might throw. Use `log.info` or `log.debug` to log 
+important information, like the users automatically generated by the factory [BookingDataFactory](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/data/BookingDataFactory.java)
 
-* base.url: the main app URL
-* grid.url: target grid url
-* grid.port: target grid port
-* log.directory = the name of the log folder
-* log.dateformat = the data format for the log filename
-
-The property file is inside _conf_ folder. This folder has three sub-folders:
-
-* dev:
-* test: 
-* prod:
-
-You can set different values for the properties keys based on your environment.
-When you run a test without inform the parameter `env`, the property file used will be _conf/dev/config.properties_.
-
-To change the environment, just use `-Denv=env_name` where _env_name_ is the name of the folder inside _conf_ folder.
-
-E.g: running all tests using test configuration values
-
-``` bash
-mvn test -Denv=test
+### Parallel execution
+The parallel test execution is based on the [parallel tests](https://testng.org/doc/documentation-main.html#parallel-tests) 
+feature on TestNG. This is in use on the `multi_browser.xml` test suite file by the `parallel="tests"` attribute and value, 
+which means each `test` item inside the test suite will execute in parallel.
+The browser in use for each `test` should be defined by a parameter, like:
+```xml
+<parameter name="browser" value="chrome"/>
 ```
+
+You can define any parallel strategy.
+
+It can be an excellent combination together with the grid strategy.
+
+### Configuration files
+This project uses a library called [Owner](http://owner.aeonbits.org/). You can find the class related to the property 
+file reader in the following classes:
+* [Configuration](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/config/Configuration.java)
+* [ConfigurationManager](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/config/ConfigurationManager.java)
+
+There are 3 properties (configuration) files located on `src/main/java/resources/conf`:
+* `general.properties`: general configuration as the target execution, base url, timeout, and faker locale
+* `grid.properties`: url and port for the Selenium grid usage (Zalenium)
+* `local.properties`:  browser to use in the local execution
+
+The properties were divided into three different ones to better separate the responsibilities and enable the changes easy 
+without have a lot of properties inside a single file.
+
+### Test Data Factory
+Is the utilization of the Factory design pattern with the Fluent Builder to generate dynamic data.
+The [BookingDataFactory](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/data/BookingDataFactory.java) 
+has only one factory `createBookingData` returning a `Booking` object with dinamyc data.
+
+This dynamic data is generated by JavaFaker filling all the fields using the Build pattern.
+The [Booking](https://github.com/eliasnogueira/selenium-java-bootstrap/blob/master/src/main/java/model/Booking.java) 
+the class uses Lombok to reduce the boilerplate, easily providing getters, setters, constructors, and the build pattern.
+
+Reading reference: https://reflectoring.io/objectmother-fluent-builder
 
 ### Profiles executors on pom.xml
 
@@ -107,9 +207,7 @@ mvn test -Pweb_execution -Dsuite=multi_browser
 
 ### Pipeline as a code
 
-The two files of pipeline as a code are inside _pipeline_as_code_ folder.
+The two files of pipeline as a code are inside `pipeline_as_code` folder.
 
-#### Jenkins pipeline
-
-You can you _Jenkisfile_ on this directory and refer _pipeline_as_code/Jenkinsfile_ on XXXXXX item on Jenkins.
-This pipeline works on
+* Jenkins: `Jenkinsfile` to be used on a Jenkins pipeline
+* GitLab CI: `.gitlab-ci.yml` to be used on a GitLab CI
