@@ -25,11 +25,19 @@
 package config;
 
 import org.aeonbits.owner.Config;
+import org.aeonbits.owner.Config.LoadPolicy;
+import org.aeonbits.owner.Config.LoadType;
 
-@Config.Sources({"classpath:conf/${environment}.properties"})
+@LoadPolicy(LoadType.MERGE)
+@Config.Sources({
+    "classpath:conf/general.properties",
+    "classpath:conf/local.properties",
+    "classpath:conf/grid.properties"})
 public interface Configuration extends Config {
 
     String target();
+
+    String browser();
 
     @Key("url.base")
     String url();
