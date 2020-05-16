@@ -8,7 +8,7 @@ This project using the following languages and frameworks:
 * [TestNG](https://testng.org/doc/) as the UnitTest framework to support the test creation
 * [Seleium WebDriver](https://www.selenium.dev/) as the web browser automation framework using the Java binding
 * [AsseertJ](https://joel-costigliola.github.io/assertj/) as the fluent assertion library
-* [ExtentReport](https://extentreports.com/) as the testing report strategy
+* [Allure Report](https://docs.qameta.io/allure/) as the testing report strategy
 * [JavaFaker](https://github.com/DiUS/java-faker) as the faker data generation strategy
 * [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging manage strategy
 * [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) as the Selenium binaries management
@@ -97,14 +97,9 @@ Both have the `alwaysRun` parameter as `true` to force the run on a pipeline.
 
 Pay attention that it was designed to open a browser instance to each `@Test` located on the test class.
 
-This class also have two test listeners:
-* `ExtentITestListenerClassAdapter`: from [ExtentReport](https://extentreports.com/) to automatically generated the report and status
-* `TestListener`: custom TestNG listener that will be described in the next section
+This class also the `TestListener` that is a custom TestNG listener, and will be described in the next section.
 
 ### TestListener
-
-The `ExtentITestListenerClassAdapter` is a listener provided by the [extentreports-testng-adapter](https://github.com/extent-framework/extentreports-testng-adapter) 
-library responsible to generate the report using the property values located on the `extent.properties` file.
 
 The `TestListener` is a class that implements [ITestListener](https://testng.org/doc/documentation-main.html#logging-listeners).
 The following method is in use to help logging errors and attach additional information on the test report:
