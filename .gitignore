@@ -7,3 +7,6 @@
 # Maven
 logs/
 target/
+
+# Allure
+.allure
