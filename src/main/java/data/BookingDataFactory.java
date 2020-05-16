@@ -24,7 +24,6 @@
 
 package data;
 
-import com.aventstack.extentreports.service.ExtentTestManager;
 import com.github.javafaker.Faker;
 import config.Configuration;
 import config.ConfigurationManager;
@@ -56,7 +55,6 @@ public class BookingDataFactory {
             build();
 
         log.info(booking);
-        ExtentTestManager.getTest().info(booking.toString());
         return booking;
     }
 
