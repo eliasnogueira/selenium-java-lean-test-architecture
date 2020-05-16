@@ -24,8 +24,8 @@
 
 package test;
 
-import com.aventstack.extentreports.service.ExtentTestManager;
 import driver.DriverManager;
+import io.qameta.allure.Attachment;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -38,7 +38,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTestManager.getTest().info(DriverManager.getInfo());
+        addBrowserInformationOnAllureReport();
     }
 
     @Override
@@ -75,8 +75,18 @@ public class TestListener implements ITestListener {
         log.error(iTestResult.getTestClass().getName());
         log.error(iTestResult.getThrowable());
 
-        String screenshot = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
-        ExtentTestManager.getTest().addScreenCaptureFromBase64String(screenshot);
+        takeScreenshotToAttachOnAllureReport();
     }
+
+    @Attachment(value = "Failed test screenshot", type = "image/png")
+    public byte[] takeScreenshotToAttachOnAllureReport() {
+        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Attachment(value = "Browser information", type = "text/plain")
+    public String addBrowserInformationOnAllureReport() {
+        return DriverManager.getInfo();
+    }
+
 
 }

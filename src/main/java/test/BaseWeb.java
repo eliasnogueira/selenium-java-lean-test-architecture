@@ -24,7 +24,6 @@
 
 package test;
 
-import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
 import config.Configuration;
 import config.ConfigurationManager;
 import driver.DriverFactory;
@@ -36,7 +35,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-@Listeners({ExtentITestListenerClassAdapter.class, TestListener.class})
+@Listeners({TestListener.class})
 public abstract class BaseWeb {
 
     @BeforeMethod(alwaysRun = true)
