@@ -24,21 +24,18 @@
 
 package test;
 
-import driver.DriverManager;
-import io.qameta.allure.Attachment;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import report.AllureManager;
 
 @Log4j2
 public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        addBrowserInformationOnAllureReport();
+        // empty
     }
 
     @Override
@@ -75,18 +72,6 @@ public class TestListener implements ITestListener {
         log.error(iTestResult.getTestClass().getName());
         log.error(iTestResult.getThrowable());
 
-        takeScreenshotToAttachOnAllureReport();
+        AllureManager.takeScreenshotToAttachOnAllureReport();
     }
-
-    @Attachment(value = "Failed test screenshot", type = "image/png")
-    public byte[] takeScreenshotToAttachOnAllureReport() {
-        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
-    }
-
-    @Attachment(value = "Browser information", type = "text/plain")
-    public String addBrowserInformationOnAllureReport() {
-        return DriverManager.getInfo();
-    }
-
-
 }
