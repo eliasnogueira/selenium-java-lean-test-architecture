@@ -27,7 +27,7 @@ package driver.remote;
 import config.Configuration;
 import config.ConfigurationManager;
 import driver.IDriver;
-import io.github.bonigarcia.wdm.DriverManagerType;
+import io.github.bonigarcia.wdm.config.DriverManagerType;
 import java.net.MalformedURLException;
 import java.net.URL;
 import lombok.extern.log4j.Log4j2;

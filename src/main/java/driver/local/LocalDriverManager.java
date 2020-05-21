@@ -25,8 +25,8 @@
 package driver.local;
 
 import driver.IDriver;
-import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.config.DriverManagerType;
 import java.lang.reflect.InvocationTargetException;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
