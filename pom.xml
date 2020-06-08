@@ -23,7 +23,7 @@
         <log4j.version>2.13.3</log4j.version>
         <lombok.version>1.18.12</lombok.version>
         <webdrivermanager.version>4.0.0</webdrivermanager.version>
-        <owner.version>1.0.11</owner.version>
+        <owner.version>1.0.12</owner.version>
         <allure.version>2.13.3</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
