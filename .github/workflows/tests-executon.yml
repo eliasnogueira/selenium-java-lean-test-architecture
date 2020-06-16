@@ -1,0 +1,27 @@
+name: Test execution
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: maven:3.6.3-openjdk-11-slim
+    env:
+      SELENIUM_HUB_HOST: hub
+    services:
+      hub:
+        image: selenium/hub
+      firefox:
+        image: selenium/standalone-chrome
+        env:
+          HUB_HOST: hub
+          HUB_PORT: 4444
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1.2.0
+      - name: build
+        run: mvn clean install
+      - name: test
+        run: mvn test -Psuite
