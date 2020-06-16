@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Multi browser test" verbose="1" parallel="tests" thread-count="99">
+
+    <test name="Chrome execution">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="test.BookRoomWebTest"/>
+        </classes>
+    </test>
+
+</suite>
