@@ -31,6 +31,7 @@ import config.ConfigurationManager;
 import driver.IDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import lombok.extern.log4j.Log4j2;
@@ -76,13 +77,13 @@ public class LocalDriverManager implements IDriver {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.setHeadless(true);
             constructor = driverClass.getDeclaredConstructor(ChromeOptions.class);
-            constructor.setAccessible(true);
+            AccessibleObject.setAccessible(new AccessibleObject[]{constructor}, true);
             driver = (WebDriver) constructor.newInstance(chromeOptions);
         } else if (FirefoxDriver.class == driverClass) {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.setHeadless(true);
             constructor = driverClass.getDeclaredConstructor(FirefoxOptions.class);
-            constructor.setAccessible(true);
+            AccessibleObject.setAccessible(new AccessibleObject[]{constructor}, true);
             driver = (WebDriver) constructor.newInstance(firefoxOptions);
         } else {
             throw new IllegalArgumentException("Headless is only supported by Google Chrome or Firefox");
