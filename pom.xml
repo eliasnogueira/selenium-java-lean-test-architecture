@@ -16,7 +16,8 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.5</aspectj.version>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.0.0-alpha-6</selenium.version>
+        <selenium-server.version>4.0.0-alpha-2</selenium-server.version>
         <testng.version>7.1.0</testng.version>
         <assertj.version>3.16.1</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
@@ -41,7 +42,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
-            <version>${selenium.version}</version>
+            <version>${selenium-server.version}</version>
         </dependency>
 
         <dependency>

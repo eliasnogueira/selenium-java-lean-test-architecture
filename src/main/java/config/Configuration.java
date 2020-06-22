@@ -27,6 +27,7 @@ package config;
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.LoadPolicy;
 import org.aeonbits.owner.Config.LoadType;
+import org.checkerframework.checker.units.qual.K;
 
 @LoadPolicy(LoadType.MERGE)
 @Config.Sources({
@@ -36,13 +37,19 @@ import org.aeonbits.owner.Config.LoadType;
     "classpath:conf/grid.properties"})
 public interface Configuration extends Config {
 
+    @Key("target")
     String target();
 
+    @Key("browser")
     String browser();
+
+    @Key("headless")
+    Boolean headless();
 
     @Key("url.base")
     String url();
 
+    @Key("timeout")
     String timeout();
 
     @Key("grid.url")
