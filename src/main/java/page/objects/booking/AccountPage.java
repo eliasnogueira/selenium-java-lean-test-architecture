@@ -24,7 +24,6 @@
 
 package page.objects.booking;
 
-import driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -46,10 +45,6 @@ public class AccountPage extends NavigationPage {
 
     @FindBy(css = ".check")
     private WebElement newsletter;
-
-    public AccountPage() {
-        DriverManager.getDriver().switchTo().frame("result");
-    }
 
     public void fillEmail(String email) {
         this.email.sendKeys(email);
