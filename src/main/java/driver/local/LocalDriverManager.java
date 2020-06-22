@@ -31,8 +31,6 @@ import config.ConfigurationManager;
 import driver.IDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
-import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
@@ -68,23 +66,13 @@ public class LocalDriverManager implements IDriver {
         return driverInstance;
     }
 
-    private WebDriver defineHeadless(Class<?> driverClass)
-        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    private WebDriver defineHeadless(Class<?> driverClass) {
         WebDriver driver;
-        Constructor<?> constructor;
 
         if (ChromeDriver.class == driverClass) {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setHeadless(true);
-            constructor = driverClass.getDeclaredConstructor(ChromeOptions.class);
-            AccessibleObject.setAccessible(new AccessibleObject[]{constructor}, true);
-            driver = (WebDriver) constructor.newInstance(chromeOptions);
+            driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
         } else if (FirefoxDriver.class == driverClass) {
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setHeadless(true);
-            constructor = driverClass.getDeclaredConstructor(FirefoxOptions.class);
-            AccessibleObject.setAccessible(new AccessibleObject[]{constructor}, true);
-            driver = (WebDriver) constructor.newInstance(firefoxOptions);
+            driver = new FirefoxDriver(new FirefoxOptions().setHeadless(true));
         } else {
             throw new IllegalArgumentException("Headless is only supported by Google Chrome or Firefox");
         }
