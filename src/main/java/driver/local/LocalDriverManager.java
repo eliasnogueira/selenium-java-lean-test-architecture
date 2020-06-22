@@ -24,30 +24,70 @@
 
 package driver.local;
 
+import static java.lang.Boolean.TRUE;
+
+import config.Configuration;
+import config.ConfigurationManager;
 import driver.IDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 @Log4j2
 public class LocalDriverManager implements IDriver {
 
     @Override
     public WebDriver createInstance(String browser) {
-        WebDriver driver = null;
+        WebDriver driverInstance = null;
 
         try {
             DriverManagerType driverManagerType = DriverManagerType.valueOf(browser.toUpperCase());
             Class<?> driverClass = Class.forName(driverManagerType.browserClass());
             WebDriverManager.getInstance(driverManagerType).setup();
-            driver = (WebDriver) driverClass.getDeclaredConstructor().newInstance();
+            Configuration configuration = ConfigurationManager.getConfiguration();
+
+            if (TRUE.equals(configuration.headless())) {
+                driverInstance = defineHeadless(driverClass);
+            } else {
+                driverInstance = (WebDriver) driverClass.getDeclaredConstructor().newInstance();
+            }
+
         } catch (IllegalAccessException | ClassNotFoundException e) {
             log.error("The class could not be found", e);
         } catch (InstantiationException | NoSuchMethodException | InvocationTargetException e) {
             log.error("Problem during driver instantiation", e);
         }
+        return driverInstance;
+    }
+
+    private WebDriver defineHeadless(Class<?> driverClass)
+        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        WebDriver driver;
+        Constructor<?> constructor;
+
+        if (ChromeDriver.class == driverClass) {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setHeadless(true);
+            constructor = driverClass.getDeclaredConstructor(ChromeOptions.class);
+            constructor.setAccessible(true);
+            driver = (WebDriver) constructor.newInstance(chromeOptions);
+        } else if (FirefoxDriver.class == driverClass) {
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setHeadless(true);
+            constructor = driverClass.getDeclaredConstructor(FirefoxOptions.class);
+            constructor.setAccessible(true);
+            driver = (WebDriver) constructor.newInstance(firefoxOptions);
+        } else {
+            throw new IllegalArgumentException("Headless is only supported by Google Chrome or Firefox");
+        }
+
         return driver;
     }
 }
