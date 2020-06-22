@@ -16,14 +16,15 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.5</aspectj.version>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.0.0-alpha-6</selenium.version>
+        <selenium-server.version>4.0.0-alpha-2</selenium-server.version>
         <testng.version>7.1.0</testng.version>
         <assertj.version>3.16.1</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
-        <log4j.version>2.13.2</log4j.version>
+        <log4j.version>2.13.3</log4j.version>
         <lombok.version>1.18.12</lombok.version>
         <webdrivermanager.version>4.0.0</webdrivermanager.version>
-        <owner.version>1.0.11</owner.version>
+        <owner.version>1.0.12</owner.version>
         <allure.version>2.13.3</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
@@ -41,7 +42,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
-            <version>${selenium.version}</version>
+            <version>${selenium-server.version}</version>
         </dependency>
 
         <dependency>
