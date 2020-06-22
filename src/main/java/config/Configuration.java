@@ -27,7 +27,6 @@ package config;
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.LoadPolicy;
 import org.aeonbits.owner.Config.LoadType;
-import org.checkerframework.checker.units.qual.K;
 
 @LoadPolicy(LoadType.MERGE)
 @Config.Sources({
