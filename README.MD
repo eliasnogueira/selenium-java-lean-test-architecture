@@ -1,4 +1,6 @@
-The purpose of this project is to have a basic project with minimum viable testing architecture to automated web tests using Selenium WebDriver and Java as the programming language.
+This project delivers to you a complete lean test architecture for your web tests using the best frameworks and practices.
+
+![Local testing example](example_filed_test_with_report.gif)
 
 ## Languages and Frameworks
 
