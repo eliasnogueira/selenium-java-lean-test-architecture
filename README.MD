@@ -1,6 +1,10 @@
-This project delivers to you a complete lean test architecture for your web tests using the best frameworks and practices.
+**This project delivers to you a complete lean test architecture for your web tests using the best frameworks and practices.**
 
-![Local testing example](example_filed_test_with_report.gif)
+Local testing execution example
+![Local testing execution example](example_filed_test_with_report.gif)
+
+Parallel testing execution example with Zalenium
+![Parallel testing execution example with Zalenium](parallel_execution.gif)
 
 ## Languages and Frameworks
 
