@@ -33,7 +33,9 @@ import org.aeonbits.owner.Config.LoadType;
     "system:properties",
     "classpath:conf/general.properties",
     "classpath:conf/local.properties",
-    "classpath:conf/grid.properties"})
+    "classpath:conf/grid.properties",
+    "classpath:conf/datadriven.properties"})
+
 public interface Configuration extends Config {
 
     @Key("target")
@@ -59,4 +61,13 @@ public interface Configuration extends Config {
 
     @Key("faker.locale")
     String faker();
+
+    @Key("excel.data.file")
+    String excelDataFile();
+
+    @Key("excel.data.sheet")
+    String excelDataSheet();
+
+    @Key("excel.total.cols")
+    String excelTotalCols();
 }
