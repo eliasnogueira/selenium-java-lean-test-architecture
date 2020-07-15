@@ -23,7 +23,7 @@
         <javafaker.version>1.0.2</javafaker.version>
         <log4j.version>2.13.3</log4j.version>
         <lombok.version>1.18.12</lombok.version>
-        <webdrivermanager.version>4.0.0</webdrivermanager.version>
+        <webdrivermanager.version>4.1.0</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.13.5</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
