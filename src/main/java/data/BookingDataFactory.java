@@ -30,13 +30,15 @@ import config.ConfigurationManager;
 import enums.RoomType;
 import java.util.Locale;
 import java.util.Random;
-import lombok.extern.log4j.Log4j2;
 import model.Booking;
+import model.BookingBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Log4j2
 public class BookingDataFactory {
 
     private final Faker faker;
+    private static final Logger logger = LogManager.getLogger(BookingDataFactory.class);
 
     public BookingDataFactory() {
         Configuration configuration = ConfigurationManager.getConfiguration();
@@ -44,7 +46,7 @@ public class BookingDataFactory {
     }
 
     public Booking createBookingData() {
-        Booking booking = Booking.builder().
+        Booking booking = new BookingBuilder().
             email(faker.internet().emailAddress()).
             country(returnRandomCountry()).
             password(faker.internet().password()).
@@ -54,7 +56,7 @@ public class BookingDataFactory {
             roomDescription(faker.lorem().paragraph()).
             build();
 
-        log.info(booking);
+        logger.info(booking);
         return booking;
     }
 

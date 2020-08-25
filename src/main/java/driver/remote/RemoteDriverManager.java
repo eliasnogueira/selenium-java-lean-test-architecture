@@ -30,7 +30,8 @@ import driver.IDriver;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import java.net.MalformedURLException;
 import java.net.URL;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -40,8 +41,9 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-@Log4j2
 public class RemoteDriverManager implements IDriver {
+
+    private static final Logger logger = LogManager.getLogger(RemoteDriverManager.class);
 
     @Override
     public WebDriver createInstance(String browser) {
@@ -53,10 +55,10 @@ public class RemoteDriverManager implements IDriver {
 
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), getCapability(browser));
         } catch (MalformedURLException e) {
-            log.error("Grid URL is invalid or Grid is not available");
-            log.error("Browser: " + browser, e);
+            logger.error("Grid URL is invalid or Grid is not available");
+            logger.error(String.format("Browser: %s", browser), e);
         } catch (IllegalArgumentException e) {
-            log.error("Browser: " + browser + "is not valid or recognized", e);
+            logger.error(String.format("Browser %s is not valid or recognized", browser), e);
         }
 
         return remoteWebDriver;
