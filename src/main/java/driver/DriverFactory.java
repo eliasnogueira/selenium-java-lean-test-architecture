@@ -29,13 +29,12 @@ import config.ConfigurationManager;
 import driver.local.LocalDriverManager;
 import driver.remote.RemoteDriverManager;
 import enums.Target;
-import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 
-@Log4j2
 public class DriverFactory {
 
-    private DriverFactory() {}
+    private DriverFactory() {
+    }
 
     public static WebDriver createInstance(String browser) {
         Configuration configuration = ConfigurationManager.getConfiguration();
