@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SELENIUM_HUB_HOST: 'localhost'
+      SELENIUM_HUB_HOST: hub
     services:
       hub:
         image: selenium/hub
@@ -18,7 +18,7 @@ jobs:
         image: selenium/standalone-chrome
         options: --health-cmd '/opt/bin/check-grid.sh'
         env:
-          HUB_HOST: 'localhost'
+          HUB_HOST: hub
           HUB_PORT: 4444
     steps:
       - uses: actions/checkout@v2
