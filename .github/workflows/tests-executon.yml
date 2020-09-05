@@ -9,17 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SELENIUM_HUB_HOST: hub
     services:
-      hub:
-        image: selenium/hub
       chrome:
         image: selenium/standalone-chrome
         options: --health-cmd '/opt/bin/check-grid.sh'
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -35,4 +28,4 @@ jobs:
       - name: Build with Maven
         run: mvn -DskipTests -B package --file pom.xml
       - name: Run the tests
-        run: mvn test -Dheadless=true -Dbrowser=chrome -Dtarget=grid
+        run: mvn test -Dtarget=local -Dheadless=true -Dbrowser=chrome
