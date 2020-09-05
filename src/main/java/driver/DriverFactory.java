@@ -31,12 +31,9 @@ import driver.remote.RemoteDriverManager;
 import enums.Target;
 import org.openqa.selenium.WebDriver;
 
-public class DriverFactory {
+public class DriverFactory implements IDriver {
 
-    private DriverFactory() {
-    }
-
-    public static WebDriver createInstance(String browser) {
+    public WebDriver createInstance(String browser) {
         Configuration configuration = ConfigurationManager.getConfiguration();
         Target target = Target.valueOf(configuration.target().toUpperCase());
         WebDriver webdriver;
