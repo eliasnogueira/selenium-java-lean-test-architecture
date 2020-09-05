@@ -9,8 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      options: --network-alias testHost
     env:
       SELENIUM_HUB_HOST: hub
+      TEST_HOST: testHost
     services:
       hub:
         image: selenium/hub
