@@ -14,8 +14,10 @@ jobs:
     services:
       hub:
         image: selenium/hub
+        options: --health-cmd '/opt/bin/check-grid.sh'
       chrome:
         image: selenium/standalone-chrome
+        options: --health-cmd '/opt/bin/check-grid.sh'
         env:
           HUB_HOST: 'localhost'
           HUB_PORT: 4444
