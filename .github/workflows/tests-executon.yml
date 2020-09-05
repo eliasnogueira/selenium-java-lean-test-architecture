@@ -34,4 +34,4 @@ jobs:
       - name: Build with Maven
         run: mvn -DskipTests -B package --file pom.xml
       - name: Run the tests
-        run: mvn test -Dheadless=true -Dbrowser=chrome -target=grid
+        run: mvn test -Dheadless=true -Dbrowser=chrome -Dtarget=grid
