@@ -9,18 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      options: --network-alias testHost
     env:
-      SELENIUM_HUB_HOST: hub
-      TEST_HOST: testHost
+      SELENIUM_HUB_HOST: 'localhost'
     services:
       hub:
         image: selenium/hub
       chrome:
         image: selenium/standalone-chrome
         env:
-          HUB_HOST: hub
+          HUB_HOST: 'localhost'
           HUB_PORT: 4444
     steps:
       - uses: actions/checkout@v2
