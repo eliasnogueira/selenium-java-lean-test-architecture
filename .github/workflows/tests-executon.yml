@@ -14,7 +14,7 @@ jobs:
     services:
       hub:
         image: selenium/hub
-      firefox:
+      chrome:
         image: selenium/standalone-chrome
         env:
           HUB_HOST: hub
@@ -34,4 +34,4 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Run the tests
-        run: mvn test -Dheadless=true -Dbrowser=chrome
+        run: mvn test -Dheadless=true -Dbrowser=chrome -target=grid
