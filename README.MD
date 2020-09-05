@@ -1,3 +1,6 @@
+# Lean Test Automation Architecture using Java and Selenium WebDriver
+![Test execution](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/workflows/Test%20execution/badge.svg)
+
 **This project delivers to you a complete lean test architecture for your web tests using the best frameworks and practices.**
 
 Local testing execution example
