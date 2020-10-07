@@ -22,20 +22,30 @@
  * SOFTWARE.
  */
 
-package page.objects;
+package com.eliasnogueira.page.booking;
 
-import config.Configuration;
-import config.ConfigurationManager;
-import driver.DriverManager;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import com.eliasnogueira.driver.DriverManager;
+import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import com.eliasnogueira.page.booking.common.NavigationPage;
 
-public class AbstractPageObject {
+public class DetailPage extends NavigationPage {
 
-    protected AbstractPageObject() {
-        Configuration configuration = ConfigurationManager.getConfiguration();
-        int timeout = Integer.parseInt(configuration.timeout());
+    @FindBy(id = "description")
+    private WebElement roomDescription;
 
-        PageFactory.initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), timeout), this);
+    @FindBy(css = "#message > p")
+    private WebElement message;
+
+    @Step
+    public void fillRoomDescription(String description) {
+        new Actions(DriverManager.getDriver()).sendKeys(roomDescription, description);
+    }
+
+    @Step
+    public String getAlertMessage() {
+        return message.getText();
     }
 }

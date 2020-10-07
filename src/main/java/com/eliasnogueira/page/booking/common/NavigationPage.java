@@ -22,47 +22,36 @@
  * SOFTWARE.
  */
 
-package page.objects.booking;
+package com.eliasnogueira.page.booking.common;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-import page.objects.booking.common.NavigationPage;
+import com.eliasnogueira.page.AbstractPageObject;
 
-public class AccountPage extends NavigationPage {
+public class NavigationPage extends AbstractPageObject {
 
-    @FindBy(id = "email")
-    private WebElement email;
+    @FindBy(name = "next")
+    private WebElement next;
 
-    @FindBy(id = "password")
-    private WebElement password;
+    @FindBy(name = "previous")
+    private WebElement previous;
 
-    @FindBy(name = "country")
-    private WebElement country;
+    @FindBy(name = "finish")
+    private WebElement finish;
 
-    @FindBy(name = "budget")
-    private WebElement budget;
-
-    @FindBy(css = ".check")
-    private WebElement newsletter;
-
-    public void fillEmail(String email) {
-        this.email.sendKeys(email);
+    @Step
+    public void next() {
+        next.click();
     }
 
-    public void fillPassword(String password) {
-        this.password.sendKeys(password);
+    @Step
+    public void previous() {
+        previous.click();
     }
 
-    public void selectCountry(String country) {
-        new Select(this.country).selectByVisibleText(country);
-    }
-
-    public void selectBudget(String value) {
-        new Select(budget).selectByVisibleText(value);
-    }
-
-    public void clickNewsletter() {
-        newsletter.click();
+    @Step
+    public void finish() {
+        finish.click();
     }
 }
