@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-package test;
+package com.eliasnogueira;
 
-import config.Configuration;
-import config.ConfigurationManager;
-import driver.DriverFactory;
-import driver.DriverManager;
+import com.eliasnogueira.config.Configuration;
+import com.eliasnogueira.config.ConfigurationManager;
+import com.eliasnogueira.driver.DriverFactory;
+import com.eliasnogueira.driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -35,7 +35,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import report.AllureManager;
+import com.eliasnogueira.report.AllureManager;
 
 @Listeners({TestListener.class})
 public abstract class BaseWeb {
