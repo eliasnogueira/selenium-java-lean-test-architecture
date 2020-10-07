@@ -1,3 +1,6 @@
+# Lean Test Automation Architecture using Java and Selenium WebDriver
+[![Actions Status](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/workflows/Build%20and%20Test/badge.svg)](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/actions)
+
 **This project delivers to you a complete lean test architecture for your web tests using the best frameworks and practices.**
 
 Local testing execution example
@@ -19,7 +22,6 @@ This project using the following languages and frameworks:
 * [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging manage strategy
 * [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) as the Selenium binaries management
 * [Owner](http://owner.aeonbits.org/) to minimize the code to handle the properties file
-* [Lombok](https://projectlombok.org/) to minimize the boilerplate in the Java code
 
 
 ## Test architecture

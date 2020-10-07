@@ -6,26 +6,30 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-bootstrap</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
+
+    <scm>
+        <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-achitecture.git</connection>
+        <developerConnection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-achitecture.git</developerConnection>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java-compiler.version>8</java-compiler.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <java-compiler.version>11</java-compiler.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.5</aspectj.version>
         <selenium.version>4.0.0-alpha-6</selenium.version>
         <selenium-server.version>4.0.0-alpha-2</selenium-server.version>
-        <testng.version>7.1.0</testng.version>
-        <assertj.version>3.16.1</assertj.version>
+        <testng.version>7.3.0</testng.version>
+        <assertj.version>3.17.1</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
         <log4j.version>2.13.3</log4j.version>
-        <lombok.version>1.18.12</lombok.version>
-        <webdrivermanager.version>4.0.0</webdrivermanager.version>
+        <webdrivermanager.version>4.2.0</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.13.3</allure.version>
+        <allure.version>2.13.5</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <apache-poi.version>4.1.2</apache-poi.version>
@@ -74,13 +78,6 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>

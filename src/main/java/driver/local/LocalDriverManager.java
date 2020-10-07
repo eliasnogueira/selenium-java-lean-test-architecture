@@ -32,15 +32,17 @@ import driver.IDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import java.lang.reflect.InvocationTargetException;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-@Log4j2
 public class LocalDriverManager implements IDriver {
+
+    private static final Logger logger = LogManager.getLogger(LocalDriverManager.class);
 
     @Override
     public WebDriver createInstance(String browser) {
@@ -59,9 +61,9 @@ public class LocalDriverManager implements IDriver {
             }
 
         } catch (IllegalAccessException | ClassNotFoundException e) {
-            log.error("The class could not be found", e);
+            logger.error("The class could not be found", e);
         } catch (InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-            log.error("Problem during driver instantiation", e);
+            logger.error("Problem during driver instantiation", e);
         }
         return driverInstance;
     }

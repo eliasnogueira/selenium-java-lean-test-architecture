@@ -1,4 +1,4 @@
-name: Test execution
+name: Build and Test
 on:
   push:
     branches:
@@ -9,16 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SELENIUM_HUB_HOST: hub
     services:
-      hub:
-        image: selenium/hub
-      firefox:
+      chrome:
         image: selenium/standalone-chrome
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444
+        options: --health-cmd '/opt/bin/check-grid.sh'
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -32,6 +26,6 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -DskipTests -B package --file pom.xml
       - name: Run the tests
-        run: mvn test
+        run: mvn test -Dtarget=local -Dheadless=true -Dbrowser=chrome
