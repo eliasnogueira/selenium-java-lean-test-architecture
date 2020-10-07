@@ -212,5 +212,6 @@ mvn test -Pweb_execution -Dsuite=multi_browser
 
 The two files of pipeline as a code are inside `pipeline_as_code` folder.
 
+* GitHub Actions to use it inside the GitHub
 * Jenkins: `Jenkinsfile` to be used on a Jenkins pipeline
 * GitLab CI: `.gitlab-ci.yml` to be used on a GitLab CI
