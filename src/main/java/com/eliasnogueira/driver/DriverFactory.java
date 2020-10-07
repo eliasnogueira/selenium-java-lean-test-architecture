@@ -22,11 +22,36 @@
  * SOFTWARE.
  */
 
-package driver;
+package com.eliasnogueira.driver;
 
+import com.eliasnogueira.config.Configuration;
+import com.eliasnogueira.config.ConfigurationManager;
+import com.eliasnogueira.driver.local.LocalDriverManager;
+import com.eliasnogueira.driver.remote.RemoteDriverManager;
+import com.eliasnogueira.enums.Target;
 import org.openqa.selenium.WebDriver;
 
-public interface IDriver {
+public class DriverFactory implements IDriver {
 
-    WebDriver createInstance(String browser);
+    public WebDriver createInstance(String browser) {
+        Configuration configuration = ConfigurationManager.getConfiguration();
+        Target target = Target.valueOf(configuration.target().toUpperCase());
+        WebDriver webdriver;
+
+        switch (target) {
+
+            case LOCAL:
+                //override the browser value from @Optional on BaseWeb
+                webdriver = new LocalDriverManager().createInstance(configuration.browser());
+                break;
+            case GRID:
+                // getting the browser from the suite file or @Optional on BaseWeb
+                webdriver = new RemoteDriverManager().createInstance(browser);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + target);
+        }
+
+        return webdriver;
+    }
 }

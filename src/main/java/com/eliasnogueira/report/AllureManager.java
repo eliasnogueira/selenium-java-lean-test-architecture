@@ -22,36 +22,39 @@
  * SOFTWARE.
  */
 
-package driver;
+package com.eliasnogueira.report;
 
-import config.Configuration;
-import config.ConfigurationManager;
-import driver.local.LocalDriverManager;
-import driver.remote.RemoteDriverManager;
-import enums.Target;
-import org.openqa.selenium.WebDriver;
+import com.github.automatedowl.tools.AllureEnvironmentWriter;
+import com.google.common.collect.ImmutableMap;
+import com.eliasnogueira.config.Configuration;
+import com.eliasnogueira.config.ConfigurationManager;
+import com.eliasnogueira.driver.DriverManager;
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
-public class DriverFactory implements IDriver {
+public class AllureManager {
 
-    public WebDriver createInstance(String browser) {
+    private AllureManager() {}
+
+    public static void setAllureEnvironmentInformation() {
         Configuration configuration = ConfigurationManager.getConfiguration();
-        Target target = Target.valueOf(configuration.target().toUpperCase());
-        WebDriver webdriver;
 
-        switch (target) {
-
-            case LOCAL:
-                //override the browser value from @Optional on BeseWeb
-                webdriver = new LocalDriverManager().createInstance(configuration.browser());
-                break;
-            case GRID:
-                // getting the browser from the suite file or @Optional on BaseWeb
-                webdriver = new RemoteDriverManager().createInstance(browser);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + target);
-        }
-
-        return webdriver;
+        AllureEnvironmentWriter.allureEnvironmentWriter(
+            ImmutableMap.<String, String>builder().
+                put("URL", configuration.url()).
+                put("Target", configuration.target()).
+                build());
     }
+
+    @Attachment(value = "Failed test screenshot", type = "image/png")
+    public static byte[] takeScreenshotToAttachOnAllureReport() {
+        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Attachment(value = "Browser information", type = "text/plain")
+    public static String addBrowserInformationOnAllureReport() {
+        return DriverManager.getInfo();
+    }
+
 }

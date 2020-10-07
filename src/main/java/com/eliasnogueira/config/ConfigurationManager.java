@@ -22,26 +22,17 @@
  * SOFTWARE.
  */
 
-package enums;
+package com.eliasnogueira.config;
 
-import java.util.Random;
+import org.aeonbits.owner.ConfigCache;
 
-public enum RoomType {
+public class ConfigurationManager {
 
-    SINGLE("Single"), FAMILY("Family"), BUSINESS("Business");
-
-    private final String value;
-
-    RoomType(String value) {
-        this.value = value;
+    private ConfigurationManager() {
     }
 
-    public static RoomType getRandom() {
-        return values()[new Random().nextInt(values().length)];
-    }
-
-    @Override
-    public String toString() {
-        return value;
+    public static Configuration getConfiguration() {
+        return ConfigCache.getOrCreate(Configuration.class);
     }
 }
+

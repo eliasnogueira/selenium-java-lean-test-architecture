@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-package driver.remote;
+package com.eliasnogueira.driver.remote;
 
-import config.Configuration;
-import config.ConfigurationManager;
-import driver.IDriver;
+import com.eliasnogueira.config.Configuration;
+import com.eliasnogueira.config.ConfigurationManager;
+import com.eliasnogueira.driver.IDriver;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import java.net.MalformedURLException;
 import java.net.URL;

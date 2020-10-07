@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
-package data;
+package com.eliasnogueira.data;
 
 import com.github.javafaker.Faker;
-import config.Configuration;
-import config.ConfigurationManager;
-import enums.RoomType;
+import com.eliasnogueira.config.Configuration;
+import com.eliasnogueira.config.ConfigurationManager;
+import com.eliasnogueira.enums.RoomType;
 import java.util.Locale;
 import java.util.Random;
-import model.Booking;
-import model.BookingBuilder;
+import com.eliasnogueira.model.Booking;
+import com.eliasnogueira.model.BookingBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

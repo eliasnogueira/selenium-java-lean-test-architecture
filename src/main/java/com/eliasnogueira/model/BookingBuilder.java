@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-package model;
+package com.eliasnogueira.model;
 
-import enums.RoomType;
+import com.eliasnogueira.enums.RoomType;
 
 public class BookingBuilder {
 

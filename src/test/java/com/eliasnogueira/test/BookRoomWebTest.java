@@ -21,16 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package test;
+package com.eliasnogueira.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import data.BookingDataFactory;
-import model.Booking;
+import com.eliasnogueira.BaseWeb;
+import com.eliasnogueira.data.BookingDataFactory;
+import com.eliasnogueira.model.Booking;
 import org.testng.annotations.Test;
-import page.objects.booking.AccountPage;
-import page.objects.booking.DetailPage;
-import page.objects.booking.RoomPage;
+import com.eliasnogueira.page.booking.AccountPage;
+import com.eliasnogueira.page.booking.DetailPage;
+import com.eliasnogueira.page.booking.RoomPage;
 
 public class BookRoomWebTest extends BaseWeb {
 

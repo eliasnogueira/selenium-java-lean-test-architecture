@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-package driver.local;
+package com.eliasnogueira.driver.local;
 
 import static java.lang.Boolean.TRUE;
 
-import config.Configuration;
-import config.ConfigurationManager;
-import driver.IDriver;
+import com.eliasnogueira.config.Configuration;
+import com.eliasnogueira.config.ConfigurationManager;
+import com.eliasnogueira.driver.IDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import java.lang.reflect.InvocationTargetException;

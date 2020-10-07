@@ -22,17 +22,11 @@
  * SOFTWARE.
  */
 
-package config;
+package com.eliasnogueira.driver;
 
-import org.aeonbits.owner.ConfigCache;
+import org.openqa.selenium.WebDriver;
 
-public class ConfigurationManager {
+public interface IDriver {
 
-    private ConfigurationManager() {
-    }
-
-    public static Configuration getConfiguration() {
-        return ConfigCache.getOrCreate(Configuration.class);
-    }
+    WebDriver createInstance(String browser);
 }
-

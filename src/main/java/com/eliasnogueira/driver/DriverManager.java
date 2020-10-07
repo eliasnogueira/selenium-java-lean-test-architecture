@@ -22,41 +22,36 @@
  * SOFTWARE.
  */
 
-package config;
+package com.eliasnogueira.driver;
 
-import org.aeonbits.owner.Config;
-import org.aeonbits.owner.Config.LoadPolicy;
-import org.aeonbits.owner.Config.LoadType;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-@LoadPolicy(LoadType.MERGE)
-@Config.Sources({
-    "system:properties",
-    "classpath:conf/general.properties",
-    "classpath:conf/local.properties",
-    "classpath:conf/grid.properties"})
-public interface Configuration extends Config {
+public class DriverManager {
 
-    @Key("target")
-    String target();
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    @Key("browser")
-    String browser();
+    private DriverManager() {}
 
-    @Key("headless")
-    Boolean headless();
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
 
-    @Key("url.base")
-    String url();
+    public static void setDriver(WebDriver driver) {
+        DriverManager.driver.set(driver);
+    }
 
-    @Key("timeout")
-    String timeout();
+    public static void quit() {
+        DriverManager.driver.get().quit();
+        driver.remove();
+    }
 
-    @Key("grid.url")
-    String gridUrl();
-
-    @Key("grid.port")
-    String gridPort();
-
-    @Key("faker.locale")
-    String faker();
+    public static String getInfo() {
+        Capabilities cap = ((RemoteWebDriver) DriverManager.getDriver()).getCapabilities();
+        String browserName = cap.getBrowserName();
+        String platform = cap.getPlatform().toString();
+        String version = cap.getVersion();
+        return String.format("browser: %s v: %s platform: %s", browserName, version, platform);
+    }
 }
