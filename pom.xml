@@ -20,18 +20,21 @@
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
         <selenium.version>4.0.0-alpha-6</selenium.version>
         <selenium-server.version>4.0.0-alpha-2</selenium-server.version>
         <testng.version>7.3.0</testng.version>
-        <assertj.version>3.17.1</assertj.version>
+        <assertj.version>3.17.2</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
         <log4j.version>2.13.3</log4j.version>
-        <webdrivermanager.version>4.2.0</webdrivermanager.version>
+        <webdrivermanager.version>4.2.2</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.13.5</allure.version>
+        <allure.version>2.13.6</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
+        <allure.cmd.download.url>
+            https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
+        </allure.cmd.download.url>
 
         <suite>multi_browser</suite>
     </properties>
@@ -160,6 +163,12 @@
                     <groupId>io.qameta.allure</groupId>
                     <artifactId>allure-maven</artifactId>
                     <version>${allure-maven.version}</version>
+                    <configuration>
+                        <reportVersion>${allure.version}</reportVersion>
+                        <allureDownloadUrl>
+                            ${allure.cmd.download.url}/${allure.version}/allure-commandline-${allure.version}.zip
+                        </allureDownloadUrl>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -172,15 +181,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>*.properties</include>
-                </includes>
-            </testResource>
-        </testResources>
     </build>
 
 </project>
