@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-bootstrap</artifactId>
-    <version>1.5</version>
+    <version>1.6</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-achitecture.git</connection>
@@ -36,7 +36,7 @@
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
 
-        <suite>multi_browser</suite>
+        <suite>local</suite>
     </properties>
 
     <dependencies>
