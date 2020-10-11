@@ -24,61 +24,65 @@
 
 package com.eliasnogueira.driver.local;
 
-import static java.lang.Boolean.TRUE;
-
-import com.eliasnogueira.config.Configuration;
 import com.eliasnogueira.config.ConfigurationManager;
 import com.eliasnogueira.driver.IDriver;
+import com.eliasnogueira.exceptions.BrowserNotSupportedException;
+import com.eliasnogueira.exceptions.HeadlessNotSupportedException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
-import java.lang.reflect.InvocationTargetException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 public class LocalDriverManager implements IDriver {
 
-    private static final Logger logger = LogManager.getLogger(LocalDriverManager.class);
-
     @Override
     public WebDriver createInstance(String browser) {
-        WebDriver driverInstance = null;
+        WebDriver driverInstance;
+        DriverManagerType driverManagerType = DriverManagerType.valueOf(browser.toUpperCase());
+        WebDriverManager.getInstance(driverManagerType).setup();
+        boolean isHeadless = ConfigurationManager.getConfiguration().headless();
 
-        try {
-            DriverManagerType driverManagerType = DriverManagerType.valueOf(browser.toUpperCase());
-            Class<?> driverClass = Class.forName(driverManagerType.browserClass());
-            WebDriverManager.getInstance(driverManagerType).setup();
-            Configuration configuration = ConfigurationManager.getConfiguration();
-
-            if (TRUE.equals(configuration.headless())) {
-                driverInstance = defineHeadless(driverClass);
-            } else {
-                driverInstance = (WebDriver) driverClass.getDeclaredConstructor().newInstance();
-            }
-
-        } catch (IllegalAccessException | ClassNotFoundException e) {
-            logger.error("The class could not be found", e);
-        } catch (InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-            logger.error("Problem during driver instantiation", e);
+        switch (driverManagerType) {
+            case CHROME:
+                driverInstance =
+                    isHeadless ? new ChromeDriver(new ChromeOptions().setHeadless(true)) : new ChromeDriver();
+                break;
+            case FIREFOX:
+                driverInstance =
+                    isHeadless ? new FirefoxDriver(new FirefoxOptions().setHeadless(true)) : new FirefoxDriver();
+                break;
+            case OPERA:
+                if (isHeadless) headlessNotSupportedForThisBrowser(driverManagerType);
+                driverInstance  = new OperaDriver();
+                break;
+            case EDGE:
+                driverInstance =
+                    isHeadless ? new EdgeDriver(new EdgeOptions().setHeadless(true)) : new EdgeDriver();
+                break;
+            case IEXPLORER:
+                if (isHeadless) headlessNotSupportedForThisBrowser(driverManagerType);
+                driverInstance = new InternetExplorerDriver();
+                break;
+            case SAFARI:
+                if (isHeadless) headlessNotSupportedForThisBrowser(driverManagerType);
+                driverInstance = new SafariDriver();
+                break;
+            default:
+                throw new BrowserNotSupportedException(driverManagerType.toString());
         }
+
         return driverInstance;
     }
 
-    private WebDriver defineHeadless(Class<?> driverClass) {
-        WebDriver driver;
-
-        if (ChromeDriver.class == driverClass) {
-            driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
-        } else if (FirefoxDriver.class == driverClass) {
-            driver = new FirefoxDriver(new FirefoxOptions().setHeadless(true));
-        } else {
-            throw new IllegalArgumentException("Headless is only supported by Google Chrome or Firefox");
-        }
-
-        return driver;
+    private void headlessNotSupportedForThisBrowser(DriverManagerType driverManagerType) {
+        throw new HeadlessNotSupportedException(driverManagerType.toString());
     }
 }
