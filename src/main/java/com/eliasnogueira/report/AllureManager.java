@@ -42,8 +42,14 @@ public class AllureManager {
 
         AllureEnvironmentWriter.allureEnvironmentWriter(
             ImmutableMap.<String, String>builder().
-                put("URL", configuration.url()).
-                put("Target", configuration.target()).
+                put("Test URL", configuration.url()).
+                put("Target execution", configuration.target()).
+                put("Global timeout", configuration.timeout()).
+                put("Headless mode", String.valueOf(configuration.headless())).
+                put("Faker locale", configuration.faker()).
+                put("Local browser", configuration.browser()).
+                put("Grid URL", configuration.gridUrl()).
+                put("Grid port", configuration.gridPort()).
                 build());
     }
 
