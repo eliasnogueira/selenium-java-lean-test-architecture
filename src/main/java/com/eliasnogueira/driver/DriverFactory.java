@@ -29,6 +29,7 @@ import com.eliasnogueira.config.ConfigurationManager;
 import com.eliasnogueira.driver.local.LocalDriverManager;
 import com.eliasnogueira.driver.remote.RemoteDriverManager;
 import com.eliasnogueira.enums.Target;
+import com.eliasnogueira.exceptions.TargetNotValidException;
 import org.openqa.selenium.WebDriver;
 
 public class DriverFactory implements IDriver {
@@ -49,7 +50,7 @@ public class DriverFactory implements IDriver {
                 webdriver = new RemoteDriverManager().createInstance(browser);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + target);
+                throw new TargetNotValidException(target.toString());
         }
 
         return webdriver;

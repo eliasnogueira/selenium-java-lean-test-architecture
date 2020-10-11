@@ -27,6 +27,7 @@ package com.eliasnogueira.driver.remote;
 import com.eliasnogueira.config.Configuration;
 import com.eliasnogueira.config.ConfigurationManager;
 import com.eliasnogueira.driver.IDriver;
+import com.eliasnogueira.exceptions.BrowserNotSupportedException;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,6 +41,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 public class RemoteDriverManager implements IDriver {
 
@@ -85,11 +87,11 @@ public class RemoteDriverManager implements IDriver {
             case IEXPLORER:
                 mutableCapabilities = new InternetExplorerOptions();
                 break;
-            case PHANTOMJS:
-            case SELENIUM_SERVER_STANDALONE:
-                throw new IllegalStateException("Not supported: " + driverManagerType);
+            case SAFARI:
+                mutableCapabilities = new SafariOptions();
+                break;
             default:
-                throw new IllegalStateException("Unexpected value: " + driverManagerType);
+                throw new BrowserNotSupportedException(driverManagerType.toString());
         }
 
         return mutableCapabilities;
