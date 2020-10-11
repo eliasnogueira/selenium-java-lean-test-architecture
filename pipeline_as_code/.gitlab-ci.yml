@@ -1,4 +1,4 @@
-image: maven:3.5.4-jdk-8
+image: maven:3.6.3-jdk-11
 
 stages:
 - build
@@ -17,4 +17,4 @@ build:
 test:
   stage: test
   script:
-  - mvn test -Pweb-execution -Dsuite=multi_browser -Denv=test
+  - mvn test -Pweb-execution -Dsuite=local -Dtarget=local
