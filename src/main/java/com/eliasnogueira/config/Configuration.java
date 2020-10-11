@@ -31,9 +31,9 @@ import org.aeonbits.owner.Config.LoadType;
 @LoadPolicy(LoadType.MERGE)
 @Config.Sources({
     "system:properties",
-    "classpath:conf/general.properties",
-    "classpath:conf/local.properties",
-    "classpath:conf/grid.properties"})
+    "classpath:general.properties",
+    "classpath:local.properties",
+    "classpath:grid.properties"})
 public interface Configuration extends Config {
 
     @Key("target")
