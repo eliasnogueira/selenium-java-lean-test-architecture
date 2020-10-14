@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.eliasnogueira</groupId>
-    <artifactId>selenium-java-bootstrap</artifactId>
+    <artifactId>selenium-java-lean-test-achitecture</artifactId>
     <version>1.6</version>
 
     <scm>

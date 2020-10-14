@@ -1,7 +1,7 @@
 # Contribution guide
 
 ## I have an idea or I want to create an issue
-If you have an idea, suggestion, feature or an issue, please log an [issue](https://github.com/eliasnogueira/selenium-java-bootstrap/issues).
+If you have an idea, suggestion, feature or an issue, please log an [issue](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/issues).
 
 Select _Bug report_ if tou want log an issue or _Feature request_ if you want to see something new.
 
