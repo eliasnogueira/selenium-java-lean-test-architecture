@@ -21,12 +21,12 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.6</aspectj.version>
-        <selenium.version>4.0.0-alpha-6</selenium.version>
+        <selenium.version>4.0.0-alpha-7</selenium.version>
         <selenium-server.version>4.0.0-alpha-2</selenium-server.version>
         <testng.version>7.3.0</testng.version>
-        <assertj.version>3.18.0</assertj.version>
+        <assertj.version>3.18.1</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
-        <log4j.version>2.13.3</log4j.version>
+        <log4j.version>2.14.0</log4j.version>
         <webdrivermanager.version>4.2.2</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.13.6</allure.version>
