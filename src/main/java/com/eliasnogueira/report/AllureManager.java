@@ -44,7 +44,7 @@ public class AllureManager {
             ImmutableMap.<String, String>builder().
                 put("Test URL", configuration.url()).
                 put("Target execution", configuration.target()).
-                put("Global timeout", configuration.timeout()).
+                put("Global timeout", String.valueOf(configuration.timeout())).
                 put("Headless mode", String.valueOf(configuration.headless())).
                 put("Faker locale", configuration.faker()).
                 put("Local browser", configuration.browser()).
