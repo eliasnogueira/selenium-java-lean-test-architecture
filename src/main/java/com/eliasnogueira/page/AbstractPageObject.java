@@ -34,7 +34,7 @@ public class AbstractPageObject {
 
     protected AbstractPageObject() {
         Configuration configuration = ConfigurationManager.getConfiguration();
-        int timeout = Integer.parseInt(configuration.timeout());
+        int timeout = configuration.timeout();
 
         PageFactory.initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), timeout), this);
     }
