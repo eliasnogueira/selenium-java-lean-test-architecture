@@ -49,7 +49,7 @@ public interface Configuration extends Config {
     String url();
 
     @Key("timeout")
-    String timeout();
+    int timeout();
 
     @Key("grid.url")
     String gridUrl();
