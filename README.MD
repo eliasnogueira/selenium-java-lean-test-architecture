@@ -167,18 +167,18 @@ Reading reference: https://reflectoring.io/objectmother-fluent-builder
 
 ### Profiles executors on pom.xml
 
-There is a profile called `web-execution` created to execute the test suite _local.xml_ inside _src/test/resources/suites_ folder.
+There is a profile called `web-execution` created to execute the test suite `local.xml` inside `src/test/resources/suites` folder.
 To execute this suite, via command line you can call the parameter `-P` and the profile id.
 
 Eg: executing the multi_browser suite
 ``` bash
-mvn test -Pmulti-browser
+mvn test -Pweb-execution -Dtestng.dtd.http=true 
 ```
 
 If you have more than one suite on _src/test/resources/suites_ folder you can parameterize the xml file name.
 To do this you need:
 
-* Create a property on pom.xml called _suite_
+* Create a property on `pom.xml` called _suite_
 
 ```xml
     <properties>
@@ -207,7 +207,7 @@ To do this you need:
 * Use `-Dsuite=suite_name` to call the suite
 
 ````bash
-mvn test -Pweb_execution -Dsuite=parallel
+mvn test -Pweb-execution -Dsuite=parallel -Dtestng.dtd.http=true 
 ````
 
 ### Pipeline as a code
