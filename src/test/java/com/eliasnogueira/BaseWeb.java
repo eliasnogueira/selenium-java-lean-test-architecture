@@ -24,10 +24,9 @@
 
 package com.eliasnogueira;
 
-import com.eliasnogueira.config.Configuration;
-import com.eliasnogueira.config.ConfigurationManager;
-import com.eliasnogueira.driver.DriverFactory;
 import com.eliasnogueira.driver.DriverManager;
+import com.eliasnogueira.driver.TargetFactory;
+import com.eliasnogueira.report.AllureManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -35,7 +34,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import com.eliasnogueira.report.AllureManager;
+
+import static com.eliasnogueira.config.ConfigurationManager.configuration;
 
 @Listeners({TestListener.class})
 public abstract class BaseWeb {
@@ -48,13 +48,10 @@ public abstract class BaseWeb {
     @BeforeMethod(alwaysRun = true)
     @Parameters("browser")
     public void preCondition(@Optional("chrome") String browser) {
-        Configuration configuration = ConfigurationManager.getConfiguration();
-
-        DriverFactory driverFactory = new DriverFactory();
-        WebDriver driver = driverFactory.createInstance(browser);
+        WebDriver driver = new TargetFactory().createInstance(browser);
         DriverManager.setDriver(driver);
 
-        DriverManager.getDriver().get(configuration.url());
+        DriverManager.getDriver().get(configuration().url());
     }
 
     @AfterMethod(alwaysRun = true)
