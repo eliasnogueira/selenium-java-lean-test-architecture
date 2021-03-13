@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Elias Nogueira
+ * Copyright (c) 2021 Elias Nogueira
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,35 +24,55 @@
 
 package com.eliasnogueira.driver;
 
-import com.eliasnogueira.config.Configuration;
-import com.eliasnogueira.config.ConfigurationManager;
-import com.eliasnogueira.driver.local.LocalDriverManager;
-import com.eliasnogueira.driver.remote.RemoteDriverManager;
-import com.eliasnogueira.enums.Target;
 import com.eliasnogueira.exceptions.TargetNotValidException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class DriverFactory implements IDriver {
+import java.net.URL;
+
+import static com.eliasnogueira.config.ConfigurationManager.configuration;
+
+public class TargetFactory {
+
+    private static final Logger logger = LogManager.getLogger(TargetFactory.class);
 
     public WebDriver createInstance(String browser) {
-        Configuration configuration = ConfigurationManager.getConfiguration();
-        Target target = Target.valueOf(configuration.target().toUpperCase());
+        Target target = Target.valueOf(configuration().target().toUpperCase());
         WebDriver webdriver;
 
         switch (target) {
-
             case LOCAL:
-                //override the browser value from @Optional on BaseWeb
-                webdriver = new LocalDriverManager().createInstance(configuration.browser());
+                webdriver = BrowserFactory.valueOf(browser.toUpperCase()).createDriver();
                 break;
-            case GRID:
-                // getting the browser from the suite file or @Optional on BaseWeb
-                webdriver = new RemoteDriverManager().createInstance(browser);
+            case REMOTE:
+                webdriver = createRemoteInstance(BrowserFactory.valueOf(browser.toUpperCase()).getOptions());
                 break;
             default:
                 throw new TargetNotValidException(target.toString());
         }
-
         return webdriver;
+    }
+
+    private RemoteWebDriver createRemoteInstance(MutableCapabilities capability) {
+        RemoteWebDriver remoteWebDriver = null;
+        try {
+            String gridURL = String.format("http://%s:%s", configuration().gridUrl(), configuration().gridPort());
+
+            remoteWebDriver = new RemoteWebDriver(new URL(gridURL), capability);
+        } catch (java.net.MalformedURLException e) {
+            logger.error("Grid URL is invalid or Grid is not available");
+            logger.error(String.format("Browser: %s", capability.getBrowserName()), e);
+        } catch (IllegalArgumentException e) {
+            logger.error(String.format("Browser %s is not valid or recognized", capability.getBrowserName()), e);
+        }
+
+        return remoteWebDriver;
+    }
+
+    enum Target {
+        LOCAL, REMOTE
     }
 }
