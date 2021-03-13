@@ -15,11 +15,11 @@ This project using the following languages and frameworks:
 
 * [Java 11](https://openjdk.java.net/projects/jdk/11/) as the programming language
 * [TestNG](https://testng.org/doc/) as the UnitTest framework to support the test creation
-* [Seleium WebDriver](https://www.selenium.dev/) as the web browser automation framework using the Java binding
+* [Selenium WebDriver](https://www.selenium.dev/) as the web browser automation framework using the Java binding
 * [AssertJ](https://joel-costigliola.github.io/assertj/) as the fluent assertion library
 * [Allure Report](https://docs.qameta.io/allure/) as the testing report strategy
 * [JavaFaker](https://github.com/DiUS/java-faker) as the faker data generation strategy
-* [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging manage strategy
+* [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging management strategy
 * [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) as the Selenium binaries management
 * [Owner](http://owner.aeonbits.org/) to minimize the code to handle the properties file
 
@@ -41,7 +41,7 @@ You will see the following items in this architecture:
 * [Profiles executors on pom.xml](#profiles-executors-on-pomxml)
 * [Pipeline as a code](#pipeline-as-a-code)
 
-Do you have any other item to add on this test architecture? Please do a pull request or open an issue to discuss
+Do you have any other items to add to this test architecture? Please do a pull request or open an issue to discuss.
 
 ### Page Objects pattern
 I will not explain the Page Object pattern because you can find a lot of good explanations and examples on the internet. 
@@ -66,34 +66,43 @@ Use this approach if you know that the page does not refresh.
 
 ### Execution types
 
-There are two execution types: **local** and **grid**.
-For both, there's a factory class [DriverFactory](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/driver/DriverFactory.java) 
-to resolve if the execution is local or remote based on the `target ` property value located on `general.properties` file.
-
-The class [DriverManager](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/driver/DriverManager.java) 
-create a `ThreadLocal` for the WebDriver instance, to make sure there's no conflict when we run it in parallel.
+There are two execution types: **local** and **remote**.
+The `TargetFactory` class will resolve the target execution based on the `target` property value located on `general.properties` file.
+Its usage is placed on the `BaseWeb` class before each test execution.
 
 #### Local execution
 This execution type uses [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) class to instantiate the web browsers.
+When the `target` is `local` the `createDriver()` method is used from the `BrowserFactory` class to return the browser instance.
 
-The class [LocalDriverManager](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/driver/local/LocalDriverManager.java) 
-create a browser instance from the value placed on the `browser` property on the `local.properties` file.
-It matches the browser name with an internal Enum type on WebDriverManager.
+The browser used in the test is placed on the `browser` property in the `local.properties` file.
 
 #### Remote execution
-This execution type uses [RemoteDriverManager](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/driver/remote/RemoteDriverManager.java) 
-class to connect on the remote grid and create the browser instance.
+This execution is based on any Selenium Grid approach to execute the tests in remote machines (local or remote/cloud grid).
+When the `target` is `remote` the `getOptions` method is used from the `BrowserFactory` to return the browser option 
+class as the remote execution needs the browser capability.
+The `DriverFactory` class has an internal method `createRemoteInstance` to return a `RemoteWebDriver` instance based on 
+the browser capability.
 
-The approach of the remote execution here was created to enable the parallel execution, but if you set the `target` 
-property value to `grid` and run a test it will work because if there's no explicit browser in use, Google Chrome will be used. 
-You can check this on the [BaseWeb](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/test/java/com/eliasnogueira/BaseWeb.java) class.
-
-You must pay attention to the two required information regarding the remote execution: the `grid.url` and `grid.port` 
+You must pay attention to the two required information regarding the remote execution: the `grid.url` and `grid.port`
 property values on the `grid.properties` file. You must update these values before the start.
 
 If you are using the `docker-compose.yml` file to start the Zalenium grid, the values on the `grid.property` file should work.
 
 Please take a look at the [Parallel Execution](#parallel-execution) section.
+
+#### BrowserFactory class
+This Factory class is a Java enum that has all implemented browsers to use during the test execution.
+Each browser is an enum, and each enum implements two methods:
+* `createDriver()`: creates the browser instance for the local execution. The browser driver is automatically managed by the WebDriverManager library
+* `getOptions()`: creates a new browser Options setting some specific configurations. It's used for the remote executions
+
+You can see that the `createDriver()` method used the `getOptions()` to use specific configuration, as starting the browser maximized and others.
+The `getOptions()` is also used for the remote execution as it is a subclass of the `AbstractDriverOptions` and can be 
+automatically accepted as either a `Capabilities` or `MutableCapabilities` class, which is required by the `RemoteWebDriver` class.
+
+#### DriverManager class
+The class [DriverManager](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/driver/DriverManager.java) 
+create a `ThreadLocal` for the WebDriver instance, to make sure there's no conflict when we run it in parallel.
 
 ### BaseTest
 This testing pattern was implemented on the [BaseWeb](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/test/java/com/eliasnogueira/BaseWeb.java) 
@@ -110,9 +119,9 @@ This class also the `TestListener` that is a custom TestNG listener, and will be
 ### TestListener
 
 The `TestListener` is a class that implements [ITestListener](https://testng.org/doc/documentation-main.html#logging-listeners).
-The following method is in use to help logging errors and attach additional information on the test report:
+The following method is used to help logging errors and attach additional information to the test report:
 * `onTestStart`: add the browser information into the test report
-* `onTestFailure`: log the exceptions and add a screenshot on the test report
+* `onTestFailure`: log the exceptions and add a screenshot to the test report
 * `onTestSkipped`: add the skipped test on the log
 
 ### Logging
@@ -123,12 +132,12 @@ A file with all the log information will be automatically created on the user fo
 If you want to change it, update the `appender.file.fileName` property value.
 
 The `log.error` is used to log all the exceptions this architecture might throw. Use `log.info` or `log.debug` to log 
-important information, like the users automatically generated by the factory [BookingDataFactory](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/data/BookingDataFactory.java)
+important information, like the users, automatically generated by the factory [BookingDataFactory](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/data/BookingDataFactory.java)
 
 ### Parallel execution
 The parallel test execution is based on the [parallel tests](https://testng.org/doc/documentation-main.html#parallel-tests) 
-feature on TestNG. This is in use on the `parallel.xml` test suite file by the `parallel="tests"` attribute and value, 
-which means each `test` item inside the test suite will execute in parallel.
+feature on TestNG. This is used by `parallel.xml` test suite file which has the `parallel="tests"` attribute and value, 
+whereas `test` item inside the test suite will execute in parallel.
 The browser in use for each `test` should be defined by a parameter, like:
 ```xml
 <parameter name="browser" value="chrome"/>
@@ -161,14 +170,14 @@ This dynamic data is generated by JavaFaker filling all the fields using the Bui
 The [Booking](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/model/Booking.java) is the plain Java objects 
 and the [BookingBuilder](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/model/BookingBuilder.java) is the builder class.
 
-You can se the use of the Builder patter in the [BookingDataFactory](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/data/BookingDataFactory.java) class.
+You can ses the use of the Builder pattern in the [BookingDataFactory](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/blob/master/src/main/java/com/eliasnogueira/data/BookingDataFactory.java) class.
 
 Reading reference: https://reflectoring.io/objectmother-fluent-builder
 
 ### Profiles executors on pom.xml
 
 There is a profile called `web-execution` created to execute the test suite `local.xml` inside `src/test/resources/suites` folder.
-To execute this suite, via command line you can call the parameter `-P` and the profile id.
+To execute this suite, via the command line you can call the parameter `-P` and the profile id.
 
 Eg: executing the multi_browser suite
 ``` bash
@@ -212,7 +221,7 @@ mvn test -Pweb-execution -Dsuite=parallel -Dtestng.dtd.http=true
 
 ### Pipeline as a code
 
-The two files of pipeline as a code are inside `pipeline_as_code` folder.
+The two files of the pipeline as a code are inside `pipeline_as_code` folder.
 
 * GitHub Actions to use it inside the GitHub located at `.github\workflows`
 * Jenkins: `Jenkinsfile` to be used on a Jenkins pipeline located at `pipeline_as_code`
