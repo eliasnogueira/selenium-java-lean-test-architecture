@@ -24,10 +24,10 @@
 
 package com.eliasnogueira.page.booking.common;
 
+import com.eliasnogueira.page.AbstractPageObject;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import com.eliasnogueira.page.AbstractPageObject;
 
 public class NavigationPage extends AbstractPageObject {
 

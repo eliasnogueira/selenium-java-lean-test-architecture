@@ -26,9 +26,9 @@ package com.eliasnogueira.page.booking;
 
 import com.eliasnogueira.driver.DriverManager;
 import com.eliasnogueira.enums.RoomType;
+import com.eliasnogueira.page.booking.common.NavigationPage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import com.eliasnogueira.page.booking.common.NavigationPage;
 
 public class RoomPage extends NavigationPage {
 

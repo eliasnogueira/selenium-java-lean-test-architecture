@@ -25,8 +25,6 @@
 package com.eliasnogueira.data;
 
 import com.github.javafaker.Faker;
-import com.eliasnogueira.config.Configuration;
-import com.eliasnogueira.config.ConfigurationManager;
 import com.eliasnogueira.enums.RoomType;
 import java.util.Locale;
 import java.util.Random;
@@ -35,14 +33,15 @@ import com.eliasnogueira.model.BookingBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static com.eliasnogueira.config.ConfigurationManager.configuration;
+
 public class BookingDataFactory {
 
     private final Faker faker;
     private static final Logger logger = LogManager.getLogger(BookingDataFactory.class);
 
     public BookingDataFactory() {
-        Configuration configuration = ConfigurationManager.getConfiguration();
-        faker = new Faker(new Locale(configuration.faker()));
+        faker = new Faker(new Locale(configuration().faker()));
     }
 
     public Booking createBookingData() {

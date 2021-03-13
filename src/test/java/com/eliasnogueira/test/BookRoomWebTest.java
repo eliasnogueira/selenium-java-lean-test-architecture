@@ -23,15 +23,15 @@
  */
 package com.eliasnogueira.test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.eliasnogueira.BaseWeb;
 import com.eliasnogueira.data.BookingDataFactory;
 import com.eliasnogueira.model.Booking;
-import org.testng.annotations.Test;
 import com.eliasnogueira.page.booking.AccountPage;
 import com.eliasnogueira.page.booking.DetailPage;
 import com.eliasnogueira.page.booking.RoomPage;
+import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookRoomWebTest extends BaseWeb {
 
@@ -56,6 +56,6 @@ public class BookRoomWebTest extends BaseWeb {
         detailPage.finish();
 
         assertThat(detailPage.getAlertMessage())
-            .isEqualTo("Your reservation has been made and we will contact you shortly");
+                .isEqualTo("Your reservation has been made and we will contact you shortly");
     }
 }

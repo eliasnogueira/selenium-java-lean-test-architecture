@@ -24,38 +24,37 @@
 
 package com.eliasnogueira.report;
 
+import com.eliasnogueira.driver.DriverManager;
 import com.github.automatedowl.tools.AllureEnvironmentWriter;
 import com.google.common.collect.ImmutableMap;
-import com.eliasnogueira.config.Configuration;
-import com.eliasnogueira.config.ConfigurationManager;
-import com.eliasnogueira.driver.DriverManager;
 import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+
+import static com.eliasnogueira.config.ConfigurationManager.configuration;
+import static org.openqa.selenium.OutputType.BYTES;
 
 public class AllureManager {
 
-    private AllureManager() {}
+    private AllureManager() {
+    }
 
     public static void setAllureEnvironmentInformation() {
-        Configuration configuration = ConfigurationManager.getConfiguration();
-
         AllureEnvironmentWriter.allureEnvironmentWriter(
-            ImmutableMap.<String, String>builder().
-                put("Test URL", configuration.url()).
-                put("Target execution", configuration.target()).
-                put("Global timeout", String.valueOf(configuration.timeout())).
-                put("Headless mode", String.valueOf(configuration.headless())).
-                put("Faker locale", configuration.faker()).
-                put("Local browser", configuration.browser()).
-                put("Grid URL", configuration.gridUrl()).
-                put("Grid port", configuration.gridPort()).
-                build());
+                ImmutableMap.<String, String>builder().
+                        put("Test URL", configuration().url()).
+                        put("Target execution", configuration().target()).
+                        put("Global timeout", String.valueOf(configuration().timeout())).
+                        put("Headless mode", String.valueOf(configuration().headless())).
+                        put("Faker locale", configuration().faker()).
+                        put("Local browser", configuration().browser()).
+                        put("Grid URL", configuration().gridUrl()).
+                        put("Grid port", configuration().gridPort()).
+                        build());
     }
 
     @Attachment(value = "Failed test screenshot", type = "image/png")
     public static byte[] takeScreenshotToAttachOnAllureReport() {
-        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(BYTES);
     }
 
     @Attachment(value = "Browser information", type = "text/plain")

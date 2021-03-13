@@ -24,18 +24,15 @@
 
 package com.eliasnogueira.page;
 
-import com.eliasnogueira.config.Configuration;
-import com.eliasnogueira.config.ConfigurationManager;
 import com.eliasnogueira.driver.DriverManager;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+
+import static com.eliasnogueira.config.ConfigurationManager.configuration;
+import static org.openqa.selenium.support.PageFactory.initElements;
 
 public class AbstractPageObject {
 
     protected AbstractPageObject() {
-        Configuration configuration = ConfigurationManager.getConfiguration();
-        int timeout = configuration.timeout();
-
-        PageFactory.initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), timeout), this);
+        initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), configuration().timeout()), this);
     }
 }
