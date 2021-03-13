@@ -37,7 +37,7 @@ public class Booking {
     private String roomDescription;
 
     public Booking(String email, String country, String password, String dailyBudget, Boolean newsletter,
-        RoomType roomType, String roomDescription) {
+                   RoomType roomType, String roomDescription) {
         this.email = email;
         this.country = country;
         this.password = password;
@@ -108,8 +108,8 @@ public class Booking {
 
     public String toString() {
         return "Booking(email=" + this.getEmail() + ", country=" + this.getCountry() + ", dailyBudget=" +
-            this.getDailyBudget() + ", newsletter=" + this.getNewsletter() + ", roomType="
-            + this.getRoomType() + ", roomDescription=" + this.getRoomDescription() + ")";
+                this.getDailyBudget() + ", newsletter=" + this.getNewsletter() + ", roomType="
+                + this.getRoomType() + ", roomDescription=" + this.getRoomDescription() + ")";
     }
 
 }
