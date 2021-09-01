@@ -27,7 +27,7 @@
         <assertj.version>3.20.2</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
         <log4j.version>2.14.1</log4j.version>
-        <webdrivermanager.version>4.4.3</webdrivermanager.version>
+        <webdrivermanager.version>5.0.1</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.14.0</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
