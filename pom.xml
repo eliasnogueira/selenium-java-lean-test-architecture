@@ -21,7 +21,7 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.6</aspectj.version>
-        <selenium.version>4.0.0-beta-4</selenium.version>
+        <selenium.version>4.0.0-rc-2</selenium.version>
         <selenium-server.version>4.0.0-alpha-2</selenium-server.version>
         <testng.version>7.4.0</testng.version>
         <assertj.version>3.20.2</assertj.version>
