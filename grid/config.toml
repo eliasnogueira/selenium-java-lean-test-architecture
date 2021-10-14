@@ -3,8 +3,7 @@
 # start a container with the given image.
 configs = [
     "selenium/standalone-firefox:4.0.0-20211013", "{\"browserName\": \"firefox\"}",
-    "selenium/standalone-chrome:4.0.0-20211013", "{\"browserName\": \"chrome\"}",
-    "selenium/standalone-edge:4.0.0-20211013", "{\"browserName\": \"MicrosoftEdge\"}"
+    "selenium/standalone-chrome:4.0.0-20211013", "{\"browserName\": \"chrome\"}"
     ]
 
 # URL for connecting to the docker daemon
