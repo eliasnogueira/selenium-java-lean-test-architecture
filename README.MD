@@ -6,8 +6,8 @@
 Local testing execution example
 ![Local testing execution example](example_filed_test_with_report.gif)
 
-Parallel testing execution example with Zalenium
-![Parallel testing execution example with Zalenium](parallel_execution.gif)
+Parallel testing execution example with Docker Selenium
+![Parallel testing execution example with Docker Selenium](selenium-grid-execution.gif)
 
 ## Languages and Frameworks
 
@@ -86,7 +86,7 @@ the browser capability.
 You must pay attention to the two required information regarding the remote execution: the `grid.url` and `grid.port`
 property values on the `grid.properties` file. You must update these values before the start.
 
-If you are using the `docker-compose.yml` file to start the Zalenium grid, the values on the `grid.property` file should work.
+If you are using the `docker-compose.yml` file to start the Docker Selenium grid, the values on the `grid.properties` file should work.
 
 Please take a look at the [Parallel Execution](#parallel-execution) section.
 
@@ -147,6 +147,21 @@ You can define any parallel strategy.
 
 It can be an excellent combination together with the grid strategy.
 
+#### Execution with Docker Selenium Distributed
+This project has the `docker-compose.yml` file to run the tests in a parallel way using Docker Selenium.
+To be able to run it in parallel the file has the [Dynamic Grid Implementation](https://github.com/SeleniumHQ/docker-selenium#dynamic-grid-) that will start the container on demand.
+
+This means that Docker Selenium will start a container test for a targeting browser.
+
+Please not you need the following before run it in parallel:
+* Docker installed
+* Pull the images for Chrome and Firefox
+  * `docker pull selenium-standalog-chrome` 
+  * `docker pull selenium-standalog-firefox` 
+* Pay attention at the `grid/config.toml` file that has comments for each specific SO
+* Start the Grid running the following command inside the `grid` folder
+  * `docker-compose up` 
+
 ### Configuration files
 This project uses a library called [Owner](http://owner.aeonbits.org/). You can find the class related to the property 
 file reader in the following classes:
@@ -155,7 +170,7 @@ file reader in the following classes:
 
 There are 3 properties (configuration) files located on `src/test/java/resources/`:
 * `general.properties`: general configuration as the target execution, base url, timeout, and faker locale
-* `grid.properties`: url and port for the Selenium grid usage (Zalenium)
+* `grid.properties`: url and port for the Selenium grid usage
 * `local.properties`:  browser to use in the local execution
 
 The properties were divided into three different ones to better separate the responsibilities and enable the changes easy 
