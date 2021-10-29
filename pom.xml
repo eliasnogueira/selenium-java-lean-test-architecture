@@ -28,7 +28,7 @@
         <log4j.version>2.14.1</log4j.version>
         <webdrivermanager.version>5.0.3</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.15.0</allure.version>
+        <allure.version>2.16.0</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
