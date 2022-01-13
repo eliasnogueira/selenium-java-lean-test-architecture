@@ -18,7 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java-compiler.version>11</java-compiler.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.6</aspectj.version>
         <selenium.version>4.0.0</selenium.version>
