@@ -29,7 +29,7 @@
         <webdrivermanager.version>5.0.3</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.15.0</allure.version>
-        <allure-maven.version>2.10.0</allure-maven.version>
+        <allure-maven.version>2.11.2</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
