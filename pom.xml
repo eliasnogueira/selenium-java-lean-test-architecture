@@ -21,7 +21,7 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.6</aspectj.version>
-        <selenium.version>4.0.0</selenium.version>
+        <selenium.version>4.1.2</selenium.version>
         <testng.version>7.4.0</testng.version>
         <assertj.version>3.21.0</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
