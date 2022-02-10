@@ -18,18 +18,18 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java-compiler.version>11</java-compiler.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.6</aspectj.version>
-        <selenium.version>4.0.0</selenium.version>
-        <testng.version>7.4.0</testng.version>
-        <assertj.version>3.21.0</assertj.version>
+        <selenium.version>4.1.2</selenium.version>
+        <testng.version>7.5</testng.version>
+        <assertj.version>3.22.0</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
-        <log4j.version>2.14.1</log4j.version>
+        <log4j.version>2.17.1</log4j.version>
         <webdrivermanager.version>5.0.3</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.15.0</allure.version>
-        <allure-maven.version>2.10.0</allure-maven.version>
+        <allure.version>2.17.2</allure.version>
+        <allure-maven.version>2.11.2</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
@@ -91,6 +91,12 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -109,6 +115,12 @@
             <groupId>com.github.automatedowl</groupId>
             <artifactId>allure-environment-writer</artifactId>
             <version>${allure-environment-writer.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

@@ -1,6 +1,12 @@
 # Lean Test Automation Architecture using Java and Selenium WebDriver
 [![Actions Status](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/workflows/Build%20and%20Test/badge.svg)](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/actions)
 
+## Important information
+```shell
+This current version has excluded the guava library from WebDriverManager and Allure Environment Writter 
+due to a conflict with the guava version on Selenium 4
+```
+
 **This project delivers to you a complete lean test architecture for your web tests using the best frameworks and practices.**
 
 Local testing execution example
