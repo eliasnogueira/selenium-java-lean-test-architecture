@@ -25,7 +25,7 @@
         <testng.version>7.5</testng.version>
         <assertj.version>3.22.0</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
-        <log4j.version>2.17.1</log4j.version>
+        <log4j.version>2.17.2</log4j.version>
         <webdrivermanager.version>5.0.3</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.17.2</allure.version>
