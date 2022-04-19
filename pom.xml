@@ -21,14 +21,14 @@
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.6</aspectj.version>
-        <selenium.version>4.1.2</selenium.version>
+        <selenium.version>4.1.3</selenium.version>
         <testng.version>7.5</testng.version>
         <assertj.version>3.22.0</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
-        <log4j.version>2.17.1</log4j.version>
-        <webdrivermanager.version>5.0.3</webdrivermanager.version>
+        <log4j.version>2.17.2</log4j.version>
+        <webdrivermanager.version>5.1.1</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.17.2</allure.version>
+        <allure.version>2.17.3</allure.version>
         <allure-maven.version>2.11.2</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
