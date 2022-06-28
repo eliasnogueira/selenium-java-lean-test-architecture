@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.eliasnogueira.data;
+package com.eliasnogueira.data.dynamic;
 
 import com.github.javafaker.Faker;
 import com.eliasnogueira.enums.RoomType;
