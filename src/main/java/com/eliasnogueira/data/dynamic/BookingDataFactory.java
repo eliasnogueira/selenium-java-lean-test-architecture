@@ -26,8 +26,9 @@ package com.eliasnogueira.data.dynamic;
 
 import com.github.javafaker.Faker;
 import com.eliasnogueira.enums.RoomType;
+
+import java.security.SecureRandom;
 import java.util.Locale;
-import java.util.Random;
 import com.eliasnogueira.model.Booking;
 import com.eliasnogueira.model.BookingBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -68,6 +69,6 @@ public class BookingDataFactory {
     }
 
     private String returnRandomItemOnArray(String[] array) {
-        return array[(new Random().nextInt(array.length))];
+        return array[(new SecureRandom().nextInt(array.length))];
     }
 }
