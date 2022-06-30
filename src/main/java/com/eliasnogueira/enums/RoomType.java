@@ -24,7 +24,7 @@
 
 package com.eliasnogueira.enums;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public enum RoomType {
 
@@ -37,7 +37,7 @@ public enum RoomType {
     }
 
     public static RoomType getRandom() {
-        return values()[new Random().nextInt(values().length)];
+        return values()[new SecureRandom().nextInt(values().length)];
     }
 
     @Override
