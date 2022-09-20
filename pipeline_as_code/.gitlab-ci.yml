@@ -1,4 +1,4 @@
-image: maven:3.6.3-jdk-11
+image: maven:3.8.4-openjdk-17
 
 stages:
 - build
@@ -17,4 +17,4 @@ build:
 test:
   stage: test
   script:
-  - mvn test -Pweb-execution -Dsuite=local -Dtarget=local -Dtestng.dtd.http=true
+  - mvn test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome -Dtestng.dtd.http=true
