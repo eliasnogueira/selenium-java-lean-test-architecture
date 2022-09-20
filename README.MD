@@ -1,19 +1,31 @@
 # Lean Test Automation Architecture using Java and Selenium WebDriver
 [![Actions Status](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/workflows/Build%20and%20Test/badge.svg)](https://github.com/eliasnogueira/selenium-java-lean-test-achitecture/actions)
 
+**This project delivers to you a complete lean test architecture for your web tests using the best frameworks and practices.**
+
 ## Important information
+
+### Know issues
 ```shell
 This current version has excluded the guava library from WebDriverManager and Allure Environment Writter 
 due to a conflict with the guava version on Selenium 4
 ```
 
-**This project delivers to you a complete lean test architecture for your web tests using the best frameworks and practices.**
+### Java versions
 
-Local testing execution example
-![Local testing execution example](example_filed_test_with_report.gif)
+The `main` branch uses Java 17.
 
-Parallel testing execution example with Docker Selenium
-![Parallel testing execution example with Docker Selenium](selenium-grid-execution.gif)
+If you want to use Java 11, please take a look at `java-11` branch.
+
+## Examples
+
+### Local testing execution example
+
+![Local testing execution example](docs/example_filed_test_with_report.gif)
+
+### Parallel testing execution example with Docker Selenium
+
+![Parallel testing execution example with Docker Selenium](docs/selenium-grid-execution.gif)
 
 ## Languages and Frameworks
 
