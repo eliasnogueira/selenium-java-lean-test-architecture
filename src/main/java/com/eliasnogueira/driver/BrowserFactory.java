@@ -56,7 +56,7 @@ public enum BrowserFactory {
 
         @Override
         public ChromeOptions getOptions() {
-            ChromeOptions chromeOptions = new ChromeOptions();
+            var chromeOptions = new ChromeOptions();
             chromeOptions.addArguments(START_MAXIMIZED);
             chromeOptions.addArguments(DISABLE_INFOBARS);
             chromeOptions.addArguments(DISABLE_NOTIFICATIONS);
@@ -74,7 +74,7 @@ public enum BrowserFactory {
 
         @Override
         public FirefoxOptions getOptions() {
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            var firefoxOptions = new FirefoxOptions();
             firefoxOptions.addArguments(START_MAXIMIZED);
             firefoxOptions.setHeadless(configuration().headless());
 
@@ -90,7 +90,7 @@ public enum BrowserFactory {
 
         @Override
         public EdgeOptions getOptions() {
-            EdgeOptions edgeOptions = new EdgeOptions();
+            var edgeOptions = new EdgeOptions();
             edgeOptions.addArguments(START_MAXIMIZED);
             edgeOptions.setHeadless(configuration().headless());
 
@@ -106,7 +106,7 @@ public enum BrowserFactory {
 
         @Override
         public SafariOptions getOptions() {
-            SafariOptions safariOptions = new SafariOptions();
+            var safariOptions = new SafariOptions();
             safariOptions.setAutomaticInspection(false);
 
             if (TRUE.equals(configuration().headless()))

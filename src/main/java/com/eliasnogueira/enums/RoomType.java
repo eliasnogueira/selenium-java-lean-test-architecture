@@ -25,8 +25,9 @@
 package com.eliasnogueira.enums;
 
 import java.security.SecureRandom;
+import java.util.function.Supplier;
 
-public enum RoomType {
+public enum RoomType implements Supplier<String> {
 
     SINGLE("Single"), FAMILY("Family"), BUSINESS("Business");
 
@@ -41,7 +42,7 @@ public enum RoomType {
     }
 
     @Override
-    public String toString() {
-        return value;
+    public String get() {
+        return this.value;
     }
 }

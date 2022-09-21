@@ -37,9 +37,9 @@ public class BookRoomWebTest extends BaseWeb {
 
     @Test(description = "Book a room")
     public void bookARoom() {
-        Booking bookingInformation = new BookingDataFactory().createBookingData();
+        var bookingInformation = BookingDataFactory.createBookingData();
 
-        AccountPage accountPage = new AccountPage();
+        var accountPage = new AccountPage();
         accountPage.fillEmail(bookingInformation.getEmail());
         accountPage.fillPassword(bookingInformation.getPassword());
         accountPage.selectCountry(bookingInformation.getCountry());
@@ -47,11 +47,11 @@ public class BookRoomWebTest extends BaseWeb {
         accountPage.clickNewsletter();
         accountPage.next();
 
-        RoomPage roomPage = new RoomPage();
+        var roomPage = new RoomPage();
         roomPage.selectRoomType(bookingInformation.getRoomType());
         roomPage.next();
 
-        DetailPage detailPage = new DetailPage();
+        var detailPage = new DetailPage();
         detailPage.fillRoomDescription(bookingInformation.getRoomDescription());
         detailPage.finish();
 

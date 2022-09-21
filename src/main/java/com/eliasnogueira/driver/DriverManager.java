@@ -24,7 +24,6 @@
 
 package com.eliasnogueira.driver;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -48,10 +47,11 @@ public class DriverManager {
     }
 
     public static String getInfo() {
-        Capabilities cap = ((RemoteWebDriver) DriverManager.getDriver()).getCapabilities();
+        var cap = ((RemoteWebDriver) DriverManager.getDriver()).getCapabilities();
         String browserName = cap.getBrowserName();
         String platform = cap.getPlatformName().toString();
         String version = cap.getBrowserVersion();
+
         return String.format("browser: %s v: %s platform: %s", browserName, version, platform);
     }
 }

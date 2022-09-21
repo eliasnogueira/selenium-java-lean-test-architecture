@@ -38,15 +38,14 @@ import static com.eliasnogueira.config.ConfigurationManager.configuration;
 
 public class BookingDataFactory {
 
-    private final Faker faker;
+    private static final Faker faker = new Faker(new Locale(configuration().faker()));
     private static final Logger logger = LogManager.getLogger(BookingDataFactory.class);
 
-    public BookingDataFactory() {
-        faker = new Faker(new Locale(configuration().faker()));
+    private BookingDataFactory() {
     }
 
-    public Booking createBookingData() {
-        Booking booking = new BookingBuilder().
+    public static Booking createBookingData() {
+        var booking = new BookingBuilder().
             email(faker.internet().emailAddress()).
             country(returnRandomCountry()).
             password(faker.internet().password()).
@@ -60,15 +59,15 @@ public class BookingDataFactory {
         return booking;
     }
 
-    private String returnRandomCountry() {
+    private static String returnRandomCountry() {
         return returnRandomItemOnArray(new String[]{"Belgium", "Brazil", "Netherlands"});
     }
 
-    private String returnDailyBudget() {
+    private static String returnDailyBudget() {
         return returnRandomItemOnArray(new String[]{"$100", "$100 - $499", "$499 - $999", "$999+"});
     }
 
-    private String returnRandomItemOnArray(String[] array) {
+    private static String returnRandomItemOnArray(String[] array) {
         return array[(new SecureRandom().nextInt(array.length))];
     }
 }

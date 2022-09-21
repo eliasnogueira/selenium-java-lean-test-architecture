@@ -12,7 +12,7 @@ node {
 
     stage('Test Execution') {
         try {
-            sh "'${mvnHome}/bin/mvn' test -Pweb-execution -Dtarget=local -Dsuite=local -Dtestng.dtd.http=true"
+            sh "'${mvnHome}/bin/mvn' test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome -Dtestng.dtd.http=true"
         } catch (Exception e) {
             currentBuild.result = 'FAILURE'
         } finally {
