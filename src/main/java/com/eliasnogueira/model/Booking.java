@@ -70,8 +70,8 @@ public class Booking {
         return this.newsletter;
     }
 
-    public RoomType getRoomType() {
-        return this.roomType;
+    public String getRoomType() {
+        return this.roomType.get();
     }
 
     public String getRoomDescription() {

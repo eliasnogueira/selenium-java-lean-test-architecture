@@ -25,7 +25,6 @@
 package com.eliasnogueira.page.booking;
 
 import com.eliasnogueira.driver.DriverManager;
-import com.eliasnogueira.enums.RoomType;
 import com.eliasnogueira.page.booking.common.NavigationPage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -33,7 +32,7 @@ import org.openqa.selenium.By;
 public class RoomPage extends NavigationPage {
 
     @Step
-    public void selectRoomType(RoomType room) {
+    public void selectRoomType(String room) {
         DriverManager.getDriver().findElement(By.xpath("//h6[text()='" + room + "']")).click();
     }
 }
