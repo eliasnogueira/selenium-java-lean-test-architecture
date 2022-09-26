@@ -24,7 +24,7 @@
         <selenium.version>4.4.0</selenium.version>
         <testng.version>7.6.1</testng.version>
         <assertj.version>3.23.1</assertj.version>
-        <javafaker.version>1.0.2</javafaker.version>
+        <datafaker.version>1.6.0</datafaker.version>
         <log4j.version>2.19.0</log4j.version>
         <webdrivermanager.version>5.3.0</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
@@ -58,9 +58,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>${javafaker.version}</version>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>${datafaker.version}</version>
         </dependency>
 
         <dependency>
