@@ -24,10 +24,9 @@
 
 package com.eliasnogueira.data.dynamic;
 
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 import com.eliasnogueira.enums.RoomType;
 
-import java.security.SecureRandom;
 import java.util.Locale;
 import com.eliasnogueira.model.Booking;
 import com.eliasnogueira.model.BookingBuilder;
@@ -60,14 +59,10 @@ public class BookingDataFactory {
     }
 
     private static String returnRandomCountry() {
-        return returnRandomItemOnArray(new String[]{"Belgium", "Brazil", "Netherlands"});
+        return faker.options().option("Belgium", "Brazil", "Netherlands");
     }
 
     private static String returnDailyBudget() {
-        return returnRandomItemOnArray(new String[]{"$100", "$100 - $499", "$499 - $999", "$999+"});
-    }
-
-    private static String returnRandomItemOnArray(String[] array) {
-        return array[(new SecureRandom().nextInt(array.length))];
+        return faker.options().option("$100", "$100 - $499", "$499 - $999", "$999+");
     }
 }
