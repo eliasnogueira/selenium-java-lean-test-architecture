@@ -25,7 +25,6 @@ package com.eliasnogueira.test;
 
 import com.eliasnogueira.BaseWeb;
 import com.eliasnogueira.data.dynamic.BookingDataFactory;
-import com.eliasnogueira.model.Booking;
 import com.eliasnogueira.page.booking.AccountPage;
 import com.eliasnogueira.page.booking.DetailPage;
 import com.eliasnogueira.page.booking.RoomPage;
