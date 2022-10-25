@@ -21,11 +21,11 @@ If you want to use Java 11, please take a look at `java-11` branch.
 
 ### Local testing execution example
 
-![Local testing execution example](docs/example_filed_test_with_report.gif)
+![Local testing execution example](assets/example_filed_test_with_report.gif)
 
 ### Parallel testing execution example with Docker Selenium
 
-![Parallel testing execution example with Docker Selenium](docs/selenium-grid-execution.gif)
+![Parallel testing execution example with Docker Selenium](assets/selenium-grid-execution.gif)
 
 ## Languages and Frameworks
 
