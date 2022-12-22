@@ -33,7 +33,7 @@ import org.aeonbits.owner.Config.LoadType;
     "system:properties",
     "classpath:general.properties",
     "classpath:local.properties",
-    "classpath:grid.properties"})
+    "classpath:selenium-grid.properties"})
 public interface Configuration extends Config {
 
     @Key("target")
