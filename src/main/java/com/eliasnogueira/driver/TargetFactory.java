@@ -24,6 +24,7 @@
 
 package com.eliasnogueira.driver;
 
+import com.eliasnogueira.data.changeless.Target;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
@@ -39,11 +40,12 @@ public class TargetFactory {
     private static final Logger logger = LogManager.getLogger(TargetFactory.class);
 
     public WebDriver createInstance(String browser) {
-        Target target = Target.valueOf(configuration().target().toUpperCase());
+        Target target = Target.get(configuration().target().toUpperCase());
 
         return switch (target) {
-            case LOCAL -> BrowserFactory.valueOf(browser.toUpperCase()).createDriver();
-            case REMOTE -> createRemoteInstance(BrowserFactory.valueOf(browser.toUpperCase()).getOptions());
+            case LOCAL -> BrowserFactory.valueOf(browser.toUpperCase()).createLocalDriver();
+            case BROWSERSTACK -> BrowserFactory.valueOf(browser.toUpperCase()).createDriver();
+            case SELENIUM_GRID -> createRemoteInstance(BrowserFactory.valueOf(browser.toUpperCase()).getOptions());
         };
     }
 
@@ -61,9 +63,5 @@ public class TargetFactory {
         }
 
         return remoteWebDriver;
-    }
-
-    enum Target {
-        LOCAL, REMOTE
     }
 }
