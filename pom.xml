@@ -28,13 +28,13 @@
         <log4j.version>2.19.0</log4j.version>
         <webdrivermanager.version>5.3.1</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.19.0</allure.version>
+        <allure.version>2.20.1</allure.version>
         <allure-maven.version>2.11.2</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <browserstack-java-sdk.version>1.1.4</browserstack-java-sdk.version>
+        <browserstack-java-sdk.version>1.1.5</browserstack-java-sdk.version>
 
         <suite>local</suite>
     </properties>
@@ -129,6 +129,12 @@
             <artifactId>browserstack-java-sdk</artifactId>
             <version>${browserstack-java-sdk.version}</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
@@ -147,6 +153,37 @@
                             <suiteXmlFiles>
                                 <suiteXmlFile>src/test/resources/suites/${suite}.xml</suiteXmlFile>
                             </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>browserstack</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>getClasspathFilenames</id>
+                                <goals>
+                                    <goal>properties</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/suites/browserstack.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <argLine>
+                                -javaagent:${com.browserstack:browserstack-java-sdk:jar}
+                            </argLine>
                         </configuration>
                     </plugin>
                 </plugins>
