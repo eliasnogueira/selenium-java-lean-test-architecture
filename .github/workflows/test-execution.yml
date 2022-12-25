@@ -20,19 +20,24 @@ jobs:
         with:
           java-version: 17
           distribution: adopt
+
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
       - name: Build with Maven
         run: mvn -DskipTests -B package --file pom.xml
+
       - name: Run local tests
         run: mvn test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
+
       - uses: browserstack/github-actions/setup-env@master
-      - name: Run browserstack tests
+      - name: Set browserstack credentials
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      - name: Run browserstack tests
         run: mvn test -Pbrowserstack -Dtarget=browserstack
