@@ -22,17 +22,18 @@
  * SOFTWARE.
  */
 
-package com.eliasnogueira.data.changeless;
+package com.eliasnogueira.enums;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toMap;
+
 public enum Target {
 
-    LOCAL("local"),
-    SELENIUM_GRID("selenium-grid"),
-    BROWSERSTACK("browserstack");
+    LOCAL("local"), SELENIUM_GRID("selenium-grid"), BROWSERSTACK("browserstack");
 
     private final String value;
     private static final Map<String, Target> ENUM_MAP;
@@ -42,10 +43,8 @@ public enum Target {
     }
 
     static {
-        Map<String, Target> map = new ConcurrentHashMap<>();
-        for (Target instance : Target.values()) {
-            map.put(instance.value.toLowerCase(), instance);
-        }
+        Map<String, Target> map = stream(Target.values()).collect(toMap(
+                instance -> instance.value.toLowerCase(), instance -> instance, (a, b) -> b, ConcurrentHashMap::new));
         ENUM_MAP = Collections.unmodifiableMap(map);
     }
 
