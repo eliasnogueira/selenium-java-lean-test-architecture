@@ -32,7 +32,7 @@ jobs:
         run: mvn test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
       - uses: browserstack/github-actions/setup-env@master
       - name: Run browserstack tests
-        run: mvn test -Pbrowserstack -Dtarget=browserstack
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: mvn test -Pbrowserstack -Dtarget=browserstack
