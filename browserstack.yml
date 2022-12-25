@@ -1,25 +1,26 @@
 # Set BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY as env variables
 # instead of adding it here
-userName: YOUR_USERNAME
-accessKey: YOUR_ACCESS_KEY
-buildName: browserstack-build-1
-projectName: BrowserStack Samples
+#userName: USER
+#accessKey: ACCESS_KEY
+buildName: book-a-room-test-1
+projectName: Selenium Java Lean Test Architecture
 framework: testng
 platforms:
-  - os: OS X
-    osVersion: Big Sur
+  - os: Windows
+    osVersion: 11
     browserName: Chrome
-    browserVersion: latest
+    browserVersion: 103.0
   - os: Windows
     osVersion: 10
-    browserName: Edge
-    browserVersion: latest
-  - device: Samsung Galaxy S22 Ultra
-    browserName: chrome
-    osVersion: 12.0
+    browserName: Firefox
+    browserVersion: 102.0
+  - os: OS X
+    osVersion: Big Sur
+    browserName: Safari
+    browserVersion: 14.1
 parallelsPerPlatform: 1
 
-source: testng:sample-master:v1.1
+source: selenium-lean-java-architecture
 browserstackLocal: true
 debug: false
 networkLogs: false
