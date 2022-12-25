@@ -34,10 +34,5 @@ jobs:
       - name: Run local tests
         run: mvn test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
 
-      - name: Set browserstack credentials
-      - uses: browserstack/github-actions/setup-env@master
-        with:
-          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       - name: Run browserstack tests
-        run: mvn test -Pbrowserstack -Dtarget=browserstack
+        run: mvn test -Pbrowserstack -Dtarget=browserstack -DBROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} -DBROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }}
