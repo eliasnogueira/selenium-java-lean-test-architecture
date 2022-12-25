@@ -35,7 +35,7 @@ import org.apache.logging.log4j.Logger;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 
-public class BookingDataFactory {
+public final class BookingDataFactory {
 
     private static final Faker faker = new Faker(new Locale(configuration().faker()));
     private static final Logger logger = LogManager.getLogger(BookingDataFactory.class);
