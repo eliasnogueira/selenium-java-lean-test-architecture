@@ -128,7 +128,6 @@
             <groupId>com.browserstack</groupId>
             <artifactId>browserstack-java-sdk</artifactId>
             <version>${browserstack-java-sdk.version}</version>
-            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <groupId>commons-io</groupId>
