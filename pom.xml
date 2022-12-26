@@ -129,12 +129,6 @@
             <artifactId>browserstack-java-sdk</artifactId>
             <version>${browserstack-java-sdk.version}</version>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.seleniumhq.selenium</groupId>
-                    <artifactId>selenium-java</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
     </dependencies>
@@ -161,6 +155,9 @@
 
         <profile>
             <id>browserstack</id>
+            <properties>
+                <target>browserstack</target>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
