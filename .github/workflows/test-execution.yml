@@ -43,5 +43,6 @@ jobs:
 
   browserstack-test:
     runs-on: ubuntu-latest
+    steps:
       - name: Run browserstack tests
         run: mvn -B test -Pbrowserstack -Dtarget=browserstack -DBROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} -DBROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }}
