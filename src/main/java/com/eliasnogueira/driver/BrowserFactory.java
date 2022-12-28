@@ -56,7 +56,7 @@ public enum BrowserFactory {
 
         @Override
         public WebDriver createDriver() {
-            return new ChromeDriver(getOptions());
+            return new ChromeDriver();
         }
 
         @Override
