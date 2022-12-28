@@ -7,7 +7,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  local_test:
     runs-on: ubuntu-latest
     services:
       chrome:
@@ -30,19 +30,26 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Build with Maven
         run: mvn -B -DskipTests package --file pom.xml
-
-  local_test:
-    runs-on: ubuntu-latest
-    services:
-      chrome:
-        image: selenium/standalone-chrome
-        options: --health-cmd '/opt/bin/check-grid.sh'
-    steps:
       - name: Run local tests
         run: mvn -B test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
 
   browserstack-test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: adopt
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
       - name: Run browserstack tests
         run: mvn -B test -Pbrowserstack -Dtarget=browserstack -DBROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} -DBROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }}
