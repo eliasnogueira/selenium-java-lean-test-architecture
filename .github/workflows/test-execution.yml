@@ -35,4 +35,4 @@ jobs:
         run: mvn -B test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
 
       - name: Run browserstack tests
-        run: mvn -B test -Pbrowserstack -target=browserstack -DBROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} -DBROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: mvn -B test -Pbrowserstack -Dtarget=browserstack -DBROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} -DBROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }}
