@@ -7,7 +7,7 @@ on:
     branches:
       - main
 jobs:
-  local_test:
+  local-test:
     runs-on: ubuntu-latest
     services:
       chrome:
@@ -51,5 +51,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: BrowserStack Env Setup
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username:  ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          project-name: selenium-lean-java-architecture
+
+      - name: Start BrowserStackLocal Tunnel
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: start
+
       - name: Run browserstack tests
         run: mvn -B test -Pbrowserstack -Dtarget=browserstack -DBROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} -DBROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+
+      - name: Start BrowserStackLocal Tunnel
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: stop
