@@ -32,7 +32,7 @@ jobs:
         run: mvn -DskipTests -B package --file pom.xml
 
       - name: Run local tests
-        run: mvn test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
+        run: mvn -B test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
 
       - name: Run browserstack tests
-        run: mvn test -Pbrowserstack -DBROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} -DBROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: mvn -B test -Pbrowserstack -DBROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} -DBROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }}
