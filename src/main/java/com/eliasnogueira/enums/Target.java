@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Elias Nogueira
+ * Copyright (c) 2022 Elias Nogueira
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,41 +22,33 @@
  * SOFTWARE.
  */
 
-package com.eliasnogueira.config;
+package com.eliasnogueira.enums;
 
-import org.aeonbits.owner.Config;
-import org.aeonbits.owner.Config.LoadPolicy;
-import org.aeonbits.owner.Config.LoadType;
+import java.util.Collections;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-@LoadPolicy(LoadType.MERGE)
-@Config.Sources({
-    "system:properties",
-    "classpath:general.properties",
-    "classpath:local.properties",
-    "classpath:selenium-grid.properties"})
-public interface Configuration extends Config {
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toMap;
 
-    @Key("target")
-    String target();
+public enum Target {
 
-    @Key("browser")
-    String browser();
+    LOCAL("local"), SELENIUM_GRID("selenium-grid"), BROWSERSTACK("browserstack");
 
-    @Key("headless")
-    Boolean headless();
+    private final String value;
+    private static final Map<String, Target> ENUM_MAP;
 
-    @Key("url.base")
-    String url();
+    Target(String value) {
+        this.value = value;
+    }
 
-    @Key("timeout")
-    int timeout();
+    static {
+        Map<String, Target> map = stream(Target.values()).collect(toMap(
+                instance -> instance.value.toLowerCase(), instance -> instance, (a, b) -> b, ConcurrentHashMap::new));
+        ENUM_MAP = Collections.unmodifiableMap(map);
+    }
 
-    @Key("grid.url")
-    String gridUrl();
-
-    @Key("grid.port")
-    String gridPort();
-
-    @Key("faker.locale")
-    String faker();
+    public static Target get(String value) {
+        return ENUM_MAP.get(value.toLowerCase());
+    }
 }

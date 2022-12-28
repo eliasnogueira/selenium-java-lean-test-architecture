@@ -48,10 +48,15 @@ public enum BrowserFactory {
 
     CHROME {
         @Override
-        public WebDriver createDriver() {
-            WebDriverManager.getInstance(DriverManagerType.CHROME).setup();
+        public WebDriver createLocalDriver() {
+            WebDriverManager.chromedriver().setup();
 
             return new ChromeDriver(getOptions());
+        }
+
+        @Override
+        public WebDriver createDriver() {
+            return new ChromeDriver();
         }
 
         @Override
@@ -66,9 +71,14 @@ public enum BrowserFactory {
         }
     }, FIREFOX {
         @Override
-        public WebDriver createDriver() {
-            WebDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
+        public WebDriver createLocalDriver() {
+            WebDriverManager.firefoxdriver().setup();
 
+            return new FirefoxDriver(getOptions());
+        }
+
+        @Override
+        public WebDriver createDriver() {
             return new FirefoxDriver(getOptions());
         }
 
@@ -82,9 +92,14 @@ public enum BrowserFactory {
         }
     }, EDGE {
         @Override
-        public WebDriver createDriver() {
-            WebDriverManager.getInstance(DriverManagerType.EDGE).setup();
+        public WebDriver createLocalDriver() {
+            WebDriverManager.edgedriver().setup();
 
+            return new EdgeDriver(getOptions());
+        }
+
+        @Override
+        public WebDriver createDriver() {
             return new EdgeDriver(getOptions());
         }
 
@@ -98,9 +113,14 @@ public enum BrowserFactory {
         }
     }, SAFARI {
         @Override
-        public WebDriver createDriver() {
-            WebDriverManager.getInstance(DriverManagerType.SAFARI).setup();
+        public WebDriver createLocalDriver() {
+            WebDriverManager.safaridriver().setup();
 
+            return new SafariDriver(getOptions());
+        }
+
+        @Override
+        public WebDriver createDriver() {
             return new SafariDriver(getOptions());
         }
 
@@ -116,7 +136,21 @@ public enum BrowserFactory {
         }
     };
 
+    /**
+     * Used to run local tests where the WebDriverManager will take care of the driver
+     * @return a new WebDriver instance based on the browser set
+     */
+    public abstract WebDriver createLocalDriver();
+
+    /**
+     * Used to run the Browserstack tests
+     * @return a new WebDriver instance based on the browser set
+     */
     public abstract WebDriver createDriver();
 
+    /**
+     *
+     * @return a new AbstractDriverOptions instance based on the browser set
+     */
     public abstract AbstractDriverOptions<?> getOptions();
 }

@@ -24,7 +24,7 @@
 
 package com.eliasnogueira.data.changeless;
 
-public class BrowserData {
+public final class BrowserData {
 
     private BrowserData() {
     }

@@ -17,4 +17,4 @@ build:
 test:
   stage: test
   script:
-  - mvn test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome -Dtestng.dtd.http=true
+  - mvn test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
