@@ -16,7 +16,7 @@ jobs:
         options: --health-cmd '/opt/bin/check-grid.sh'
     steps:
       - name: Checkout, cache and build
-        run: ./.github/workflows/reusable/checkout-cache-build.yaml
+        run: .github/workflows/reusable/checkout-cache-build.yaml
 
       - name: Run local tests
         run: mvn -B test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout, cache and build
-        run: ./.github/workflows/reusable/checkout-cache-build.yaml
+        run: .github/workflows/reusable/checkout-cache-build.yaml
 
       - name: Run local tests
         run: mvn -B test -Dtarget=testcontainers -Dbrowser=chrome
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout, cache and build
-        run: ./.github/workflows/reusable/checkout-cache-build.yaml
+        run: .github/workflows/reusable/checkout-cache-build.yaml
 
       - name: BrowserStack Env Setup
         uses: browserstack/github-actions/setup-env@master
