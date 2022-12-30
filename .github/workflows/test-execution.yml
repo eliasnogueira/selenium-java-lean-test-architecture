@@ -14,22 +14,28 @@ jobs:
       chrome:
         image: selenium/standalone-chrome
         options: --health-cmd '/opt/bin/check-grid.sh'
-    uses: ./.github/workflows/checkout-cache-build.yaml
     steps:
+      - name: Checkout, cache and build
+        run: ./.github/workflows/reusable/checkout-cache-build.yaml
+
       - name: Run local tests
         run: mvn -B test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
 
   testcontainers-test:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/checkout-cache-build.yaml
     steps:
+      - name: Checkout, cache and build
+        run: ./.github/workflows/reusable/checkout-cache-build.yaml
+
       - name: Run local tests
         run: mvn -B test -Dtarget=testcontainers -Dbrowser=chrome
 
   browserstack-test:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/checkout-cache-build.yaml
     steps:
+      - name: Checkout, cache and build
+        run: ./.github/workflows/reusable/checkout-cache-build.yaml
+
       - name: BrowserStack Env Setup
         uses: browserstack/github-actions/setup-env@master
         with:
