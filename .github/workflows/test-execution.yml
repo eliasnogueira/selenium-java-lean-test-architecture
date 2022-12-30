@@ -35,7 +35,10 @@ jobs:
       - name: Run local tests
         run: mvn -B test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
 
+# disabled job to show it as a reference since the browserstack sdk dynamically loads classes and generates conflicts
+# with the current libraries
   browserstack-test:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
