@@ -25,10 +25,13 @@
 package com.eliasnogueira.report;
 
 import com.eliasnogueira.driver.DriverManager;
+import com.eliasnogueira.enums.Target;
 import com.github.automatedowl.tools.AllureEnvironmentWriter;
 import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.TakesScreenshot;
+
+import java.util.Map;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 import static org.openqa.selenium.OutputType.BYTES;
@@ -39,17 +42,21 @@ public class AllureManager {
     }
 
     public static void setAllureEnvironmentInformation() {
-        AllureEnvironmentWriter.allureEnvironmentWriter(
-                ImmutableMap.<String, String>builder().
-                        put("Test URL", configuration().url()).
-                        put("Target execution", configuration().target()).
-                        put("Global timeout", String.valueOf(configuration().timeout())).
-                        put("Headless mode", String.valueOf(configuration().headless())).
-                        put("Faker locale", configuration().faker()).
-                        put("Local browser", configuration().browser()).
-                        put("Grid URL", configuration().gridUrl()).
-                        put("Grid port", configuration().gridPort()).
-                        build());
+        var basicInfo = Map.of(
+                "Test URL", configuration().url(),
+                "Target execution", configuration().target(),
+                "Global timeout", String.valueOf(configuration().timeout()),
+                "Headless mode", String.valueOf(configuration().headless()),
+                "Faker locale", configuration().faker(),
+                "Local browser", configuration().browser()
+        );
+
+        if (configuration().target().equals(Target.SELENIUM_GRID)) {
+            var gridMap = Map.of("Grid URL", configuration().gridUrl(), "Grid port", configuration().gridPort());
+            basicInfo.putAll(gridMap);
+        }
+
+        AllureEnvironmentWriter.allureEnvironmentWriter(ImmutableMap.copyOf(basicInfo));
     }
 
     @Attachment(value = "Failed test screenshot", type = "image/png")
@@ -61,5 +68,4 @@ public class AllureManager {
     public static String addBrowserInformationOnAllureReport() {
         return DriverManager.getInfo();
     }
-
 }
