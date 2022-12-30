@@ -1,5 +1,8 @@
 name: Reusable checkout and cache
 
+on:
+  workflow_call:
+
 jobs:
   local-test:
     runs-on: ubuntu-latest
