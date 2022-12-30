@@ -5,6 +5,13 @@
 **This project delivers to you a complete lean test architecture for your web tests using the best frameworks and
 practices.**
 
+It has a complete solution to run tests in different ways:
+
+* local testing using the browser on your local machine
+* parallel (or single) testing using Selenium Docker
+* parallel (or single) testing using Browserstack
+* local testing using TestContainers
+
 ## Important information
 
 ### Know issues
@@ -95,12 +102,23 @@ on `general.properties` file. Its usage is placed on the `BaseWeb` class before 
 
 #### Local execution
 
+##### Local machine
+
 This execution type uses [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) class to instantiate the web
 browsers.
 When the `target` is `local` the `createLocalDriver()` method is used from the `BrowserFactory` class to return the
 browser instance.
 
 The browser used in the test is placed on the `browser` property in the `general.properties` file.
+
+##### Testcontainers
+
+This execution type uses the [WebDriver Containers](https://www.testcontainers.org/modules/webdriver_containers/) in
+Testcontainers to run the tests in your machine, but using the Selenium docker images for Chrome or Firefox.
+
+When the `target` is `testcontainers` the `TargetFactory` uses the `createTestContainersInstance()` method to initialize
+the container based on the browser set in the `browser` property. Currently, Testcontainers only supports Chrome and
+Firefox.
 
 #### Remote execution
 
