@@ -88,9 +88,10 @@ There are three execution types:
 - `local`
 - `selenium-grid`
 - `browserstack`
-  The `TargetFactory` class will resolve the target execution based on the `target` property value located
-  on `general.properties` file.
-  Its usage is placed on the `BaseWeb` class before each test execution.
+- `testcontainers`
+
+The `TargetFactory` class will resolve the target execution based on the `target` property value located
+on `general.properties` file. Its usage is placed on the `BaseWeb` class before each test execution.
 
 #### Local execution
 
@@ -99,7 +100,7 @@ browsers.
 When the `target` is `local` the `createLocalDriver()` method is used from the `BrowserFactory` class to return the
 browser instance.
 
-The browser used in the test is placed on the `browser` property in the `local.properties` file.
+The browser used in the test is placed on the `browser` property in the `general.properties` file.
 
 #### Remote execution
 
@@ -260,9 +261,8 @@ file reader in the following classes:
 
 There are 3 properties (configuration) files located on `src/test/java/resources/`:
 
-* `general.properties`: general configuration as the target execution, base url, timeout, and faker locale
+* `general.properties`: general configuration as the target execution, browser, base url, timeout, and faker locale
 * `grid.properties`: url and port for the Selenium grid usage
-* `local.properties`:  browser to use in the local execution
 
 The properties were divided into three different ones to better separate the responsibilities and enable the changes
 easy without having a lot of properties inside a single file.
