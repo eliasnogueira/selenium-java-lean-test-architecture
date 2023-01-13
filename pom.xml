@@ -34,7 +34,7 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <browserstack-java-sdk.version>1.1.5</browserstack-java-sdk.version>
+        <browserstack-java-sdk.version>1.1.7</browserstack-java-sdk.version>
         <testcontainers.selenium.version>1.17.6</testcontainers.selenium.version>
 
         <suite>local</suite>
