@@ -25,7 +25,7 @@
         <testng.version>7.7.0</testng.version>
         <assertj.version>3.23.1</assertj.version>
         <datafaker.version>1.7.0</datafaker.version>
-        <log4j.version>2.19.0</log4j.version>
+        <log4j.version>2.20.0</log4j.version>
         <webdrivermanager.version>5.3.1</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.20.1</allure.version>
