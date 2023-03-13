@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Multi browser test" verbose="1" parallel="tests" thread-count="99">
 
-    <test name="Chrome execution">
+    <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.eliasnogueira.test.BookRoomWebTest"/>
