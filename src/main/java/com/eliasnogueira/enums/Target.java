@@ -33,7 +33,7 @@ import static java.util.stream.Collectors.toMap;
 
 public enum Target {
 
-    LOCAL("local"), SELENIUM_GRID("selenium-grid"), BROWSERSTACK("browserstack"),
+    LOCAL("local"), LOCAL_SUITE("local-suite"), SELENIUM_GRID("selenium-grid"), BROWSERSTACK("browserstack"),
     TESTCONTAINERS("testcontainers");
 
     private final String value;

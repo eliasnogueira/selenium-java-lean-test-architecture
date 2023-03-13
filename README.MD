@@ -90,9 +90,10 @@ Use this approach if you know that the page does not refresh.
 
 ### Execution types
 
-There are three execution types:
+There are different execution types:
 
 - `local`
+- `local-suite`
 - `selenium-grid`
 - `browserstack`
 - `testcontainers`
@@ -104,12 +105,20 @@ on `general.properties` file. Its usage is placed on the `BaseWeb` class before 
 
 ##### Local machine
 
+**This approach is automatically used when you run the test class in your IDE.**
+
 This execution type uses [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) class to instantiate the web
 browsers.
 When the `target` is `local` the `createLocalDriver()` method is used from the `BrowserFactory` class to return the
 browser instance.
 
 The browser used in the test is placed on the `browser` property in the `general.properties` file.
+
+##### Local Suite
+
+This execution type also uses the [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) to instantiate the
+web browser. The difference is that the browser is taken from the TestNG suite file instead of the `general.properties`
+file, enabling you to run multi-browser test approach locally.
 
 ##### Testcontainers
 
