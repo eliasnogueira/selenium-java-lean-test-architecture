@@ -26,7 +26,6 @@ package com.eliasnogueira.driver;
 
 import com.eliasnogueira.exceptions.HeadlessNotSupportedException;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.config.DriverManagerType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,8 +38,11 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
+import static com.eliasnogueira.data.changeless.BrowserData.CHROME_HEADLESS;
 import static com.eliasnogueira.data.changeless.BrowserData.DISABLE_INFOBARS;
 import static com.eliasnogueira.data.changeless.BrowserData.DISABLE_NOTIFICATIONS;
+import static com.eliasnogueira.data.changeless.BrowserData.GENERIC_HEADLESS;
+import static com.eliasnogueira.data.changeless.BrowserData.REMOTE_ALLOW_ORIGINS;
 import static com.eliasnogueira.data.changeless.BrowserData.START_MAXIMIZED;
 import static java.lang.Boolean.TRUE;
 
@@ -65,7 +67,9 @@ public enum BrowserFactory {
             chromeOptions.addArguments(START_MAXIMIZED);
             chromeOptions.addArguments(DISABLE_INFOBARS);
             chromeOptions.addArguments(DISABLE_NOTIFICATIONS);
-            chromeOptions.setHeadless(configuration().headless());
+            chromeOptions.addArguments(REMOTE_ALLOW_ORIGINS);
+
+            if (configuration().headless()) chromeOptions.addArguments(CHROME_HEADLESS);
 
             return chromeOptions;
         }
@@ -86,7 +90,8 @@ public enum BrowserFactory {
         public FirefoxOptions getOptions() {
             var firefoxOptions = new FirefoxOptions();
             firefoxOptions.addArguments(START_MAXIMIZED);
-            firefoxOptions.setHeadless(configuration().headless());
+
+            if (configuration().headless()) firefoxOptions.addArguments(GENERIC_HEADLESS);
 
             return firefoxOptions;
         }
@@ -107,7 +112,8 @@ public enum BrowserFactory {
         public EdgeOptions getOptions() {
             var edgeOptions = new EdgeOptions();
             edgeOptions.addArguments(START_MAXIMIZED);
-            edgeOptions.setHeadless(configuration().headless());
+
+            if (configuration().headless()) edgeOptions.addArguments(GENERIC_HEADLESS);
 
             return edgeOptions;
         }
@@ -138,18 +144,19 @@ public enum BrowserFactory {
 
     /**
      * Used to run local tests where the WebDriverManager will take care of the driver
+     *
      * @return a new WebDriver instance based on the browser set
      */
     public abstract WebDriver createLocalDriver();
 
     /**
      * Used to run the Browserstack tests
+     *
      * @return a new WebDriver instance based on the browser set
      */
     public abstract WebDriver createDriver();
 
     /**
-     *
      * @return a new AbstractDriverOptions instance based on the browser set
      */
     public abstract AbstractDriverOptions<?> getOptions();
