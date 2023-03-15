@@ -156,10 +156,6 @@
                     <groupId>commons-io</groupId>
                     <artifactId>commons-io</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
             </exclusions>
         </dependency>
 
@@ -170,7 +166,6 @@
         </dependency>
 
         <!-- security libraries override -->
-        <!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery -->
 
         <!-- testng dependency -->
         <dependency>
