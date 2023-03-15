@@ -35,7 +35,8 @@ import org.testcontainers.containers.BrowserWebDriverContainer;
 import java.net.URL;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
-import static com.eliasnogueira.driver.BrowserFactory.*;
+import static com.eliasnogueira.driver.BrowserFactory.CHROME;
+import static com.eliasnogueira.driver.BrowserFactory.valueOf;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.notEqual;
 
@@ -48,7 +49,7 @@ public class TargetFactory {
 
         return switch (target) {
             case LOCAL -> valueOf(configuration().browser().toUpperCase()).createLocalDriver();
-            case BROWSERSTACK -> valueOf(browser.toUpperCase()).createDriver();
+            case LOCAL_SUITE -> valueOf(browser.toUpperCase()).createLocalDriver();
             case SELENIUM_GRID -> createRemoteInstance(valueOf(browser.toUpperCase()).getOptions());
             case TESTCONTAINERS ->
                     createTestContainersInstance(valueOf(configuration().browser().toUpperCase()).getOptions());
@@ -74,7 +75,7 @@ public class TargetFactory {
     private RemoteWebDriver createTestContainersInstance(MutableCapabilities capabilities) {
         String browser = capabilities.getBrowserName();
 
-        if (notEqual(browser, CHROME.toString().toLowerCase()) && notEqual(browser, CHROME.toString().toLowerCase())) {
+        if (notEqual(browser, CHROME.toString().toLowerCase())) {
             throw new IllegalArgumentException(
                     format("Browser %s not supported for TestContainers", capabilities.getBrowserName()));
         }

@@ -9,7 +9,6 @@ It has a complete solution to run tests in different ways:
 
 * local testing using the browser on your local machine
 * parallel (or single) testing using Selenium Docker
-* parallel (or single) testing using Browserstack
 * local testing using TestContainers
 
 ## Important information
@@ -90,11 +89,11 @@ Use this approach if you know that the page does not refresh.
 
 ### Execution types
 
-There are three execution types:
+There are different execution types:
 
 - `local`
+- `local-suite`
 - `selenium-grid`
-- `browserstack`
 - `testcontainers`
 
 The `TargetFactory` class will resolve the target execution based on the `target` property value located
@@ -104,12 +103,20 @@ on `general.properties` file. Its usage is placed on the `BaseWeb` class before 
 
 ##### Local machine
 
+**This approach is automatically used when you run the test class in your IDE.**
+
 This execution type uses [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) class to instantiate the web
 browsers.
 When the `target` is `local` the `createLocalDriver()` method is used from the `BrowserFactory` class to return the
 browser instance.
 
 The browser used in the test is placed on the `browser` property in the `general.properties` file.
+
+##### Local Suite
+
+This execution type also uses the [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) to instantiate the
+web browser. The difference is that the browser is taken from the TestNG suite file instead of the `general.properties`
+file, enabling you to run multi-browser test approach locally.
 
 ##### Testcontainers
 
@@ -139,16 +146,6 @@ If you are using the `docker-compose.yml` file to start the Docker Selenium grid
 file should work.
 
 You can take a look at the [Execution with Docker Selenium Distributed](#execution-with-docker-selenium-distributed)
-to run the parallel tests using this example.
-
-##### Browserstack
-
-The Browserstack approach runs the tests in the browserstack cloud.
-
-When the `target` is `browserstack` the `createDriver` method is used from the `BrowserFactory` to return the browser(s)
-set in the `src/test/resources/suites/browserstack.xml` test suite.
-
-You can take a look at the [Execution with Browserstack](#execution-with-browserstack)
 to run the parallel tests using this example.
 
 #### BrowserFactory class
