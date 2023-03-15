@@ -50,7 +50,6 @@ public class TargetFactory {
         return switch (target) {
             case LOCAL -> valueOf(configuration().browser().toUpperCase()).createLocalDriver();
             case LOCAL_SUITE -> valueOf(browser.toUpperCase()).createLocalDriver();
-            case BROWSERSTACK -> valueOf(browser.toUpperCase()).createDriver();
             case SELENIUM_GRID -> createRemoteInstance(valueOf(browser.toUpperCase()).getOptions());
             case TESTCONTAINERS ->
                     createTestContainersInstance(valueOf(configuration().browser().toUpperCase()).getOptions());

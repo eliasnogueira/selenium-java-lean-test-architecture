@@ -9,7 +9,6 @@ It has a complete solution to run tests in different ways:
 
 * local testing using the browser on your local machine
 * parallel (or single) testing using Selenium Docker
-* parallel (or single) testing using Browserstack
 * local testing using TestContainers
 
 ## Important information
@@ -95,7 +94,6 @@ There are different execution types:
 - `local`
 - `local-suite`
 - `selenium-grid`
-- `browserstack`
 - `testcontainers`
 
 The `TargetFactory` class will resolve the target execution based on the `target` property value located
@@ -148,16 +146,6 @@ If you are using the `docker-compose.yml` file to start the Docker Selenium grid
 file should work.
 
 You can take a look at the [Execution with Docker Selenium Distributed](#execution-with-docker-selenium-distributed)
-to run the parallel tests using this example.
-
-##### Browserstack
-
-The Browserstack approach runs the tests in the browserstack cloud.
-
-When the `target` is `browserstack` the `createDriver` method is used from the `BrowserFactory` to return the browser(s)
-set in the `src/test/resources/suites/browserstack.xml` test suite.
-
-You can take a look at the [Execution with Browserstack](#execution-with-browserstack)
 to run the parallel tests using this example.
 
 #### BrowserFactory class

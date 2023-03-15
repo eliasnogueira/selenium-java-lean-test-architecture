@@ -34,7 +34,6 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <browserstack-java-sdk.version>1.2.3</browserstack-java-sdk.version>
         <testcontainers.selenium.version>1.17.6</testcontainers.selenium.version>
 
         <!-- security libraries override -->
@@ -148,18 +147,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.browserstack</groupId>
-            <artifactId>browserstack-java-sdk</artifactId>
-            <version>${browserstack-java-sdk.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>selenium</artifactId>
             <version>${testcontainers.selenium.version}</version>
@@ -210,39 +197,6 @@
             </build>
         </profile>
 
-        <profile>
-            <id>browserstack</id>
-            <properties>
-                <target>browserstack</target>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>getClasspathFilenames</id>
-                                <goals>
-                                    <goal>properties</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/suites/browserstack.xml</suiteXmlFile>
-                            </suiteXmlFiles>
-                            <argLine>
-                                -javaagent:${com.browserstack:browserstack-java-sdk:jar}
-                            </argLine>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 
     <build>
