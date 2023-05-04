@@ -24,14 +24,13 @@
 
 package com.eliasnogueira.data.dynamic;
 
-import net.datafaker.Faker;
 import com.eliasnogueira.enums.RoomType;
-
-import java.util.Locale;
 import com.eliasnogueira.model.Booking;
-import com.eliasnogueira.model.BookingBuilder;
+import net.datafaker.Faker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Locale;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 
@@ -44,7 +43,7 @@ public final class BookingDataFactory {
     }
 
     public static Booking createBookingData() {
-        var booking = new BookingBuilder().
+        var booking = new Booking.BookingBuilder().
             email(faker.internet().emailAddress()).
             country(returnRandomCountry()).
             password(faker.internet().password()).
