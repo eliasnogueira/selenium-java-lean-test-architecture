@@ -39,19 +39,19 @@ public class BookRoomWebTest extends BaseWeb {
         var bookingInformation = BookingDataFactory.createBookingData();
 
         var accountPage = new AccountPage();
-        accountPage.fillEmail(bookingInformation.getEmail());
-        accountPage.fillPassword(bookingInformation.getPassword());
-        accountPage.selectCountry(bookingInformation.getCountry());
-        accountPage.selectBudget(bookingInformation.getDailyBudget());
+        accountPage.fillEmail(bookingInformation.email());
+        accountPage.fillPassword(bookingInformation.password());
+        accountPage.selectCountry(bookingInformation.country());
+        accountPage.selectBudget(bookingInformation.dailyBudget());
         accountPage.clickNewsletter();
         accountPage.next();
 
         var roomPage = new RoomPage();
-        roomPage.selectRoomType(bookingInformation.getRoomType());
+        roomPage.selectRoomType(bookingInformation.roomType().get());
         roomPage.next();
 
         var detailPage = new DetailPage();
-        detailPage.fillRoomDescription(bookingInformation.getRoomDescription());
+        detailPage.fillRoomDescription(bookingInformation.roomDescription());
         detailPage.finish();
 
         assertThat(detailPage.getAlertMessage())

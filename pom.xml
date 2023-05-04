@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.3.0</version>
+    <version>3.3.1</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -21,26 +21,28 @@
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.9.1</aspectj.version>
-        <selenium.version>4.8.1</selenium.version>
+        <selenium.version>4.9.0</selenium.version>
         <testng.version>7.7.1</testng.version>
         <assertj.version>3.24.2</assertj.version>
-        <datafaker.version>1.8.0</datafaker.version>
+        <datafaker.version>1.9.0</datafaker.version>
         <log4j.version>2.20.0</log4j.version>
         <webdrivermanager.version>5.3.2</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.21.0</allure.version>
+        <allure.version>2.22.0</allure.version>
         <allure-maven.version>2.11.2</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.17.6</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.18.0</testcontainers.selenium.version>
 
         <!-- security libraries override -->
         <jquery.version>3.6.3</jquery.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <commons-io.version>2.11.0</commons-io.version>
         <junit.version>4.13.2</junit.version>
+        <jackson-databind.version>2.15.0</jackson-databind.version>
+        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
 
         <suite>local</suite>
     </properties>
@@ -110,16 +112,6 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -154,11 +146,23 @@
 
         <!-- security libraries override -->
 
-        <!-- testng dependency -->
+        <!-- webdrivermanager dependency -->
         <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>jquery</artifactId>
-            <version>${jquery.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>${bcprov-jdk15on.version}</version>
         </dependency>
 
         <!-- data-faker dependency -->
@@ -166,13 +170,6 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${snakeyaml.version}</version>
-        </dependency>
-
-        <!-- webdriver manager dependency -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
         </dependency>
 
     </dependencies>

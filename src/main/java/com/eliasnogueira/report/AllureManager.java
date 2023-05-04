@@ -31,6 +31,7 @@ import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.TakesScreenshot;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
@@ -42,16 +43,16 @@ public class AllureManager {
     }
 
     public static void setAllureEnvironmentInformation() {
-        var basicInfo = Map.of(
+        var basicInfo = new HashMap<>(Map.of(
                 "Test URL", configuration().url(),
                 "Target execution", configuration().target(),
                 "Global timeout", String.valueOf(configuration().timeout()),
                 "Headless mode", String.valueOf(configuration().headless()),
                 "Faker locale", configuration().faker(),
                 "Local browser", configuration().browser()
-        );
+        ));
 
-        if (configuration().target().equals(Target.SELENIUM_GRID)) {
+        if (configuration().target().equals(Target.SELENIUM_GRID.name())) {
             var gridMap = Map.of("Grid URL", configuration().gridUrl(), "Grid port", configuration().gridPort());
             basicInfo.putAll(gridMap);
         }
