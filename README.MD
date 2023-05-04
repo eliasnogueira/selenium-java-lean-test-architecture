@@ -155,7 +155,7 @@ Each browser is an `enum`, and each enum implements three methods:
 
 * `createLocalDriver()`: creates the browser instance for the local execution. The browser driver is automatically
   managed by the WebDriverManager library
-* `createDriver()`: creates the browser instance for the remote execution using the Browserstack cloud
+* `createDriver()`: creates the browser instance for the remote execution
 * `getOptions()`: creates a new browser `Options` setting some specific configurations, and it's used for the remote
   executions using the Selenium Grid
 
@@ -246,25 +246,6 @@ Please note that you need to do the following actions before running it in paral
 * Pay attention to the `grid/config.toml` file that has comments for each specific SO
 * Start the Grid by running the following command inside the `grid` folder
     * `docker-compose up`
-
-#### Execution with Browserstack
-
-This project uses
-the [Browserstack SDK](https://www.browserstack.com/docs/automate/selenium/browserstack-sdk/core-concepts)
-to run the tests in the Browserstack cloud using the `browserstack.yml` file in the project root directory.
-
-You need a username and access key to run the tests and, For education purposes, you can set it in
-the `browserstack.yml` file, but the recommended way is to set it as an environment variable in your local machine.
-
-To run the test in the Browserstack cloud, you need to:
-
-* set the username and access key in the `browserstack.yml` file
-  or [create the related environment variables](https://automate.browserstack.com/dashboard/v2/quick-start/setup-browserstack-sdk)
-* run the tests using the following command: `mvn test -Pbrowserstack`
-
-The tests will only run using the `browserstack` profile because the Browserstack SDK is configured as a Java Agent, so
-it's there only
-for these tests. It's also worth to mention that the profile automatically sets the `target` property to `browserstack`.
 
 ### Configuration files
 
