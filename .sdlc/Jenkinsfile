@@ -2,7 +2,7 @@ node {
     def mvnHome
 
     stage('Preparation') {
-        git 'https://github.com/eliasnogueira/selenium-java-lean-test-achitecture.git'
+        git 'https://github.com/mdiwakar/selenium-java-lean-test-achitecture.git'
         mvnHome = tool 'M3'
     }
 

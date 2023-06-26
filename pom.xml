@@ -9,8 +9,8 @@
     <version>3.3.1</version>
 
     <scm>
-        <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
-        <developerConnection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</developerConnection>
+        <connection>scm:git@github.com:mdiwakar/selenium-java-lean-test-architecture.git</connection>
+        <developerConnection>scm:git@github.com:mdiwakar/selenium-java-lean-test-architecture.git</developerConnection>
     </scm>
 
     <properties>
@@ -34,7 +34,7 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.18.0</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.18.3</testcontainers.selenium.version>
 
         <!-- security libraries override -->
         <jquery.version>3.6.3</jquery.version>

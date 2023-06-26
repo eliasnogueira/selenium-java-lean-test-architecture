@@ -37,6 +37,7 @@ import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
+
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 import static com.eliasnogueira.data.changeless.BrowserData.CHROME_HEADLESS;
 import static com.eliasnogueira.data.changeless.BrowserData.DISABLE_INFOBARS;

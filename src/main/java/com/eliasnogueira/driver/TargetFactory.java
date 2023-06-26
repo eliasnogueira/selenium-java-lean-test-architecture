@@ -27,16 +27,19 @@ package com.eliasnogueira.driver;
 import com.eliasnogueira.enums.Target;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import java.net.URL;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
-import static com.eliasnogueira.driver.BrowserFactory.CHROME;
-import static com.eliasnogueira.driver.BrowserFactory.valueOf;
+import static com.eliasnogueira.driver.BrowserFactory.*;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.notEqual;
 
@@ -74,16 +77,23 @@ public class TargetFactory {
 
     private RemoteWebDriver createTestContainersInstance(MutableCapabilities capabilities) {
         String browser = capabilities.getBrowserName();
+        BrowserWebDriverContainer<?> driverContainer = null ;
+        if (browser.equalsIgnoreCase( CHROME.toString())) {
 
-        if (notEqual(browser, CHROME.toString().toLowerCase())) {
+            driverContainer = new BrowserWebDriverContainer<>()
+                    .withCapabilities(new ChromeOptions());
+        } else if (browser.equalsIgnoreCase( FIREFOX.toString())) {
+            driverContainer = new BrowserWebDriverContainer<>()
+                    .withCapabilities(new FirefoxOptions());
+        } else if (browser.equalsIgnoreCase( "MicrosoftEdge")) {
+            driverContainer = new BrowserWebDriverContainer<>()
+                    .withCapabilities(new EdgeOptions());
+        }else {
             throw new IllegalArgumentException(
-                    format("Browser %s not supported for TestContainers", capabilities.getBrowserName()));
+                format("Browser %s not supported for TestContainers", capabilities.getBrowserName()));
         }
+                driverContainer.start();
+                return new RemoteWebDriver(driverContainer.getSeleniumAddress(), capabilities);
 
-        try (BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(capabilities)) {
-            driverContainer.start();
-
-            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), capabilities);
-        }
     }
 }
