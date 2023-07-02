@@ -9,8 +9,8 @@
     <version>3.3.1</version>
 
     <scm>
-        <connection>scm:git@github.com:mdiwakar/selenium-java-lean-test-architecture.git</connection>
-        <developerConnection>scm:git@github.com:mdiwakar/selenium-java-lean-test-architecture.git</developerConnection>
+        <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
+        <developerConnection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</developerConnection>
     </scm>
 
     <properties>
