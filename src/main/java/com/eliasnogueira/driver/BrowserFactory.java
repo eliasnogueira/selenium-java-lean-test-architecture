@@ -34,8 +34,10 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.testcontainers.containers.BrowserWebDriverContainer;
 
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
@@ -47,6 +49,7 @@ import static com.eliasnogueira.data.changeless.BrowserData.REMOTE_ALLOW_ORIGINS
 import static com.eliasnogueira.data.changeless.BrowserData.START_MAXIMIZED;
 import static java.lang.Boolean.TRUE;
 
+
 public enum BrowserFactory {
 
     CHROME {
@@ -56,7 +59,15 @@ public enum BrowserFactory {
 
             return new ChromeDriver(getOptions());
         }
+        @Override
+        public WebDriver createTestContainerDriver() {
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
+                    .withCapabilities(new ChromeOptions());
+                driverContainer.start();
+                return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new ChromeOptions());
 
+
+        }
         @Override
         public ChromeOptions getOptions() {
             var chromeOptions = new ChromeOptions();
@@ -76,8 +87,16 @@ public enum BrowserFactory {
 
             return new FirefoxDriver(getOptions());
         }
-
         @Override
+        public WebDriver createTestContainerDriver() {
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
+                    .withCapabilities(new FirefoxOptions());
+                driverContainer.start();
+                return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new FirefoxOptions());
+
+
+        }
+            @Override
         public FirefoxOptions getOptions() {
             var firefoxOptions = new FirefoxOptions();
             firefoxOptions.addArguments(START_MAXIMIZED);
@@ -92,6 +111,14 @@ public enum BrowserFactory {
             WebDriverManager.edgedriver().setup();
 
             return new EdgeDriver(getOptions());
+        }
+
+        public WebDriver createTestContainerDriver() {
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
+                    .withCapabilities(new EdgeOptions());
+                driverContainer.start();
+                return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new EdgeOptions());
+
         }
 
         @Override
@@ -109,6 +136,11 @@ public enum BrowserFactory {
             WebDriverManager.safaridriver().setup();
 
             return new SafariDriver(getOptions());
+        }
+        public WebDriver createTestContainerDriver() {
+            throw new IllegalArgumentException(
+                    "Browser Safari not supported on TestContainers yet");
+
         }
 
         @Override
@@ -134,4 +166,8 @@ public enum BrowserFactory {
      * @return a new AbstractDriverOptions instance based on the browser set
      */
     public abstract AbstractDriverOptions<?> getOptions();
+
+
+    public abstract WebDriver createTestContainerDriver();
+
 }
