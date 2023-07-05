@@ -10,6 +10,7 @@ It has a complete solution to run tests in different ways:
 * local testing using the browser on your local machine
 * parallel (or single) testing using Selenium Docker
 * local testing using TestContainers
+* Distributed execution using Selenium Grid 
 
 ## Important information
 
@@ -43,6 +44,7 @@ This project uses the following languages and frameworks:
 * [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging management strategy
 * [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) as the Selenium binaries management
 * [Owner](http://owner.aeonbits.org/) to minimize the code to handle the properties file
+* [TestContainers] (https://java.testcontainers.org/modules/webdriver_containers/) Webdriver Containers
 
 ## Test architecture
 
@@ -61,6 +63,7 @@ You will see the following items in this architecture:
 * [Test Data Factory](#test-data-factory)
 * [Profiles executors on pom.xml](#profiles-executors-on-pomxml)
 * [Pipeline as a code](#pipeline-as-a-code)
+* [Test environment abstraction](#execution-with-docker-selenium-distributed)
 
 Do you have any other items to add to this test architecture? Please do a pull request or open an issue to discuss.
 
@@ -151,13 +154,14 @@ to run the parallel tests using this example.
 #### BrowserFactory class
 
 This Factory class is a Java enum that has all implemented browsers to use during the test execution.
-Each browser is an `enum`, and each enum implements three methods:
+Each browser is an `enum`, and each enum implements four methods:
 
 * `createLocalDriver()`: creates the browser instance for the local execution. The browser driver is automatically
   managed by the WebDriverManager library
 * `createDriver()`: creates the browser instance for the remote execution
 * `getOptions()`: creates a new browser `Options` setting some specific configurations, and it's used for the remote
   executions using the Selenium Grid
+* `createTestContainerDriver()` : Creates selenium grid lightweight test container in Standalone mode with Chrome/Firefox/Edge browser support.
 
 You can see that the `createLocalDriver()` method use the `getOptions()` to get specific browser configurations, as
 starting the browser maximized and others.
@@ -240,9 +244,13 @@ This means that Docker Selenium will start a container test for a targeting brow
 Please note that you need to do the following actions before running it in parallel:
 
 * Docker installed
-* Pull the images for Chrome and Firefox
-    * `docker pull selenium-standalog-chrome`
-    * `docker pull selenium-standalog-firefox`
+* Pull the images for Chrome Edge and Firefox - Optional
+  * Images are pulled if not available and initial test execution will be slow
+      * `docker pull selenium-standalog-chrome`
+      * `docker pull selenium-standalog-firefox`
+      * `docker pull selenium/standalone-edge`
+  * If you are using a MacBook with either M1 or M2 chip you must check the following experimental feature in Docker Desktop: Settings -> Features in development -> Use Rosetta for x86/amd64 emulation on Apple Silicon
+  
 * Pay attention to the `grid/config.toml` file that has comments for each specific SO
 * Start the Grid by running the following command inside the `grid` folder
     * `docker-compose up`

@@ -11,7 +11,7 @@ Do not forget to add a _label_ on the issue or feature.
 Excellent! Thank you to help me out!
 
 You're going to need a few things first:
-* JDK 11+
+* JDK 17+
 * [Configure your IDE](https://projectlombok.org/setup/overview) in order to support Lombok.
 
 ## Send a pull request
