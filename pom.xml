@@ -6,42 +6,43 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.3.1</version>
+    <version>3.3.2</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
-        <developerConnection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</developerConnection>
+        <developerConnection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git
+        </developerConnection>
     </scm>
 
     <properties>
         <java-compiler.version>17</java-compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.9.1</aspectj.version>
-        <selenium.version>4.9.0</selenium.version>
-        <testng.version>7.7.1</testng.version>
+        <aspectj.version>1.9.19</aspectj.version>
+        <selenium.version>4.10.0</selenium.version>
+        <testng.version>7.8.0</testng.version>
         <assertj.version>3.24.2</assertj.version>
-        <datafaker.version>1.9.0</datafaker.version>
+        <datafaker.version>2.0.1</datafaker.version>
         <log4j.version>2.20.0</log4j.version>
-        <webdrivermanager.version>5.3.2</webdrivermanager.version>
+        <webdrivermanager.version>5.4.0</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.22.0</allure.version>
-        <allure-maven.version>2.11.2</allure-maven.version>
+        <allure.version>2.23.0</allure.version>
+        <allure-maven.version>2.12.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.18.0</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.18.3</testcontainers.selenium.version>
 
         <!-- security libraries override -->
         <jquery.version>3.6.3</jquery.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <commons-io.version>2.11.0</commons-io.version>
         <junit.version>4.13.2</junit.version>
-        <jackson-databind.version>2.15.0</jackson-databind.version>
+        <jackson-databind.version>2.15.2</jackson-databind.version>
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
 
         <suite>local</suite>
