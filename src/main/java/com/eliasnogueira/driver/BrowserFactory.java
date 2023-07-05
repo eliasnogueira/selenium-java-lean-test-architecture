@@ -38,15 +38,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.testcontainers.containers.BrowserWebDriverContainer;
-import static com.eliasnogueira.config.ConfigurationManager.configuration;
-import static com.eliasnogueira.data.changeless.BrowserData.CHROME_HEADLESS;
-import static com.eliasnogueira.data.changeless.BrowserData.DISABLE_INFOBARS;
-import static com.eliasnogueira.data.changeless.BrowserData.DISABLE_NOTIFICATIONS;
-import static com.eliasnogueira.data.changeless.BrowserData.GENERIC_HEADLESS;
-import static com.eliasnogueira.data.changeless.BrowserData.REMOTE_ALLOW_ORIGINS;
-import static com.eliasnogueira.data.changeless.BrowserData.START_MAXIMIZED;
-import static java.lang.Boolean.TRUE;
 
+import static com.eliasnogueira.config.ConfigurationManager.configuration;
+import static com.eliasnogueira.data.changeless.BrowserData.*;
+import static java.lang.Boolean.TRUE;
 
 public enum BrowserFactory {
 
@@ -57,13 +52,15 @@ public enum BrowserFactory {
 
             return new ChromeDriver(getOptions());
         }
+
         @Override
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
-                    .withCapabilities(new ChromeOptions());
-                driverContainer.start();
-                return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new ChromeOptions());
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new ChromeOptions());
+            driverContainer.start();
+
+            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new ChromeOptions());
         }
+
         @Override
         public ChromeOptions getOptions() {
             var chromeOptions = new ChromeOptions();
@@ -71,71 +68,85 @@ public enum BrowserFactory {
             chromeOptions.addArguments(DISABLE_INFOBARS);
             chromeOptions.addArguments(DISABLE_NOTIFICATIONS);
             chromeOptions.addArguments(REMOTE_ALLOW_ORIGINS);
+
             if (configuration().headless()) chromeOptions.addArguments(CHROME_HEADLESS);
+
             return chromeOptions;
         }
     }, FIREFOX {
         @Override
         public WebDriver createLocalDriver() {
             WebDriverManager.firefoxdriver().setup();
+
             return new FirefoxDriver(getOptions());
         }
+
         @Override
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
-                    .withCapabilities(new FirefoxOptions());
-                driverContainer.start();
-                return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new FirefoxOptions());
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new FirefoxOptions());
+            driverContainer.start();
+
+            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new FirefoxOptions());
         }
-            @Override
+
+        @Override
         public FirefoxOptions getOptions() {
             var firefoxOptions = new FirefoxOptions();
             firefoxOptions.addArguments(START_MAXIMIZED);
+
             if (configuration().headless()) firefoxOptions.addArguments(GENERIC_HEADLESS);
+
             return firefoxOptions;
         }
     }, EDGE {
         @Override
         public WebDriver createLocalDriver() {
             WebDriverManager.edgedriver().setup();
+
             return new EdgeDriver(getOptions());
         }
+
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
-                    .withCapabilities(new EdgeOptions());
-                driverContainer.start();
-                return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new EdgeOptions());
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new EdgeOptions());
+            driverContainer.start();
+
+            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new EdgeOptions());
         }
 
         @Override
         public EdgeOptions getOptions() {
             var edgeOptions = new EdgeOptions();
             edgeOptions.addArguments(START_MAXIMIZED);
+
             if (configuration().headless()) edgeOptions.addArguments(GENERIC_HEADLESS);
+
             return edgeOptions;
         }
     }, SAFARI {
         @Override
         public WebDriver createLocalDriver() {
             WebDriverManager.safaridriver().setup();
+
             return new SafariDriver(getOptions());
         }
+
         public WebDriver createTestContainerDriver() {
-            throw new IllegalArgumentException(
-                    "Browser Safari not supported on TestContainers yet");
+            throw new IllegalArgumentException("Browser Safari not supported on TestContainers yet");
         }
 
         @Override
         public SafariOptions getOptions() {
             var safariOptions = new SafariOptions();
             safariOptions.setAutomaticInspection(false);
+
             if (TRUE.equals(configuration().headless()))
                 throw new HeadlessNotSupportedException(safariOptions.getBrowserName());
+
             return safariOptions;
         }
     };
 
-    /**n
+    /**
      * Used to run local tests where the WebDriverManager will take care of the driver
      *
      * @return a new WebDriver instance based on the browser set
@@ -147,7 +158,10 @@ public enum BrowserFactory {
      */
     public abstract AbstractDriverOptions<?> getOptions();
 
-
+    /**
+     * Used to run the remote test execution using Testcontainers
+     *
+     * @return a new WebDriver instance based on the browser set
+     */
     public abstract WebDriver createTestContainerDriver();
-
 }

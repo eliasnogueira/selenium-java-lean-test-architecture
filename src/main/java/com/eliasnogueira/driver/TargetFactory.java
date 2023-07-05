@@ -30,11 +30,12 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
 import java.net.URL;
+
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 import static com.eliasnogueira.driver.BrowserFactory.valueOf;
 import static java.lang.String.format;
-
 
 public class TargetFactory {
 
@@ -66,5 +67,4 @@ public class TargetFactory {
 
         return remoteWebDriver;
     }
-
 }
