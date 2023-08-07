@@ -39,7 +39,7 @@
 
         <!-- security libraries override -->
         <jquery.version>3.6.3</jquery.version>
-        <snakeyaml.version>2.0</snakeyaml.version>
+        <snakeyaml.version>2.1</snakeyaml.version>
         <commons-io.version>2.11.0</commons-io.version>
         <junit.version>4.13.2</junit.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
