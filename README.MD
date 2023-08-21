@@ -130,6 +130,11 @@ When the `target` is `testcontainers` the `TargetFactory` uses the `createTestCo
 the container based on the browser set in the `browser` property. Currently, Testcontainers only supports Chrome and
 Firefox.
 
+Example
+```shell
+ mvn test -Pweb-execution -Dtarget=testcontainers -Dbrowser=chrome
+```
+
 #### Remote execution
 
 ##### Selenium Grid
@@ -219,7 +224,7 @@ factory [BookingDataFactory](https://github.com/eliasnogueira/selenium-java-lean
 
 The parallel test execution is based on
 the [parallel tests](https://testng.org/doc/documentation-main.html#parallel-tests)
-feature on TestNG. This is used by `parallel.xml` test suite file which has the `parallel="tests"` attribute and value,
+feature on TestNG. This is used by `selenium-grid.xml` test suite file which has the `parallel="tests"` attribute and value,
 whereas `test` item inside the test suite will execute in parallel.
 The browser in use for each `test` should be defined by a parameter, like:
 
@@ -250,10 +255,14 @@ Please note that you need to do the following actions before running it in paral
       * `docker pull selenium-standalog-firefox`
       * `docker pull selenium/standalone-edge`
   * If you are using a MacBook with either M1 or M2 chip you must check the following experimental feature in Docker Desktop: Settings -> Features in development -> Use Rosetta for x86/amd64 emulation on Apple Silicon
-  
 * Pay attention to the `grid/config.toml` file that has comments for each specific SO
 * Start the Grid by running the following command inside the `grid` folder
     * `docker-compose up`
+* Run the project using the following command
+```shell
+mvn test -Pweb-execution -Dsuite=selenium-grid -Dtarget=selenium-grid -Dheadless=true
+```
+* Open the [Selenium Grid] page to see the node status
 
 ### Configuration files
 

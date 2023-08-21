@@ -21,13 +21,13 @@
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.19</aspectj.version>
-        <selenium.version>4.10.0</selenium.version>
+        <aspectj.version>1.9.20</aspectj.version>
+        <selenium.version>4.11.0</selenium.version>
         <testng.version>7.8.0</testng.version>
         <assertj.version>3.24.2</assertj.version>
         <datafaker.version>2.0.1</datafaker.version>
         <log4j.version>2.20.0</log4j.version>
-        <webdrivermanager.version>5.4.0</webdrivermanager.version>
+        <webdrivermanager.version>5.4.1</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.23.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
@@ -35,11 +35,11 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.18.3</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.19.0</testcontainers.selenium.version>
 
         <!-- security libraries override -->
         <jquery.version>3.6.3</jquery.version>
-        <snakeyaml.version>2.0</snakeyaml.version>
+        <snakeyaml.version>2.1</snakeyaml.version>
         <commons-io.version>2.11.0</commons-io.version>
         <junit.version>4.13.2</junit.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
