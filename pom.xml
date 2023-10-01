@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.3.3</version>
+    <version>3.3.4</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -21,15 +21,15 @@
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.20</aspectj.version>
-        <selenium.version>4.11.0</selenium.version>
+        <aspectj.version>1.9.20.1</aspectj.version>
+        <selenium.version>4.13.0</selenium.version>
         <testng.version>7.8.0</testng.version>
         <assertj.version>3.24.2</assertj.version>
         <datafaker.version>2.0.1</datafaker.version>
         <log4j.version>2.20.0</log4j.version>
-        <webdrivermanager.version>5.4.1</webdrivermanager.version>
+        <webdrivermanager.version>5.5.3</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.23.0</allure.version>
+        <allure.version>2.24.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
@@ -38,12 +38,8 @@
         <testcontainers.selenium.version>1.19.0</testcontainers.selenium.version>
 
         <!-- security libraries override -->
-        <jquery.version>3.6.3</jquery.version>
-        <snakeyaml.version>2.1</snakeyaml.version>
-        <commons-io.version>2.11.0</commons-io.version>
-        <junit.version>4.13.2</junit.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
-        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
+        <commons-io.version>2.14.0</commons-io.version>
 
         <suite>local</suite>
     </properties>
@@ -157,20 +153,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>${bcprov-jdk15on.version}</version>
-        </dependency>
-
-        <!-- data-faker dependency -->
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>${snakeyaml.version}</version>
+            <version>${commons-io.version}</version>
         </dependency>
 
     </dependencies>
