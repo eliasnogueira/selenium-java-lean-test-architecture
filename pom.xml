@@ -35,7 +35,7 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.19.0</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.19.1</testcontainers.selenium.version>
 
         <!-- security libraries override -->
         <jackson-databind.version>2.15.2</jackson-databind.version>
