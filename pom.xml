@@ -26,8 +26,8 @@
         <testng.version>7.8.0</testng.version>
         <assertj.version>3.24.2</assertj.version>
         <datafaker.version>2.0.1</datafaker.version>
-        <log4j.version>2.20.0</log4j.version>
-        <webdrivermanager.version>5.4.1</webdrivermanager.version>
+        <log4j.version>2.21.1</log4j.version>
+        <webdrivermanager.version>5.6.1</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.23.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
@@ -40,9 +40,9 @@
         <!-- security libraries override -->
         <jquery.version>3.6.3</jquery.version>
         <snakeyaml.version>2.1</snakeyaml.version>
-        <commons-io.version>2.11.0</commons-io.version>
+        <commons-io.version>2.15.0</commons-io.version>
         <junit.version>4.13.2</junit.version>
-        <jackson-databind.version>2.15.2</jackson-databind.version>
+        <jackson-databind.version>2.15.3</jackson-databind.version>
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
 
         <suite>local</suite>
