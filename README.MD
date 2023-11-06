@@ -35,7 +35,7 @@ due to a conflict with the guava version of Selenium 4
 
 This project uses the following languages and frameworks:
 
-* [Java 17](https://openjdk.java.net/projects/jdk/17/) as the programming language
+* [Java 21](https://openjdk.java.net/projects/jdk/21/) as the programming language
 * [TestNG](https://testng.org/doc/) as the UnitTest framework to support the test creation
 * [Selenium WebDriver](https://www.selenium.dev/) as the web browser automation framework using the Java binding
 * [AssertJ](https://joel-costigliola.github.io/assertj/) as the fluent assertion library
@@ -132,7 +132,7 @@ Firefox.
 
 Example
 ```shell
- mvn test -Pweb-execution -Dtarget=testcontainers -Dbrowser=chrome
+mvn test -Pweb-execution -Dtarget=testcontainers -Dbrowser=chrome
 ```
 
 #### Remote execution
@@ -346,7 +346,7 @@ To do this you need:
 * Use `-Dsuite=suite_name` to call the suite
 
 ````bash
-mvn test -Pweb-execution -Dsuite=parallel -Dtestng.dtd.http=true 
+mvn test -Pweb-execution -Dsuite=parallel
 ````
 
 ### Pipeline as a code
