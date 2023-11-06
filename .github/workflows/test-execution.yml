@@ -14,11 +14,11 @@ jobs:
         image: selenium/standalone-chrome
         options: --health-cmd '/opt/bin/check-grid.sh'
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 17
+          java-version: 21
           distribution: adopt
 
       - name: Cache Maven packages
