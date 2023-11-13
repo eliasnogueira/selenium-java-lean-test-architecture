@@ -31,7 +31,7 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.URL;
+import java.net.URI;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 import static com.eliasnogueira.driver.BrowserFactory.valueOf;
@@ -57,7 +57,7 @@ public class TargetFactory {
         try {
             String gridURL = format("http://%s:%s", configuration().gridUrl(), configuration().gridPort());
 
-            remoteWebDriver = new RemoteWebDriver(new URL(gridURL), capability);
+            remoteWebDriver = new RemoteWebDriver(URI.create(gridURL).toURL(), capability);
         } catch (java.net.MalformedURLException e) {
             logger.error("Grid URL is invalid or Grid is not available");
             logger.error(format("Browser: %s", capability.getBrowserName()), e);
