@@ -36,7 +36,7 @@ import static com.eliasnogueira.config.ConfigurationManager.configuration;
 
 public final class BookingDataFactory {
 
-    private static final Faker faker = new Faker(new Locale(configuration().faker()));
+    private static final Faker faker = new Faker(new Locale.Builder().setLanguageTag(configuration().faker()).build());
     private static final Logger logger = LogManager.getLogger(BookingDataFactory.class);
 
     private BookingDataFactory() {
