@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.3.5</version>
+    <version>3.3.6</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -21,7 +21,7 @@
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.20.1</aspectj.version>
+        <aspectj.version>1.9.21.M1</aspectj.version>
         <selenium.version>4.13.0</selenium.version>
         <testng.version>7.8.0</testng.version>
         <assertj.version>3.24.2</assertj.version>
@@ -35,14 +35,14 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.19.1</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.19.3</testcontainers.selenium.version>
 
         <!-- security libraries override -->
         <jquery.version>3.6.3</jquery.version>
         <snakeyaml.version>2.2</snakeyaml.version>
         <commons-io.version>2.15.0</commons-io.version>
         <junit.version>4.13.2</junit.version>
-        <jackson-databind.version>2.15.3</jackson-databind.version>
+        <jackson-databind.version>2.16.0</jackson-databind.version>
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
 
         <suite>local</suite>
