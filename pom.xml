@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.3.6</version>
+    <version>3.3.7</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -19,15 +19,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.21</aspectj.version>
         <selenium.version>4.13.0</selenium.version>
-        <testng.version>7.8.0</testng.version>
-        <assertj.version>3.24.2</assertj.version>
-        <datafaker.version>2.0.2</datafaker.version>
+        <testng.version>7.9.0</testng.version>
+        <assertj.version>3.25.1</assertj.version>
+        <datafaker.version>2.1.0</datafaker.version>
         <log4j.version>2.21.1</log4j.version>
-        <webdrivermanager.version>5.6.2</webdrivermanager.version>
+        <webdrivermanager.version>5.6.3</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.25.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
@@ -38,12 +38,7 @@
         <testcontainers.selenium.version>1.19.3</testcontainers.selenium.version>
 
         <!-- security libraries override -->
-        <jquery.version>3.6.3</jquery.version>
-        <snakeyaml.version>2.2</snakeyaml.version>
-        <commons-io.version>2.15.0</commons-io.version>
-        <junit.version>4.13.2</junit.version>
-        <jackson-databind.version>2.16.0</jackson-databind.version>
-        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
+        <jackson-databind.version>2.16.1</jackson-databind.version>
 
         <suite>local</suite>
     </properties>
@@ -113,6 +108,12 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -146,31 +147,10 @@
         </dependency>
 
         <!-- security libraries override -->
-
-        <!-- webdrivermanager dependency -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-databind.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.15.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>${bcprov-jdk15on.version}</version>
-        </dependency>
-
-        <!-- data-faker dependency -->
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>${snakeyaml.version}</version>
         </dependency>
 
     </dependencies>
