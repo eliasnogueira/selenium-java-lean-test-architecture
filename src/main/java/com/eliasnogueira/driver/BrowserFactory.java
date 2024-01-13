@@ -48,8 +48,6 @@ public enum BrowserFactory {
     CHROME {
         @Override
         public WebDriver createLocalDriver() {
-            WebDriverManager.chromedriver().setup();
-
             return new ChromeDriver(getOptions());
         }
 
@@ -76,8 +74,6 @@ public enum BrowserFactory {
     }, FIREFOX {
         @Override
         public WebDriver createLocalDriver() {
-            WebDriverManager.firefoxdriver().setup();
-
             return new FirefoxDriver(getOptions());
         }
 
@@ -101,8 +97,6 @@ public enum BrowserFactory {
     }, EDGE {
         @Override
         public WebDriver createLocalDriver() {
-            WebDriverManager.edgedriver().setup();
-
             return new EdgeDriver(getOptions());
         }
 
