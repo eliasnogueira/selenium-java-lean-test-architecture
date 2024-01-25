@@ -24,7 +24,7 @@
         <aspectj.version>1.9.21</aspectj.version>
         <selenium.version>4.13.0</selenium.version>
         <testng.version>7.9.0</testng.version>
-        <assertj.version>3.25.1</assertj.version>
+        <assertj.version>3.25.2</assertj.version>
         <datafaker.version>2.1.0</datafaker.version>
         <log4j.version>2.22.1</log4j.version>
         <webdrivermanager.version>5.6.3</webdrivermanager.version>
