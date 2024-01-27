@@ -119,8 +119,6 @@ public enum BrowserFactory {
     }, SAFARI {
         @Override
         public WebDriver createLocalDriver() {
-            WebDriverManager.safaridriver().setup();
-
             return new SafariDriver(getOptions());
         }
 

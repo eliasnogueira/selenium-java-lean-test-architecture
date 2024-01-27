@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.3.9</version>
+    <version>3.3.10</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -27,7 +27,6 @@
         <assertj.version>3.25.1</assertj.version>
         <datafaker.version>2.1.0</datafaker.version>
         <log4j.version>2.22.1</log4j.version>
-        <webdrivermanager.version>5.6.3</webdrivermanager.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.25.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
@@ -36,9 +35,6 @@
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
         <testcontainers.selenium.version>1.19.4</testcontainers.selenium.version>
-
-        <!-- security libraries override -->
-        <jackson-databind.version>2.16.1</jackson-databind.version>
 
         <suite>local</suite>
     </properties>
@@ -105,18 +101,6 @@
         </dependency>
 
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
@@ -144,13 +128,6 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>selenium</artifactId>
             <version>${testcontainers.selenium.version}</version>
-        </dependency>
-
-        <!-- security libraries override -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-databind.version}</version>
         </dependency>
 
     </dependencies>
