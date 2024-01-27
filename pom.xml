@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.3.8</version>
+    <version>3.3.9</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -35,7 +35,7 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.19.3</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.19.4</testcontainers.selenium.version>
 
         <!-- security libraries override -->
         <jackson-databind.version>2.16.1</jackson-databind.version>
