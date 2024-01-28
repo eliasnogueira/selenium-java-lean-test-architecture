@@ -25,7 +25,6 @@
 package com.eliasnogueira.driver;
 
 import com.eliasnogueira.exceptions.HeadlessNotSupportedException;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -119,8 +118,6 @@ public enum BrowserFactory {
     }, SAFARI {
         @Override
         public WebDriver createLocalDriver() {
-            WebDriverManager.safaridriver().setup();
-
             return new SafariDriver(getOptions());
         }
 
