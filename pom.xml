@@ -21,7 +21,7 @@
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.21.1</aspectj.version>
+        <aspectj.version>1.9.21.2</aspectj.version>
         <selenium.version>4.13.0</selenium.version>
         <testng.version>7.9.0</testng.version>
         <assertj.version>3.25.3</assertj.version>
