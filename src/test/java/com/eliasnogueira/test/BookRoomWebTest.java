@@ -55,6 +55,6 @@ public class BookRoomWebTest extends BaseWeb {
         detailPage.finish();
 
         assertThat(detailPage.getAlertMessage())
-                .isEqualTo("Your reservation has been made and we will contact you shortly");
+                .isEqualTo("YYour reservation has been made and we will contact you shortly");
     }
 }

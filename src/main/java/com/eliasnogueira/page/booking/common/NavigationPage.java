@@ -46,11 +46,6 @@ public class NavigationPage extends AbstractPageObject {
     }
 
     @Step
-    public void previous() {
-        previous.click();
-    }
-
-    @Step
     public void finish() {
         finish.click();
     }

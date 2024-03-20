@@ -42,7 +42,6 @@ public abstract class BaseWeb {
 
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
         AllureManager.setAllureEnvironmentInformation();
     }
 
