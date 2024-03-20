@@ -15,8 +15,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 21
-          distribution: temurin
+          java-version: 22
+          distribution: oracle
 
       - name: Cache Maven packages
         uses: actions/cache@v3
