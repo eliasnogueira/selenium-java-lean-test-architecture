@@ -10,16 +10,7 @@ It has a complete solution to run tests in different ways:
 * local testing using the browser on your local machine
 * parallel (or single) testing using Selenium Docker
 * local testing using TestContainers
-* Distributed execution using Selenium Grid 
-
-## Important information
-
-### Know issues
-
-```shell
-This current version has excluded the guava library from WebDriverManager and Allure Environment Writer 
-due to a conflict with the guava version of Selenium 4
-```
+* Distributed execution using Selenium Grid
 
 ## Examples
 
@@ -35,7 +26,7 @@ due to a conflict with the guava version of Selenium 4
 
 This project uses the following languages and frameworks:
 
-* [Java 21](https://openjdk.java.net/projects/jdk/21/) as the programming language
+* [Java 22](https://openjdk.java.net/projects/jdk/22/) as the programming language
 * [TestNG](https://testng.org/doc/) as the UnitTest framework to support the test creation
 * [Selenium WebDriver](https://www.selenium.dev/) as the web browser automation framework using the Java binding
 * [AssertJ](https://joel-costigliola.github.io/assertj/) as the fluent assertion library
