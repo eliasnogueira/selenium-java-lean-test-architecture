@@ -28,7 +28,7 @@
         <datafaker.version>2.1.0</datafaker.version>
         <log4j.version>2.23.1</log4j.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.26.0</allure.version>
+        <allure.version>2.27.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
