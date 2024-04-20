@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Elias Nogueira
+ * Copyright (c) 2024 Elias Nogueira
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,39 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.eliasnogueira;
+package com.eliasnogueira.report;
 
 import com.eliasnogueira.driver.DriverManager;
-import com.eliasnogueira.driver.TargetFactory;
-import com.eliasnogueira.report.AllureManager;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.listener.TestLifecycleListener;
+import io.qameta.allure.model.TestResult;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
 
-import static com.eliasnogueira.config.ConfigurationManager.configuration;
+import static io.qameta.allure.model.Status.BROKEN;
+import static io.qameta.allure.model.Status.FAILED;
 
-public abstract class BaseWeb {
+/*
+ * Approach implemented using the https://github.com/biczomate/allure-testng7.5-attachment-example as reference
+ */
+public class AllureTestLifecycleListener implements TestLifecycleListener {
 
-    @BeforeSuite
-    public void beforeSuite() {
-        AllureManager.setAllureEnvironmentInformation();
+    public AllureTestLifecycleListener() {
     }
 
-    @BeforeMethod(alwaysRun = true)
-    @Parameters("browser")
-    public void preCondition(@Optional("chrome") String browser) {
-        WebDriver driver = new TargetFactory().createInstance(browser);
-        DriverManager.setDriver(driver);
-
-        DriverManager.getDriver().get(configuration().url());
+    @Attachment(value = "Page Screenshot", type = "image/png")
+    public byte[] saveScreenshot(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void postCondition() {
-        DriverManager.quit();
+    @Override
+    public void beforeTestStop(TestResult result) {
+        if (FAILED == result.getStatus() || BROKEN == result.getStatus()) {
+            saveScreenshot(DriverManager.getDriver());
+        }
     }
 }

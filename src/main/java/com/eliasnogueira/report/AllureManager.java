@@ -24,18 +24,14 @@
 
 package com.eliasnogueira.report;
 
-import com.eliasnogueira.driver.DriverManager;
 import com.eliasnogueira.enums.Target;
 import com.github.automatedowl.tools.AllureEnvironmentWriter;
 import com.google.common.collect.ImmutableMap;
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.TakesScreenshot;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
-import static org.openqa.selenium.OutputType.BYTES;
 
 public class AllureManager {
 
@@ -58,15 +54,5 @@ public class AllureManager {
         }
 
         AllureEnvironmentWriter.allureEnvironmentWriter(ImmutableMap.copyOf(basicInfo));
-    }
-
-    @Attachment(value = "Failed test screenshot", type = "image/png")
-    public static byte[] takeScreenshotToAttachOnAllureReport() {
-        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(BYTES);
-    }
-
-    @Attachment(value = "Browser information", type = "text/plain")
-    public static String addBrowserInformationOnAllureReport() {
-        return DriverManager.getInfo();
     }
 }
