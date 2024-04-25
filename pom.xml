@@ -25,7 +25,7 @@
         <selenium.version>4.19.1</selenium.version>
         <testng.version>7.10.1</testng.version>
         <assertj.version>3.25.3</assertj.version>
-        <datafaker.version>2.2.0</datafaker.version>
+        <datafaker.version>2.2.1</datafaker.version>
         <log4j.version>2.23.1</log4j.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.27.0</allure.version>
