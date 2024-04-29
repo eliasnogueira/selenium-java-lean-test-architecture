@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.4.3</version>
+    <version>3.4.4</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -22,10 +22,10 @@
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.22</aspectj.version>
-        <selenium.version>4.19.1</selenium.version>
-        <testng.version>7.10.1</testng.version>
+        <selenium.version>4.20.0</selenium.version>
+        <testng.version>7.10.2</testng.version>
         <assertj.version>3.25.3</assertj.version>
-        <datafaker.version>2.2.0</datafaker.version>
+        <datafaker.version>2.2.2</datafaker.version>
         <log4j.version>2.23.1</log4j.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.27.0</allure.version>
