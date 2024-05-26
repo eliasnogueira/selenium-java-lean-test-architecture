@@ -33,9 +33,8 @@ This project uses the following languages and frameworks:
 * [Allure Report](https://docs.qameta.io/allure/) as the testing report strategy
 * [DataFaker](https://www.datafaker.net/) as the faker data generation strategy
 * [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging management strategy
-* [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) as the Selenium binaries management
 * [Owner](http://owner.aeonbits.org/) to minimize the code to handle the properties file
-* [TestContainers] (https://java.testcontainers.org/modules/webdriver_containers/) Webdriver Containers
+* [TestContainers](https://java.testcontainers.org/modules/webdriver_containers/) Webdriver Containers
 
 ## Test architecture
 
@@ -99,8 +98,6 @@ on `general.properties` file. Its usage is placed on the `BaseWeb` class before 
 
 **This approach is automatically used when you run the test class in your IDE.**
 
-This execution type uses [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) class to instantiate the web
-browsers.
 When the `target` is `local` the `createLocalDriver()` method is used from the `BrowserFactory` class to return the
 browser instance.
 
@@ -108,8 +105,7 @@ The browser used in the test is placed on the `browser` property in the `general
 
 ##### Local Suite
 
-This execution type also uses the [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) to instantiate the
-web browser. The difference is that the browser is taken from the TestNG suite file instead of the `general.properties`
+It's the same as the Local Execution, where the difference is that the browser is taken from the TestNG suite file instead of the `general.properties`
 file, enabling you to run multi-browser test approach locally.
 
 ##### Testcontainers
