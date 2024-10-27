@@ -39,7 +39,12 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
-import static com.eliasnogueira.data.changeless.BrowserData.*;
+import static com.eliasnogueira.data.changeless.BrowserData.CHROME_HEADLESS;
+import static com.eliasnogueira.data.changeless.BrowserData.DISABLE_INFOBARS;
+import static com.eliasnogueira.data.changeless.BrowserData.DISABLE_NOTIFICATIONS;
+import static com.eliasnogueira.data.changeless.BrowserData.GENERIC_HEADLESS;
+import static com.eliasnogueira.data.changeless.BrowserData.REMOTE_ALLOW_ORIGINS;
+import static com.eliasnogueira.data.changeless.BrowserData.START_MAXIMIZED;
 import static java.lang.Boolean.TRUE;
 
 public enum BrowserFactory {

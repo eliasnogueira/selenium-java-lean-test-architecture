@@ -35,4 +35,3 @@ public class ConfigurationManager {
         return ConfigCache.getOrCreate(Configuration.class);
     }
 }
-
