@@ -6,11 +6,17 @@ configs = [
     "selenium/standalone-chrome:latest", "{\"browserName\": \"chrome\"}"
     ]
 
+host-config-keys = ["Binds"]
+
 # URL for connecting to the docker daemon
-# host.docker.internal works for macOS and Windows.
-# Linux could use --net=host in the `docker run` instruction or 172.17.0.1 in the URI below.
-# To have Docker listening through tcp on macOS, install socat and run the following command
-# socat -4 TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock
+# Most simple approach, leave it as http://127.0.0.1:2375, and mount /var/run/docker.sock.
+# 127.0.0.1 is used because internally the container uses socat when /var/run/docker.sock is mounted
+# If var/run/docker.sock is not mounted:
+# Windows: make sure Docker Desktop exposes the daemon via tcp, and use http://host.docker.internal:2375.
+# macOS: install socat and run the following command, socat -4 TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock,
+# then use http://host.docker.internal:2375.
+# Linux: varies from machine to machine, please mount /var/run/docker.sock. If this does not work, please create an issue.
+
 url = "http://host.docker.internal:2375"
 # Docker image used for video recording
 video-image = "selenium/video:latest"

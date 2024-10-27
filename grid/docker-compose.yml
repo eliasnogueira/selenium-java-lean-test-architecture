@@ -1,10 +1,11 @@
-version: "3"
 services:
   node-docker:
     image: selenium/node-docker:latest
     volumes:
       - ./assets:/opt/selenium/assets
       - ./config.toml:/opt/bin/config.toml
+      - ~/Downloads:/home/seluser/Downloads
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - selenium-hub
     environment:
