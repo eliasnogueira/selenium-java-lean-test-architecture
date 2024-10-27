@@ -105,7 +105,8 @@ The browser used in the test is placed on the `browser` property in the `general
 
 ##### Local Suite
 
-It's the same as the Local Execution, where the difference is that the browser is taken from the TestNG suite file instead of the `general.properties`
+It's the same as the Local Execution, where the difference is that the browser is taken from the TestNG suite file
+instead of the `general.properties`
 file, enabling you to run multi-browser test approach locally.
 
 ##### Testcontainers
@@ -118,6 +119,7 @@ the container based on the browser set in the `browser` property. Currently, Tes
 Firefox.
 
 Example
+
 ```shell
 mvn test -Pweb-execution -Dtarget=testcontainers -Dbrowser=chrome
 ```
@@ -153,7 +155,8 @@ Each browser is an `enum`, and each enum implements four methods:
 * `createDriver()`: creates the browser instance for the remote execution
 * `getOptions()`: creates a new browser `Options` setting some specific configurations, and it's used for the remote
   executions using the Selenium Grid
-* `createTestContainerDriver()` : Creates selenium grid lightweight test container in Standalone mode with Chrome/Firefox/Edge browser support.
+* `createTestContainerDriver()` : Creates selenium grid lightweight test container in Standalone mode with
+  Chrome/Firefox/Edge browser support.
 
 You can see that the `createLocalDriver()` method use the `getOptions()` to get specific browser configurations, as
 starting the browser maximized and others.
@@ -211,7 +214,8 @@ factory [BookingDataFactory](https://github.com/eliasnogueira/selenium-java-lean
 
 The parallel test execution is based on
 the [parallel tests](https://testng.org/doc/documentation-main.html#parallel-tests)
-feature on TestNG. This is used by `selenium-grid.xml` test suite file which has the `parallel="tests"` attribute and value,
+feature on TestNG. This is used by `selenium-grid.xml` test suite file which has the `parallel="tests"` attribute and
+value,
 whereas `test` item inside the test suite will execute in parallel.
 The browser in use for each `test` should be defined by a parameter, like:
 
@@ -237,18 +241,21 @@ Please note that you need to do the following actions before running it in paral
 
 * Docker installed
 * Pull the images for Chrome Edge and Firefox - Optional
-  * Images are pulled if not available and initial test execution will be slow
-      * `docker pull selenium-standalog-chrome`
-      * `docker pull selenium-standalog-firefox`
-      * `docker pull selenium/standalone-edge`
-  * If you are using a MacBook with either M1 or M2 chip you must check the following experimental feature in Docker Desktop: Settings -> Features in development -> Use Rosetta for x86/amd64 emulation on Apple Silicon
+    * Images are pulled if not available and initial test execution will be slow
+        * `docker pull selenium-standalog-chrome`
+        * `docker pull selenium-standalog-firefox`
+        * `docker pull selenium/standalone-edge`
+    * If you are using a MacBook with either M1 or M2 chip you must check the following experimental feature in Docker
+      Desktop: Settings -> Features in development -> Use Rosetta for x86/amd64 emulation on Apple Silicon
 * Pay attention to the `grid/config.toml` file that has comments for each specific SO
 * Start the Grid by running the following command inside the `grid` folder
     * `docker-compose up`
 * Run the project using the following command
+
 ```shell
 mvn test -Pweb-execution -Dsuite=selenium-grid -Dtarget=selenium-grid -Dheadless=true
 ```
+
 * Open the [Selenium Grid] page to see the node status
 
 ### Configuration files
@@ -295,7 +302,7 @@ To execute this suite, via the command line you can call the parameter `-P` and 
 Eg: executing the multi_browser suite
 
 ``` bash
-mvn test -Pweb-execution -Dtestng.dtd.http=true 
+mvn test -Pweb-execution 
 ```
 
 If you have more than one suite on _src/test/resources/suites_ folder you can parameterize the xml file name.
@@ -333,7 +340,7 @@ To do this you need:
 * Use `-Dsuite=suite_name` to call the suite
 
 ````bash
-mvn test -Pweb-execution -Dsuite=parallel
+mvn test -Pweb-execution -Dsuite=suite_name
 ````
 
 ### Pipeline as a code
