@@ -29,7 +29,7 @@
         <log4j.version>2.23.1</log4j.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.29.0</allure.version>
-        <allure-maven.version>2.15.0</allure-maven.version>
+        <allure-maven.version>2.15.1</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
