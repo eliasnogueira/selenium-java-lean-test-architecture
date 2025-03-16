@@ -24,7 +24,6 @@
 
 package com.eliasnogueira.enums;
 
-import java.security.SecureRandom;
 import java.util.function.Supplier;
 
 public enum RoomType implements Supplier<String> {
@@ -35,10 +34,6 @@ public enum RoomType implements Supplier<String> {
 
     RoomType(String value) {
         this.value = value;
-    }
-
-    public static RoomType getRandom() {
-        return values()[new SecureRandom().nextInt(values().length)];
     }
 
     @Override
