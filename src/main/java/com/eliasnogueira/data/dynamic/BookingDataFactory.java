@@ -49,7 +49,7 @@ public final class BookingDataFactory {
             password(faker.internet().password()).
             dailyBudget(returnDailyBudget()).
             newsletter(faker.bool().bool()).
-            roomType(RoomType.getRandom()).
+            roomType(faker.options().option(RoomType.class)).
             roomDescription(faker.lorem().paragraph()).
             build();
 
