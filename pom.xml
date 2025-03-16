@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.4.11</version>
+    <version>3.5.0</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -15,26 +15,29 @@
     </scm>
 
     <properties>
-        <java-compiler.version>22</java-compiler.version>
+        <java-compiler.version>23</java-compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.22.1</aspectj.version>
-        <selenium.version>4.27.0</selenium.version>
-        <testng.version>7.10.2</testng.version>
+        <aspectj.version>1.9.23</aspectj.version>
+        <selenium.version>4.29.0</selenium.version>
+        <testng.version>7.11.0</testng.version>
         <assertj.version>3.27.2</assertj.version>
         <datafaker.version>2.4.2</datafaker.version>
         <log4j.version>2.24.3</log4j.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.29.1</allure.version>
-        <allure-maven.version>2.15.3</allure-maven.version>
+        <allure.version>2.33.0</allure.version>
+        <allure-testng.version>2.29.1</allure-testng.version>
+        <allure-attachments.version>2.29.1</allure-attachments.version>
+        <allure-maven.version>2.15.2</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.20.4</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.20.6</testcontainers.selenium.version>
+        <slf4j-simple.version>2.0.17</slf4j-simple.version>
 
         <!-- Vulnerability temp libs-->
         <commons-compress.version>1.27.1</commons-compress.version>
@@ -94,13 +97,13 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>${allure.version}</version>
+            <version>${allure-testng.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-attachments</artifactId>
-            <version>${allure.version}</version>
+            <version>${allure-attachments.version}</version>
         </dependency>
 
         <dependency>
@@ -125,6 +128,13 @@
                     <artifactId>commons-compress</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-simple.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Vulnerability temp libs-->
