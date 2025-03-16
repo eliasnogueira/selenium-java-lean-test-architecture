@@ -60,9 +60,9 @@ public class TargetFactory {
             remoteWebDriver = new RemoteWebDriver(URI.create(gridURL).toURL(), capability);
         } catch (java.net.MalformedURLException e) {
             logger.error("Grid URL is invalid or Grid is not available");
-            logger.error(format("Browser: %s", capability.getBrowserName()), e);
+            logger.error("Browser: {}", capability.getBrowserName(), e);
         } catch (IllegalArgumentException e) {
-            logger.error(format("Browser %s is not valid or recognized", capability.getBrowserName()), e);
+            logger.error("Browser {} is not valid or recognized", capability.getBrowserName(), e);
         }
 
         return remoteWebDriver;
