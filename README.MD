@@ -26,7 +26,7 @@ It has a complete solution to run tests in different ways:
 
 This project uses the following languages and frameworks:
 
-* [Java 22](https://openjdk.java.net/projects/jdk/22/) as the programming language
+* [Java 23](https://openjdk.java.net/projects/jdk/23/) as the programming language
 * [TestNG](https://testng.org/doc/) as the UnitTest framework to support the test creation
 * [Selenium WebDriver](https://www.selenium.dev/) as the web browser automation framework using the Java binding
 * [AssertJ](https://joel-costigliola.github.io/assertj/) as the fluent assertion library
