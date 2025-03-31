@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.5.0</version>
+    <version>3.6.0</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -18,11 +18,11 @@
         <java-compiler.version>23</java-compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.23</aspectj.version>
-        <selenium.version>4.29.0</selenium.version>
+        <selenium.version>4.30.0</selenium.version>
         <testng.version>7.11.0</testng.version>
         <assertj.version>3.27.2</assertj.version>
         <datafaker.version>2.4.2</datafaker.version>
