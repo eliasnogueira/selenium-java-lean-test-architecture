@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -22,10 +22,10 @@
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.23</aspectj.version>
-        <selenium.version>4.30.0</selenium.version>
+        <selenium.version>4.32.0</selenium.version>
         <testng.version>7.11.0</testng.version>
         <assertj.version>3.27.2</assertj.version>
-        <datafaker.version>2.4.2</datafaker.version>
+        <datafaker.version>2.4.3</datafaker.version>
         <log4j.version>2.24.3</log4j.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.33.0</allure.version>
@@ -36,7 +36,7 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.20.6</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.21.0</testcontainers.selenium.version>
         <slf4j-simple.version>2.0.17</slf4j-simple.version>
 
         <!-- Vulnerability temp libs-->
