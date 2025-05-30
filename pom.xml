@@ -36,7 +36,7 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.21.0</testcontainers.selenium.version>
+        <testcontainers.selenium.version>1.21.1</testcontainers.selenium.version>
         <slf4j-simple.version>2.0.17</slf4j-simple.version>
 
         <!-- Vulnerability temp libs-->
