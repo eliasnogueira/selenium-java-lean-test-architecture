@@ -26,7 +26,7 @@
         <testng.version>7.11.0</testng.version>
         <assertj.version>3.27.2</assertj.version>
         <datafaker.version>2.4.3</datafaker.version>
-        <log4j.version>2.24.3</log4j.version>
+        <log4j.version>2.25.0</log4j.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.33.0</allure.version>
         <allure-testng.version>2.29.1</allure-testng.version>
