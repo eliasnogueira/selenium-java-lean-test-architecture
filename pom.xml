@@ -30,7 +30,7 @@
         <owner.version>1.0.12</owner.version>
         <allure.version>2.33.0</allure.version>
         <allure-testng.version>2.29.1</allure-testng.version>
-        <allure-attachments.version>2.29.1</allure-attachments.version>
+        <allure-attachments.version>2.30.0</allure-attachments.version>
         <allure-maven.version>2.15.2</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
