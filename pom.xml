@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.8.0</version>
+    <version>3.9.0</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -15,28 +15,28 @@
     </scm>
 
     <properties>
-        <java-compiler.version>24</java-compiler.version>
+        <java-compiler.version>25</java-compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.24</aspectj.version>
-        <selenium.version>4.35.0</selenium.version>
+        <aspectj.version>1.9.25</aspectj.version>
+        <selenium.version>4.38.0</selenium.version>
         <testng.version>7.11.0</testng.version>
-        <assertj.version>3.27.4</assertj.version>
-        <datafaker.version>2.4.4</datafaker.version>
-        <log4j.version>2.25.1</log4j.version>
+        <assertj.version>3.27.6</assertj.version>
+        <datafaker.version>2.5.3</datafaker.version>
+        <log4j.version>2.25.2</log4j.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.33.0</allure.version>
-        <allure-testng.version>2.29.1</allure-testng.version>
-        <allure-attachments.version>2.29.1</allure-attachments.version>
-        <allure-maven.version>2.15.2</allure-maven.version>
+        <allure.version>2.35.1</allure.version>
+        <allure-testng.version>2.31.0</allure-testng.version>
+        <allure-attachments.version>2.31.0</allure-attachments.version>
+        <allure-maven.version>2.16.1</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers.selenium.version>1.21.3</testcontainers.selenium.version>
+        <testcontainers-selenium.version>1.21.3</testcontainers-selenium.version>
         <slf4j-simple.version>2.0.17</slf4j-simple.version>
 
         <suite>local</suite>
@@ -118,7 +118,7 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>selenium</artifactId>
-            <version>${testcontainers.selenium.version}</version>
+            <version>${testcontainers-selenium.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
