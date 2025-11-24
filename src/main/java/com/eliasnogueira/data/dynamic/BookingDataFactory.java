@@ -46,7 +46,7 @@ public final class BookingDataFactory {
         var booking = new Booking.BookingBuilder().
             email(faker.internet().emailAddress()).
             country(returnRandomCountry()).
-            password(faker.internet().password()).
+            password(faker.credentials().password()).
             dailyBudget(returnDailyBudget()).
             newsletter(faker.bool().bool()).
             roomType(faker.options().option(RoomType.class)).
