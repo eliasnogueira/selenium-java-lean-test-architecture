@@ -31,7 +31,7 @@
         <allure.version>2.35.1</allure.version>
         <allure-testng.version>2.31.0</allure-testng.version>
         <allure-attachments.version>2.31.0</allure-attachments.version>
-        <allure-maven.version>2.16.1</allure-maven.version>
+        <allure-maven.version>2.17.0</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
