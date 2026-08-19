@@ -85,7 +85,6 @@ Use this approach if you know that the page does not refresh.
 There are different execution types:
 
 - `local`
-- `local-suite`
 - `selenium-grid`
 - `testcontainers`
 
@@ -102,12 +101,6 @@ When the `target` is `local` the `createLocalDriver()` method is used from the `
 browser instance.
 
 The browser used in the test is placed on the `browser` property in the `general.properties` file.
-
-##### Local Suite
-
-It's the same as the Local Execution, where the difference is that the browser is taken from the TestNG suite file
-instead of the `general.properties`
-file, enabling you to run multi-browser test approach locally.
 
 ##### Testcontainers
 
