@@ -26,11 +26,16 @@ package com.eliasnogueira.page.booking;
 
 import com.eliasnogueira.page.booking.common.NavigationPage;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 public class AccountPage extends NavigationPage {
+
+    public AccountPage(WebDriver driver) {
+        super(driver);
+    }
 
     @FindBy(id = "email")
     private WebElement email;
