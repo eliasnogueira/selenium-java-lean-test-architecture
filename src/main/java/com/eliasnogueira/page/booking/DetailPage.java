@@ -29,6 +29,12 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static com.eliasnogueira.config.ConfigurationManager.configuration;
 
 public class DetailPage extends NavigationPage {
 
@@ -44,7 +50,9 @@ public class DetailPage extends NavigationPage {
 
     @Step
     public void fillRoomDescription(String description) {
-        roomDescription.sendKeys(description);
+        new WebDriverWait(driver, Duration.ofSeconds(configuration().timeout()))
+                .until(ExpectedConditions.elementToBeClickable(roomDescription))
+                .sendKeys(description);
     }
 
     @Step
