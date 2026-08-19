@@ -25,8 +25,6 @@
 package com.eliasnogueira.driver;
 
 import com.eliasnogueira.enums.Target;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -40,8 +38,6 @@ import static com.eliasnogueira.driver.BrowserFactory.valueOf;
 import static java.lang.String.format;
 
 public class TargetFactory {
-
-    private static final Logger logger = LogManager.getLogger(TargetFactory.class);
 
     public WebDriver createInstance(String browser) {
         Target target = Target.get(configuration().target().toUpperCase());
