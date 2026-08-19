@@ -11,15 +11,15 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v5
-      - name: Set up JDK 25
+      - uses: actions/checkout@v7
+      - name: Set up JDK 26
         uses: actions/setup-java@v5
         with:
-          java-version: 25
-          distribution: oracle
+          java-version: 26
+          distribution: temurin
 
       - name: Cache Maven packages
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
