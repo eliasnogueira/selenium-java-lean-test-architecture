@@ -26,10 +26,15 @@ package com.eliasnogueira.page.booking.common;
 
 import com.eliasnogueira.page.AbstractPageObject;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class NavigationPage extends AbstractPageObject {
+
+    protected NavigationPage(WebDriver driver) {
+        super(driver);
+    }
 
     @FindBy(name = "next")
     private WebElement next;
