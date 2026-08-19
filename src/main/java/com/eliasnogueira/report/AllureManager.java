@@ -48,7 +48,7 @@ public class AllureManager {
                 "Local browser", configuration().browser()
         ));
 
-        if (configuration().target().equals(Target.SELENIUM_GRID.name())) {
+        if (Target.get(configuration().target()) == Target.SELENIUM_GRID) {
             var gridMap = Map.of("Grid URL", configuration().gridUrl(), "Grid port", configuration().gridPort());
             basicInfo.putAll(gridMap);
         }
