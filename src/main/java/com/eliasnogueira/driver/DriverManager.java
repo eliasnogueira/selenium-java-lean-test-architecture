@@ -24,14 +24,16 @@
 
 package com.eliasnogueira.driver;
 
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private DriverManager() {}
+    private DriverManager() {
+    }
 
     public static WebDriver getDriver() {
         return driver.get();
@@ -42,16 +44,29 @@ public class DriverManager {
     }
 
     public static void quit() {
-        DriverManager.driver.get().quit();
-        driver.remove();
+        WebDriver currentDriver = driver.get();
+
+        try {
+            if (currentDriver != null) {
+                currentDriver.quit();
+            }
+        } finally {
+            driver.remove();
+        }
     }
 
     public static String getInfo() {
-        var cap = ((RemoteWebDriver) DriverManager.getDriver()).getCapabilities();
-        String browserName = cap.getBrowserName();
-        String platform = cap.getPlatformName().toString();
-        String version = cap.getBrowserVersion();
+        WebDriver currentDriver = getDriver();
 
-        return String.format("browser: %s v: %s platform: %s", browserName, version, platform);
+        if (!(currentDriver instanceof HasCapabilities hasCapabilities)) {
+            throw new IllegalStateException("Current driver does not expose capabilities");
+        }
+
+        Capabilities capabilities = hasCapabilities.getCapabilities();
+
+        return "browser: %s v: %s platform: %s".formatted(
+                capabilities.getBrowserName(),
+                capabilities.getBrowserVersion(),
+                capabilities.getPlatformName());
     }
 }
