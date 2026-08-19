@@ -3,7 +3,7 @@ services:
     image: selenium/node-docker:latest
     volumes:
       - ./assets:/opt/selenium/assets
-      - ./config.toml:/opt/bin/config.toml
+      - ./config.toml:/opt/selenium/docker.toml
       - ~/Downloads:/home/seluser/Downloads
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
