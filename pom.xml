@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>selenium-java-lean-test-architecture</artifactId>
-    <version>3.9.0</version>
+    <version>3.10.0</version>
 
     <scm>
         <connection>scm:git@github.com:eliasnogueira/selenium-java-lean-test-architecture.git</connection>
@@ -15,29 +15,29 @@
     </scm>
 
     <properties>
-        <java-compiler.version>25</java-compiler.version>
+        <java-compiler.version>26</java-compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.25.1</aspectj.version>
-        <selenium.version>4.41.0</selenium.version>
+        <selenium.version>4.47.0</selenium.version>
         <testng.version>7.12.0</testng.version>
         <assertj.version>3.27.7</assertj.version>
-        <datafaker.version>2.5.4</datafaker.version>
-        <log4j.version>2.25.3</log4j.version>
+        <datafaker.version>2.7.0</datafaker.version>
+        <log4j.version>2.26.1</log4j.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>2.35.1</allure.version>
-        <allure-testng.version>2.33.0</allure-testng.version>
-        <allure-attachments.version>2.33.0</allure-attachments.version>
-        <allure-maven.version>2.17.0</allure-maven.version>
+        <allure.version>2.35.4</allure.version>
+        <allure-testng.version>2.35.4</allure-testng.version>
+        <allure-attachments.version>2.35.4</allure-attachments.version>
+        <allure-maven.version>3.0.3</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <testcontainers-selenium.version>1.21.4</testcontainers-selenium.version>
-        <slf4j-simple.version>2.0.17</slf4j-simple.version>
+        <testcontainers-selenium.version>2.0.5</testcontainers-selenium.version>
+        <slf4j-simple.version>2.0.18</slf4j-simple.version>
 
         <suite>local</suite>
     </properties>
@@ -117,14 +117,8 @@
 
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>selenium</artifactId>
+            <artifactId>testcontainers-selenium</artifactId>
             <version>${testcontainers-selenium.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-compress</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -147,10 +141,21 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${maven-surefire-plugin.version}</version>
                         <configuration>
+                            <argLine>
+                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                            </argLine>
+                            <testFailureIgnore>false</testFailureIgnore>
                             <suiteXmlFiles>
                                 <suiteXmlFile>src/test/resources/suites/${suite}.xml</suiteXmlFile>
                             </suiteXmlFiles>
                         </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjweaver</artifactId>
+                                <version>${aspectj.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -159,47 +164,36 @@
     </profiles>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven-surefire-plugin.version}</version>
-                    <configuration>
-                        <argLine>
-                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        </argLine>
-                        <testFailureIgnore>false</testFailureIgnore>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.aspectj</groupId>
-                            <artifactId>aspectjweaver</artifactId>
-                            <version>${aspectj.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                <plugin>
-                    <groupId>io.qameta.allure</groupId>
-                    <artifactId>allure-maven</artifactId>
-                    <version>${allure-maven.version}</version>
-                    <configuration>
-                        <reportVersion>${allure.version}</reportVersion>
-                        <allureDownloadUrl>
-                            ${allure.cmd.download.url}/${allure.version}/allure-commandline-${allure.version}.zip
-                        </allureDownloadUrl>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
-                    <configuration>
-                        <release>${java-compiler.version}</release>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <release>${java-compiler.version}</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                    <allureDownloadUrl>
+                        ${allure.cmd.download.url}/${allure.version}/allure-commandline-${allure.version}.zip
+                    </allureDownloadUrl>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-allure-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
