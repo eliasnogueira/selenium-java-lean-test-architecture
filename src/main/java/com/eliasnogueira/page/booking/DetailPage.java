@@ -42,7 +42,7 @@ public class DetailPage extends NavigationPage {
         super(driver);
     }
 
-    @FindBy(id = "description")
+    @FindBy(css = "textarea#description")
     private WebElement roomDescription;
 
     @FindBy(css = "#message > p")
