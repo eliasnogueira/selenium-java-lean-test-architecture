@@ -17,7 +17,7 @@ host-config-keys = ["Binds"]
 # then use http://host.docker.internal:2375.
 # Linux: varies from machine to machine, please mount /var/run/docker.sock. If this does not work, please create an issue.
 
-url = "http://host.docker.internal:2375"
+url = "http://127.0.0.1:2375"
 # Docker image used for video recording
 video-image = "selenium/video:latest"
 
