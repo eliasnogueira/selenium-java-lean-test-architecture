@@ -26,56 +26,21 @@ package com.eliasnogueira.model;
 
 import com.eliasnogueira.enums.RoomType;
 
-public record Booking(String email, String country, String password, String dailyBudget, Boolean newsletter,
+import java.util.Objects;
+
+public record Booking(String email, String country, String password, String dailyBudget, boolean newsletter,
                       RoomType roomType, String roomDescription) {
 
-    public static final class BookingBuilder {
+    public Booking {
+        Objects.requireNonNull(email, "email must not be null");
+        Objects.requireNonNull(country, "country must not be null");
+        Objects.requireNonNull(password, "password must not be null");
+        Objects.requireNonNull(dailyBudget, "dailyBudget must not be null");
+        Objects.requireNonNull(roomType, "roomType must not be null");
+        Objects.requireNonNull(roomDescription, "roomDescription must not be null");
 
-        private String email;
-        private String country;
-        private String password;
-        private String dailyBudget;
-        private Boolean newsletter;
-        private RoomType roomType;
-        private String roomDescription;
-
-        public BookingBuilder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public BookingBuilder country(String country) {
-            this.country = country;
-            return this;
-        }
-
-        public BookingBuilder password(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public BookingBuilder dailyBudget(String dailyBudget) {
-            this.dailyBudget = dailyBudget;
-            return this;
-        }
-
-        public BookingBuilder newsletter(Boolean newsletter) {
-            this.newsletter = newsletter;
-            return this;
-        }
-
-        public BookingBuilder roomType(RoomType roomType) {
-            this.roomType = roomType;
-            return this;
-        }
-
-        public BookingBuilder roomDescription(String roomDescription) {
-            this.roomDescription = roomDescription;
-            return this;
-        }
-
-        public Booking build() {
-            return new Booking(email, country, password, dailyBudget, newsletter, roomType, roomDescription);
+        if (email.isBlank()) {
+            throw new IllegalArgumentException("email must not be blank");
         }
     }
 }
