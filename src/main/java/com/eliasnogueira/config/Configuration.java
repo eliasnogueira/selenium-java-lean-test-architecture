@@ -42,6 +42,7 @@ public interface Configuration extends Config {
     String browser();
 
     @Key("headless")
+    @DefaultValue("false")
     Boolean headless();
 
     @Key("url.base")
