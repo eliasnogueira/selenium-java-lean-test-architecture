@@ -43,17 +43,23 @@ public final class BookingDataFactory {
     }
 
     public static Booking createBookingData() {
-        var booking = new Booking.BookingBuilder().
-            email(faker.internet().emailAddress()).
-            country(returnRandomCountry()).
-            password(faker.credentials().password()).
-            dailyBudget(returnDailyBudget()).
-            newsletter(faker.bool().bool()).
-            roomType(faker.options().option(RoomType.class)).
-            roomDescription(faker.lorem().paragraph()).
-            build();
+        var booking = new Booking(
+                faker.internet().emailAddress(),
+                returnRandomCountry(),
+                faker.credentials().password(),
+                returnDailyBudget(),
+                faker.bool().bool(),
+                faker.options().option(RoomType.class),
+                faker.lorem().paragraph());
 
-        logger.info(booking);
+        logger.info(
+                "Booking data generated: email={}, country={}, dailyBudget={}, newsletter={}, roomType={}",
+                booking.email(),
+                booking.country(),
+                booking.dailyBudget(),
+                booking.newsletter(),
+                booking.roomType());
+
         return booking;
     }
 
