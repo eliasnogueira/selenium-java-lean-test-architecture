@@ -38,7 +38,7 @@ public class BookRoomWebTest extends BaseWeb {
     public void bookARoom() {
         var bookingInformation = BookingDataFactory.createBookingData();
 
-        var accountPage = new AccountPage();
+        var accountPage = new AccountPage(driver);
         accountPage.fillEmail(bookingInformation.email());
         accountPage.fillPassword(bookingInformation.password());
         accountPage.selectCountry(bookingInformation.country());
@@ -46,11 +46,11 @@ public class BookRoomWebTest extends BaseWeb {
         accountPage.clickNewsletter();
         accountPage.next();
 
-        var roomPage = new RoomPage();
+        var roomPage = new RoomPage(driver);
         roomPage.selectRoomType(bookingInformation.roomType().get());
         roomPage.next();
 
-        var detailPage = new DetailPage();
+        var detailPage = new DetailPage(driver);
         detailPage.fillRoomDescription(bookingInformation.roomDescription());
         detailPage.finish();
 
