@@ -24,15 +24,20 @@
 
 package com.eliasnogueira.page;
 
-import com.eliasnogueira.driver.DriverManager;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+
+import java.util.Objects;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 import static org.openqa.selenium.support.PageFactory.initElements;
 
 public class AbstractPageObject {
 
-    protected AbstractPageObject() {
-        initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), configuration().timeout()), this);
+    protected final WebDriver driver;
+
+    protected AbstractPageObject(WebDriver driver) {
+        this.driver = Objects.requireNonNull(driver, "driver must not be null");
+        initElements(new AjaxElementLocatorFactory(this.driver, configuration().timeout()), this);
     }
 }
