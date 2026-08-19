@@ -36,7 +36,7 @@ import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
-import org.testcontainers.containers.BrowserWebDriverContainer;
+import org.testcontainers.selenium.BrowserWebDriverContainer;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 import static com.eliasnogueira.data.changeless.BrowserData.CHROME_HEADLESS;
@@ -47,6 +47,7 @@ import static com.eliasnogueira.data.changeless.BrowserData.REMOTE_ALLOW_ORIGINS
 import static com.eliasnogueira.data.changeless.BrowserData.START_MAXIMIZED;
 import static java.lang.Boolean.TRUE;
 
+@SuppressWarnings("resource")
 public enum BrowserFactory {
 
     CHROME {
@@ -57,10 +58,11 @@ public enum BrowserFactory {
 
         @Override
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new ChromeOptions());
+            BrowserWebDriverContainer driverContainer =
+                    new BrowserWebDriverContainer("selenium/standalone-chrome:latest");
             driverContainer.start();
 
-            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new ChromeOptions());
+            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), getOptions());
         }
 
         @Override
@@ -83,10 +85,11 @@ public enum BrowserFactory {
 
         @Override
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new FirefoxOptions());
+            BrowserWebDriverContainer driverContainer =
+                    new BrowserWebDriverContainer("selenium/standalone-firefox:latest");
             driverContainer.start();
 
-            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new FirefoxOptions());
+            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), getOptions());
         }
 
         @Override
@@ -105,10 +108,11 @@ public enum BrowserFactory {
         }
 
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new EdgeOptions());
+            BrowserWebDriverContainer driverContainer =
+                    new BrowserWebDriverContainer("selenium/standalone-edge:latest");
             driverContainer.start();
 
-            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new EdgeOptions());
+            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), getOptions());
         }
 
         @Override
