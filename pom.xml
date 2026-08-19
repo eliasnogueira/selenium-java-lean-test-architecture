@@ -31,6 +31,7 @@
         <allure.version>2.35.4</allure.version>
         <allure-testng.version>2.35.4</allure-testng.version>
         <allure-attachments.version>2.35.4</allure-attachments.version>
+        <allure-commandline.version>2.35.1</allure-commandline.version>
         <allure-maven.version>3.0.3</allure-maven.version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <allure.cmd.download.url>
@@ -178,9 +179,9 @@
                 <artifactId>allure-maven</artifactId>
                 <version>${allure-maven.version}</version>
                 <configuration>
-                    <reportVersion>${allure.version}</reportVersion>
+                    <reportVersion>${allure-commandline.version}</reportVersion>
                     <allureDownloadUrl>
-                        ${allure.cmd.download.url}/${allure.version}/allure-commandline-${allure.version}.zip
+                        ${allure.cmd.download.url}/${allure-commandline.version}/allure-commandline-${allure-commandline.version}.zip
                     </allureDownloadUrl>
                 </configuration>
                 <executions>
