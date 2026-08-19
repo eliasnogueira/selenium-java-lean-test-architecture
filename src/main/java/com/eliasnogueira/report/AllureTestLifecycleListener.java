@@ -30,6 +30,7 @@ import io.qameta.allure.model.TestResult;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 
 import static io.qameta.allure.model.Status.BROKEN;
 import static io.qameta.allure.model.Status.FAILED;
@@ -44,13 +45,27 @@ public class AllureTestLifecycleListener implements TestLifecycleListener {
 
     @Attachment(value = "Page Screenshot", type = "image/png")
     public byte[] saveScreenshot(WebDriver driver) {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        if (!(driver instanceof TakesScreenshot screenshotDriver)) {
+            return new byte[0];
+        }
+
+        try {
+            return screenshotDriver.getScreenshotAs(OutputType.BYTES);
+        } catch (WebDriverException exception) {
+            return new byte[0];
+        }
     }
 
     @Override
     public void beforeTestStop(TestResult result) {
-        if (FAILED == result.getStatus() || BROKEN == result.getStatus()) {
-            saveScreenshot(DriverManager.getDriver());
+        if (result.getStatus() != FAILED && result.getStatus() != BROKEN) {
+            return;
+        }
+
+        WebDriver driver = DriverManager.getDriver();
+
+        if (driver != null) {
+            saveScreenshot(driver);
         }
     }
 }
