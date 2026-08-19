@@ -29,8 +29,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
 import java.net.URI;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
@@ -53,18 +55,13 @@ public class TargetFactory {
     }
 
     private RemoteWebDriver createRemoteInstance(MutableCapabilities capability) {
-        RemoteWebDriver remoteWebDriver = null;
+        String gridURL = format("http://%s:%s", configuration().gridUrl(), configuration().gridPort());
+
         try {
-            String gridURL = format("http://%s:%s", configuration().gridUrl(), configuration().gridPort());
-
-            remoteWebDriver = new RemoteWebDriver(URI.create(gridURL).toURL(), capability);
-        } catch (java.net.MalformedURLException e) {
-            logger.error("Grid URL is invalid or Grid is not available");
-            logger.error("Browser: {}", capability.getBrowserName(), e);
-        } catch (IllegalArgumentException e) {
-            logger.error("Browser {} is not valid or recognized", capability.getBrowserName(), e);
+            return new RemoteWebDriver(URI.create(gridURL).toURL(), capability);
+        } catch (MalformedURLException | WebDriverException exception) {
+            throw new IllegalStateException(
+                    "Could not create WebDriver using Grid URL: " + gridURL, exception);
         }
-
-        return remoteWebDriver;
     }
 }
