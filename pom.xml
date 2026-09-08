@@ -29,7 +29,7 @@
         <log4j.version>2.26.1</log4j.version>
         <owner.version>1.0.12</owner.version>
         <allure.version>2.35.4</allure.version>
-        <allure-testng.version>2.35.4</allure-testng.version>
+        <allure-testng.version>2.35.5</allure-testng.version>
         <allure-attachments.version>2.35.4</allure-attachments.version>
         <allure-commandline.version>2.35.1</allure-commandline.version>
         <allure-maven.version>3.0.3</allure-maven.version>
