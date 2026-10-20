@@ -335,11 +335,3 @@ To do this you need:
 ````bash
 mvn test -Pweb-execution -Dsuite=suite_name
 ````
-
-### Pipeline as a code
-
-The two files of the pipeline as a code are inside `pipeline_as_code` folder.
-
-* GitHub Actions to use it inside the GitHub located at `.github\workflows`
-* Jenkins: `Jenkinsfile` to be used on a Jenkins pipeline located at `pipeline_as_code`
-* GitLab CI: `.gitlab-ci.yml` to be used on a GitLab CI `pipeline_as_code`
