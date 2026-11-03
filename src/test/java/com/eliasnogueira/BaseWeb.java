@@ -35,8 +35,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.ITestResult;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 
 public abstract class BaseWeb {
