@@ -18,7 +18,9 @@
         <java-compiler.version>26</java-compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-surefire-plugin.version>3.6.1</maven-surefire-plugin.version>
+
+        <!-- Downgraded because Surefire 3.6.0+ no longer supports TestNG XML suite execution via suiteXmlFile -->
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
 
         <aspectj.version>1.9.26</aspectj.version>
