@@ -10,6 +10,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   local-test:
     timeout-minutes: 10
@@ -48,3 +52,58 @@ jobs:
             target/failsafe-reports/
             allure-results/
             target/allure-results/
+
+  selenium-grid-test:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    timeout-minutes: 20
+    runs-on: macos-latest
+    needs: local-test
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up JDK 26
+        uses: actions/setup-java@v5
+        with:
+          java-version: 26
+          distribution: temurin
+          cache: maven
+
+      - name: Start Selenium Grid
+        working-directory: grid
+        run: docker compose up -d
+
+      - name: Wait for Selenium Grid
+        run: |
+          for i in {1..30}; do
+            if curl -fsSL http://localhost:4444/status | grep -q '"ready":true'; then
+              echo "Selenium Grid is ready"
+              exit 0
+            fi
+          
+            echo "Waiting for Selenium Grid..."
+            sleep 2
+          done
+          
+          echo "Selenium Grid did not become ready in time"
+          docker compose -f grid/docker-compose.yml logs
+          exit 1
+
+      - name: Run Selenium Grid tests
+        run: mvn --batch-mode verify -Pweb-execution -Dsuite=selenium-grid -Dtarget=grid -Dheadless=true -Dgrid.url=http://localhost:4444
+
+      - name: Upload Grid test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-selenium-grid
+          path: |
+            target/surefire-reports/
+            target/failsafe-reports/
+            allure-results/
+            target/allure-results/
+
+      - name: Stop Selenium Grid
+        if: always()
+        working-directory: grid
+        run: docker compose down --volumes --remove-orphans
