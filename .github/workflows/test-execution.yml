@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   local-test:
+    timeout-minutes: 10
     runs-on: macos-latest
 
     steps:
@@ -21,6 +22,7 @@ jobs:
         with:
           java-version: 26
           distribution: temurin
+          cache: maven
 
       - name: Cache Maven packages
         uses: actions/cache@v6
@@ -31,7 +33,18 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build with Maven
-        run: mvn -q -DskipTests package
+        run: mvn --batch-mode -DskipTests package
 
       - name: Run local tests
-        run: mvn -q test -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
+        run: mvn --batch-mode verify -Pweb-execution -Dsuite=local -Dtarget=local -Dheadless=true -Dbrowser=chrome
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.browser }}
+          path: |
+            target/surefire-reports/
+            target/failsafe-reports/
+            allure-results/
+            target/allure-results/
