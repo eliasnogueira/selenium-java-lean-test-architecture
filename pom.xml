@@ -18,18 +18,18 @@
         <java-compiler.version>26</java-compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-surefire-plugin.version>3.6.0</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.6.1</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
 
-        <aspectj.version>1.9.25.1</aspectj.version>
-        <selenium.version>4.51.0</selenium.version>
+        <aspectj.version>1.9.26</aspectj.version>
+        <selenium.version>4.52.0</selenium.version>
         <testng.version>7.12.0</testng.version>
         <assertj.version>3.27.7</assertj.version>
         <datafaker.version>2.7.0</datafaker.version>
         <log4j.version>2.26.1</log4j.version>
         <owner.version>1.0.12</owner.version>
-        <allure.version>3.0.0</allure.version>
-        <allure-testng.version>3.0.0</allure-testng.version>
+        <allure.version>3.0.1</allure.version>
+        <allure-testng.version>3.0.1</allure-testng.version>
         <allure-attachments.version>2.35.5</allure-attachments.version>
         <allure-commandline.version>3.0.0</allure-commandline.version>
         <allure-maven.version>3.1.0</allure-maven.version>
