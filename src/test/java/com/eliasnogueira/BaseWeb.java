@@ -35,12 +35,15 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.ITestResult;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import static com.eliasnogueira.config.ConfigurationManager.configuration;
 
 public abstract class BaseWeb {
 
-    protected WebDriver driver;
+    protected WebDriver driver() {
+        return DriverManager.getDriver();
+    }
 
     @BeforeSuite
     public void beforeSuite() {
@@ -50,7 +53,7 @@ public abstract class BaseWeb {
     @BeforeMethod(alwaysRun = true)
     @Parameters("browser")
     public void preCondition(@Optional("chrome") String browser) {
-        driver = new TargetFactory().createInstance(browser);
+        WebDriver driver = new TargetFactory().createInstance(browser);
         DriverManager.setDriver(driver);
 
         driver.get(configuration().url());
@@ -59,12 +62,11 @@ public abstract class BaseWeb {
     @AfterMethod(alwaysRun = true)
     public void postCondition(ITestResult result) {
         try {
-            if (result.getStatus() == ITestResult.FAILURE && driver != null) {
-                new AllureTestLifecycleListener().saveScreenshot(driver);
+            if (result.getStatus() == ITestResult.FAILURE && driver() != null) {
+                new AllureTestLifecycleListener().saveScreenshot(driver());
             }
         } finally {
             DriverManager.quit();
-            driver = null;
         }
     }
 }
